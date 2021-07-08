@@ -12,7 +12,7 @@ describe Haystack do
         amount: "20000"
       ) do |response|
         response.success?.should be_true
-        response.data.should be_a(Haystack::Transaction::Initialization)
+        response.data.should be_a(Haystack::Transaction::Authorization)
       end
     end
   end

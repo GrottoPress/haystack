@@ -6,12 +6,12 @@ struct Haystack::Transaction::Endpoint
     yield init(**params)
   end
 
-  def init(**params) : Initialization::Item
+  def init(**params) : Authorization::Item
     @haystack.post(
       "#{self.class.path}/initialize",
       body: params.to_json
     ) do |response|
-      Initialization::Item.from_json(response.body_io)
+      Authorization::Item.from_json(response.body_io)
     end
   end
 

@@ -1,4 +1,4 @@
-struct Haystack::Transaction::Initialization
+struct Haystack::Transaction::Authorization
   include JSON::Serializable
 
   getter access_code : String
@@ -8,7 +8,6 @@ struct Haystack::Transaction::Initialization
   struct Item
     include Response
 
-    getter data : Initialization?
+    getter data : Authorization?
   end
-
 end
