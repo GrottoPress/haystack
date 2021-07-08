@@ -2,7 +2,7 @@ class Haystack::Subscription::RecentInvoice
   include JSON::Serializable
 
   getter amount : Int64?
-  getter authorization : Authorization | Int64 | Nil
+  getter authorization : Int64?
   getter created_at : Time?
   getter customer : Customer | Int64 | Nil
   getter description : String?
