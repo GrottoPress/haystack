@@ -8,7 +8,7 @@ struct Haystack::BulkCharge::Charge
   end
 
   getter amount : Int64?
-  getter authorization : Authorization?
+  getter authorization : Card::Authorization?
   getter bulkcharge : Int64?
   getter createdAt : Time?
   getter currency : Currency?

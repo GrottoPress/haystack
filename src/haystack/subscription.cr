@@ -2,7 +2,7 @@ class Haystack::Subscription
   include JSON::Serializable
 
   getter amount : Int64?
-  getter authorization : Authorization?
+  getter authorization : Card::Authorization?
   getter cancelledAt : Time?
   getter createdAt : Time?
   getter cron_expression : String?

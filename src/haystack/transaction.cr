@@ -2,7 +2,7 @@ struct Haystack::Transaction
   include JSON::Serializable
 
   getter amount : Int64?
-  getter authorization : Haystack::Authorization?
+  getter authorization : Card::Authorization?
   getter channel : Channel?
   getter created_at : Time?
   getter createdAt : Time?

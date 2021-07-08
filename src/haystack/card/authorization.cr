@@ -1,4 +1,4 @@
-struct Haystack::Authorization
+struct Haystack::Card::Authorization
   include JSON::Serializable
 
   getter account_name : String?
@@ -16,4 +16,11 @@ struct Haystack::Authorization
   getter receiver_bank_account_number : String?
   getter reusable : Bool | Int32 | Nil
   getter signature : String?
+
+  struct Item
+    include Response
+
+    getter data : Authorization?
+  end
+
 end

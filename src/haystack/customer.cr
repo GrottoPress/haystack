@@ -1,7 +1,7 @@
 class Haystack::Customer
   include JSON::Serializable
 
-  getter authorizations : Array(Authorization)?
+  getter authorizations : Array(Card::Authorization)?
   getter createdAt : Time?
   getter customer_code : String?
   getter dedicated_account : Bank::Account?
