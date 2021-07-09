@@ -79,10 +79,10 @@ See <https://paystack.com/docs/api/#dedicated-nuban>
    ) do |response|
      return puts response.message unless response.success?
 
-     response.data.try do |account|
-       puts account.split_config.try &.bearer_subaccount
-       puts account.split_config.try &.bearer_type
-       puts account.split_config.try &.total_subaccounts
+     response.data.try &.split_config.try do |split_config|
+       puts split_config.bearer_subaccount
+       puts split_config.bearer_type
+       puts split_config.total_subaccounts
        # ...
      end
    end
@@ -94,10 +94,10 @@ See <https://paystack.com/docs/api/#dedicated-nuban>
    paystack.nubans.unsplit(account_number: "0033322211") do |response|
      return puts response.message unless response.success?
 
-     response.data.try do |account|
-       puts account.split_config.try &.bearer_subaccount
-       puts account.split_config.try &.bearer_type
-       puts account.split_config.try &.total_subaccounts
+     response.data.try &.split_config.try do |split_config|
+       puts split_config.id
+       puts split_config.split_code
+       puts split_config.currency
        # ...
      end
    end

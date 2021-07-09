@@ -17,10 +17,10 @@ See <https://paystack.com/docs/api/#subaccount> for the raw JSON schema.
    ) do |response|
      return puts response.message unless response.success?
 
-     response.data.try do |account|
-       puts account.id
-       puts account.account_number
-       puts account.active
+     response.data.try do |subaccount|
+       puts subaccount.id
+       puts subaccount.account_number
+       puts subaccount.active
        # ...
      end
    end
@@ -32,10 +32,10 @@ See <https://paystack.com/docs/api/#subaccount> for the raw JSON schema.
    paystack.subaccounts.list(perPage: "20", page: "2") do |response|
      return puts response.message unless response.success?
 
-     response.data.try &.each do |account|
-       puts account.business_name
-       puts account.description
-       puts account.migrate
+     response.data.try &.each do |subaccount|
+       puts subaccount.business_name
+       puts subaccount.description
+       puts subaccount.migrate
        # ...
      end
    end
@@ -47,10 +47,10 @@ See <https://paystack.com/docs/api/#subaccount> for the raw JSON schema.
    paystack.subaccounts.fetch(id: 123456) do |response|
      return puts response.message unless response.success?
 
-     response.data.try do |account|
-       puts account.is_verified
-       puts account.percentage_charge
-       puts account.primary_contact_email
+     response.data.try do |subaccount|
+       puts subaccount.is_verified
+       puts subaccount.percentage_charge
+       puts subaccount.primary_contact_email
        # ...
      end
    end
@@ -66,10 +66,10 @@ See <https://paystack.com/docs/api/#subaccount> for the raw JSON schema.
    ) do |response|
      return puts response.message unless response.success?
 
-     response.data.try do |account|
-       puts account.primary_contact_name
-       puts account.primary_contact_phone
-       puts account.settlement_bank
+     response.data.try do |subaccount|
+       puts subaccount.primary_contact_name
+       puts subaccount.primary_contact_phone
+       puts subaccount.settlement_bank
        # ...
      end
    end

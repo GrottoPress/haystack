@@ -33,7 +33,7 @@ See <https://paystack.com/docs/api/#transaction> for the raw JSON schema.
 
      response.data.try do |transaction|
        puts transaction.status
-       puts transaction.authorization
+       puts transaction.authorization.try &.card_type
        puts transaction.channel
        # ...
      end
@@ -161,8 +161,10 @@ See <https://paystack.com/docs/api/#transaction> for the raw JSON schema.
    ) do |response|
      return puts response.message unless response.success?
 
-     response.data.try do |export|
-       puts export.path
+     response.data.try do |transaction|
+       puts transaction.paid_at.try &.minute
+       puts transaction.pos_transaction_data
+       puts transaction.requested_amount
        # ...
      end
    end

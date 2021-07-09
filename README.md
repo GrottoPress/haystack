@@ -38,10 +38,10 @@
    ) do |response|
      return puts response.message unless response.success?
 
-     response.data.try do |data|
-       puts data.access_code
-       puts data.authorization_url
-       puts data.reference
+     response.data.try do |authorization|
+       puts authorization.access_code
+       puts authorization.authorization_url
+       puts authorization.reference
      # ...
      end
    end
@@ -55,7 +55,7 @@
 
      response.data.try do |transaction|
        puts transaction.status
-       puts transaction.authorization
+       puts transaction.authorization.try &.authorization_code
        puts transaction.channel
      # ...
      end
