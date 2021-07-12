@@ -1,14 +1,17 @@
 class Haystack::Subscription::RecentInvoice
   include JSON::Serializable
 
+  @customer : Customer | Int64 | Nil
+  @integration : Integration | Int64 | Nil
+  @subscription : Subscription | Int64 | Nil
+  @transaction : Transaction | Int64 | Nil
+
   getter amount : Int64?
   getter authorization : Int64?
   getter created_at : Time?
-  getter customer : Customer | Int64 | Nil
   getter description : String?
   getter domain : Domain?
   getter id : Int64?
-  getter integration : Integration | Int64 | Nil
   getter invoice_code : String?
   getter next_notification : Time?
   getter notification_flag : JSON::Any? # "null" - Figure out type
@@ -18,7 +21,21 @@ class Haystack::Subscription::RecentInvoice
   getter period_start : Time?
   getter retries : Int32?
   getter status : Invoice::Status?
-  getter subscription : Subscription | Int64 | Nil
-  getter transaction : Transaction | Int64 | Nil
   getter updated_at : Time?
+
+  def customer : Customer?
+    Customer.from_any(@customer)
+  end
+
+  def integration : Integration?
+    Integration.from_any(@integration)
+  end
+
+  def transaction : Transaction?
+    Transaction.from_any(@transaction)
+  end
+
+  def subscription : Subscription?
+    Subscription.from_any(@subscription)
+  end
 end

@@ -1,15 +1,17 @@
 class Haystack::Dispute
   include JSON::Serializable
 
+  @customer : Customer | Int64 | Nil
+  @evidence : Evidence | Int64 | Nil
+  @transaction : Transaction | Int64 | Nil
+
   getter attachments : String?
   getter bin : String?
   getter category : String?
   getter createdAt : Time?
   getter currency : Currency?
-  getter customer : Customer | Int64 | Nil
   getter domain : Domain?
   getter dueAt : Time?
-  getter evidence : Evidence | Int64 | Nil
   getter history : Array(History)?
   getter id : Int64?
   getter last4 : String?
@@ -23,7 +25,18 @@ class Haystack::Dispute
   getter resolvedAt : Time?
   getter source : Source?
   getter status : Status?
-  getter transaction : Transaction | Int64 | Nil
   getter transaction_reference : String?
   getter updatedAt : Time?
+
+  def customer : Customer?
+    Customer.from_any(@customer)
+  end
+
+  def evidence : Evidence?
+    Evidence.from_any(@evidence)
+  end
+
+  def transaction : Transaction?
+    Transaction.from_any(@transaction)
+  end
 end

@@ -1,18 +1,43 @@
 struct Haystack::Bank
   include JSON::Serializable
 
-  getter active : Bool | Int32 | Nil
+  @active : ::Bool | Int32 | Nil
+  @is_deleted : ::Bool | Int32 | Nil
+  @pay_with_bank : ::Bool | Int32 | Nil
+
   getter code : String?
   getter country : String?
   getter currency : Currency?
   getter createdAt : Time?
   getter gateway : Gateway?
   getter id : Int64?
-  getter is_deleted : Bool | Int32 | Nil
   getter longcode : String?
   getter name : String?
-  getter pay_with_bank : Bool | Int32 | Nil
   getter slug : String?
   getter type : Type?
   getter updatedAt : Time?
+
+  def active
+    active?
+  end
+
+  def is_deleted
+    is_deleted?
+  end
+
+  def pay_with_bank
+    pay_with_bank?
+  end
+
+  def active?
+    Bool.from_any(@active)
+  end
+
+  def is_deleted?
+    Bool.from_any(@is_deleted)
+  end
+
+  def pay_with_bank?
+    Bool.from_any(@pay_with_bank)
+  end
 end

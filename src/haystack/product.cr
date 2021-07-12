@@ -1,7 +1,13 @@
 struct Haystack::Product
   include JSON::Serializable
 
-  getter active : Bool | Int32 | Nil
+  @active : ::Bool | Int32 | Nil
+  @in_stock : ::Bool | Int32 | Nil
+  @integration : Integration | Int64 | Nil
+  @is_shippable : ::Bool | Int32 | Nil
+  @metadata : Metadata | JSON::Any | Nil
+  @unlimited : ::Bool | Int32 | Nil
+
   getter createdAt : Time?
   getter currency : Currency?
   getter description : String?
@@ -11,11 +17,7 @@ struct Haystack::Product
   getter files : Array(File)?
   getter id : Int64?
   getter image_path : String?
-  getter in_stock : Bool | Int32 | Nil
-  getter integration : Integration | Int64 | Nil
-  getter is_shippable : Bool | Int32 | Nil
   getter maximum_orderable : Int32?
-  getter metadata : Metadata | JSON::Any | Nil
   getter minimum_orderable : Int32?
   getter name : String?
   getter notification_emails : JSON::Any? # Figure out type
@@ -28,7 +30,46 @@ struct Haystack::Product
   getter split_code : String?
   getter success_message : String?
   getter type : Type?
-  getter unlimited : Bool | Int32 | Nil
   getter updatedAt : Time?
   getter variant_options : Array(JSON::Any)? # Figure out type
+
+  def integration : Integration?
+    Integration.from_any(@integration)
+  end
+
+  def metadata : Metadata?
+    Metadata.from_any(@metadata)
+  end
+
+  def active
+    active?
+  end
+
+  def in_stock
+    in_stock?
+  end
+
+  def is_shippable
+    is_shippable?
+  end
+
+  def unlimited
+    unlimited?
+  end
+
+  def active?
+    Bool.from_any(@active)
+  end
+
+  def in_stock?
+    Bool.from_any(@in_stock)
+  end
+
+  def is_shippable?
+    Bool.from_any(@is_shippable)
+  end
+
+  def unlimited?
+    Bool.from_any(@unlimited)
+  end
 end

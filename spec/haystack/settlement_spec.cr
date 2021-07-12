@@ -1,5 +1,30 @@
 require "../spec_helper"
 
+describe Haystack::Settlement do
+  describe ".from_any" do
+    it "returns settlement unmodified" do
+      id = 11
+      settlement = Haystack::Settlement.from_json(%({"id": #{id}}))
+      settlement = Haystack::Settlement.from_any(settlement)
+
+      settlement.should be_a(Haystack::Settlement)
+      settlement.try(&.id).should eq(id)
+    end
+
+    it "returns settlement from integer" do
+      id = 44
+      settlement = Haystack::Settlement.from_any(id)
+
+      settlement.should be_a(Haystack::Settlement)
+      settlement.try(&.id).should eq(id)
+    end
+
+    it "returns nil from nil" do
+      Haystack::Settlement.from_any(nil).should be_nil
+    end
+  end
+end
+
 describe Haystack::Settlement::Endpoint do
   describe "#list" do
     it "lists settlements" do

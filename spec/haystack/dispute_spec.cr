@@ -1,5 +1,30 @@
 require "../spec_helper"
 
+describe Haystack::Dispute::Evidence do
+  describe ".from_any" do
+    it "returns evidence unmodified" do
+      id = 11
+      evidence = Haystack::Dispute::Evidence.from_json(%({"id": #{id}}))
+      evidence = Haystack::Dispute::Evidence.from_any(evidence)
+
+      evidence.should be_a(Haystack::Dispute::Evidence)
+      evidence.try(&.id).should eq(id)
+    end
+
+    it "returns evidence from integer" do
+      id = 44
+      evidence = Haystack::Dispute::Evidence.from_any(id)
+
+      evidence.should be_a(Haystack::Dispute::Evidence)
+      evidence.try(&.id).should eq(id)
+    end
+
+    it "returns nil from nil" do
+      Haystack::Dispute::Evidence.from_any(nil).should be_nil
+    end
+  end
+end
+
 describe Haystack::Dispute::Endpoint do
   describe "#list" do
     it "lists disputes" do

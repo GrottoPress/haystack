@@ -1,5 +1,30 @@
 require "../spec_helper"
 
+describe Haystack::Transaction do
+  describe ".from_any" do
+    it "returns transaction unmodified" do
+      id = 11
+      transaction = Haystack::Transaction.from_json(%({"id": #{id}}))
+      transaction = Haystack::Transaction.from_any(transaction)
+
+      transaction.should be_a(Haystack::Transaction)
+      transaction.try(&.id).should eq(id)
+    end
+
+    it "returns transaction from integer" do
+      id = 44
+      transaction = Haystack::Transaction.from_any(id)
+
+      transaction.should be_a(Haystack::Transaction)
+      transaction.try(&.id).should eq(id)
+    end
+
+    it "returns nil from nil" do
+      Haystack::Transaction.from_any(nil).should be_nil
+    end
+  end
+end
+
 describe Haystack::Transaction::Endpoint do
   describe "#init" do
     it "initializes transaction" do

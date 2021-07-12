@@ -1,17 +1,18 @@
 struct Haystack::Subaccount
   include JSON::Serializable
 
+  @active : ::Bool | Int32 | Nil
+  @integration : Integration | Int64 | Nil
+  @is_verified : ::Bool | Int32 | Nil
+  @metadata : Metadata | JSON::Any | Nil
+  @migrate : ::Bool | Int32 | Nil
+
   getter account_number : String?
-  getter active : Bool | Int32 | Nil
   getter business_name : String?
   getter createdAt : Time?
   getter description : String?
   getter domain : Domain?
   getter id : Int64?
-  getter migrate : Bool | Int32 | Nil
-  getter integration : Integration | Int64 | Nil
-  getter is_verified : Bool | Int32 | Nil
-  getter metadata : Metadata | JSON::Any | Nil
   getter percentage_charge : Float64?
   getter primary_contact_email : String?
   getter primary_contact_name : String?
@@ -20,4 +21,36 @@ struct Haystack::Subaccount
   getter settlement_schedule : Settlement::Schedule?
   getter subaccount_code : String?
   getter updatedAt : Time?
+
+  def integration : Integration?
+    Integration.from_any(@integration)
+  end
+
+  def metadata : Metadata?
+    Metadata.from_any(@metadata)
+  end
+
+  def active
+    active?
+  end
+
+  def migrate
+    migrate?
+  end
+
+  def is_verified
+    is_verified?
+  end
+
+  def active?
+    Bool.from_any(@active)
+  end
+
+  def migrate?
+    Bool.from_any(@migrate)
+  end
+
+  def is_verified?
+    Bool.from_any(@is_verified)
+  end
 end

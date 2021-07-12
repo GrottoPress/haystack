@@ -1,5 +1,38 @@
 require "../spec_helper"
 
+describe Haystack::Recipient do
+  describe ".from_any" do
+    it "returns recipient unmodified" do
+      id = 11
+      recipient = Haystack::Recipient.from_json(%({"id": #{id}}))
+      recipient = Haystack::Recipient.from_any(recipient)
+
+      recipient.should be_a(Haystack::Recipient)
+      recipient.try(&.id).should eq(id)
+    end
+
+    it "returns recipient from string" do
+      code = "abcdef"
+      recipient = Haystack::Recipient.from_any(code)
+
+      recipient.should be_a(Haystack::Recipient)
+      recipient.try(&.recipient_code).should eq(code)
+    end
+
+    it "returns recipient from integer" do
+      id = 44
+      recipient = Haystack::Recipient.from_any(id)
+
+      recipient.should be_a(Haystack::Recipient)
+      recipient.try(&.id).should eq(id)
+    end
+
+    it "returns nil from nil" do
+      Haystack::Recipient.from_any(nil).should be_nil
+    end
+  end
+end
+
 describe Haystack::Recipient::Endpoint do
   describe "#create" do
     it "creates transfer recipient" do

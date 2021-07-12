@@ -1,5 +1,30 @@
 require "../spec_helper"
 
+describe Haystack::Subscription do
+  describe ".from_any" do
+    it "returns subscription unmodified" do
+      id = 11
+      subscription = Haystack::Subscription.from_json(%({"id": #{id}}))
+      subscription = Haystack::Subscription.from_any(subscription)
+
+      subscription.should be_a(Haystack::Subscription)
+      subscription.try(&.id).should eq(id)
+    end
+
+    it "returns subscription from integer" do
+      id = 44
+      subscription = Haystack::Subscription.from_any(id)
+
+      subscription.should be_a(Haystack::Subscription)
+      subscription.try(&.id).should eq(id)
+    end
+
+    it "returns nil from nil" do
+      Haystack::Subscription.from_any(nil).should be_nil
+    end
+  end
+end
+
 describe Haystack::Subscription::Endpoint do
   describe "#create" do
     it "creates subscription" do

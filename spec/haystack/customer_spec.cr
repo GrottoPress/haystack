@@ -1,5 +1,30 @@
 require "../spec_helper"
 
+describe Haystack::Customer do
+  describe ".from_any" do
+    it "returns customer unmodified" do
+      id = 11
+      customer = Haystack::Customer.from_json(%({"id": #{id}}))
+      customer = Haystack::Customer.from_any(customer)
+
+      customer.should be_a(Haystack::Customer)
+      customer.try(&.id).should eq(id)
+    end
+
+    it "returns customer from integer" do
+      id = 44
+      customer = Haystack::Customer.from_any(id)
+
+      customer.should be_a(Haystack::Customer)
+      customer.try(&.id).should eq(id)
+    end
+
+    it "returns nil from nil" do
+      Haystack::Customer.from_any(nil).should be_nil
+    end
+  end
+end
+
 describe Haystack::Customer::Endpoint do
   describe "#create" do
     it "creates customer" do

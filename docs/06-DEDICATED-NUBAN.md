@@ -59,10 +59,8 @@ See <https://paystack.com/docs/api/#dedicated-nuban>
      return puts response.message unless response.success?
 
      response.data.try do |account|
-       puts account.metadata.try &.as(Haystack::Metadata)
-        .json_unmapped["some_key"]
-
-       puts account.metadata.try &.as(Haystack::Metadata).recurring
+       puts account.metadata.try &.json_unmapped["some_key"]
+       puts account.metadata.try &.recurring
        puts account.currency
        # ...
      end

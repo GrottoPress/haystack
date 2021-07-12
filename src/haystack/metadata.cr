@@ -1,12 +1,32 @@
 struct Haystack::Metadata
   include JSON::Serializable
   include JSON::Serializable::Unmapped
+  include FromAny
 
+  @recurring : ::Bool | Int32 | Nil
+
+  getter any : JSON::Any?
   getter banks : Array(String)?
   getter cancel_action : String?
   getter card_brands : Array(String)?
   getter custom_fields : Array(CustomField)?
-  getter recurring : Bool | Int32 | Nil
+
+  def recurring
+    recurring?
+  end
+
+  def recurring?
+    Bool.from_any(@recurring)
+  end
+
+  def self.from_any(metadata) : self?
+    case metadata
+    when JSON::Any, Bool, Number, String
+      from_json(%({"any": #{metadata}}))
+    else
+      metadata
+    end
+  end
 
   struct CustomField
     include JSON::Serializable

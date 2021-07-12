@@ -1,5 +1,38 @@
 require "../spec_helper"
 
+describe Haystack::Plan do
+  describe ".from_any" do
+    it "returns plan unmodified" do
+      id = 11
+      plan = Haystack::Plan.from_json(%({"id": #{id}}))
+      plan = Haystack::Plan.from_any(plan)
+
+      plan.should be_a(Haystack::Plan)
+      plan.try(&.id).should eq(id)
+    end
+
+    it "returns plan from string" do
+      code = "abcdef"
+      plan = Haystack::Plan.from_any(code)
+
+      plan.should be_a(Haystack::Plan)
+      plan.try(&.plan_code).should eq(code)
+    end
+
+    it "returns plan from integer" do
+      id = 44
+      plan = Haystack::Plan.from_any(id)
+
+      plan.should be_a(Haystack::Plan)
+      plan.try(&.id).should eq(id)
+    end
+
+    it "returns nil from nil" do
+      Haystack::Plan.from_any(nil).should be_nil
+    end
+  end
+end
+
 describe Haystack::Plan::Endpoint do
   describe "#create" do
     it "creates plan" do

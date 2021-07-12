@@ -1,5 +1,14 @@
 struct Haystack::Plan
   include JSON::Serializable
+  include FromAny
+
+  @hosted_page : ::Bool | Int32 | Nil
+  @integration : Integration | Int64 | Nil
+  @is_archived : ::Bool | Int32 | Nil
+  @is_deleted : ::Bool | Int32 | Nil
+  @migrate : ::Bool | Int32 | Nil
+  @send_invoices : ::Bool | Int32 | Nil
+  @send_sms : ::Bool | Int32 | Nil
 
   getter active_subscriptions : Int64?
   getter amount : Int64?
@@ -7,23 +16,73 @@ struct Haystack::Plan
   getter currency : Currency?
   getter description : String?
   getter domain : Domain?
-  getter hosted_page : Bool | Int32 | Nil
   getter hosted_page_summary : String?
   getter hosted_page_url : String?
   getter id : Int64?
   getter interval : Interval?
-  getter integration : Integration | Int64 | Nil
   getter invoice_limit : Int32?
-  getter is_deleted : Bool | Int32 | Nil
-  getter is_archived : Bool | Int32 | Nil
-  getter migrate : Bool | Int32 | Nil
   getter name : String?
   getter pages : Array(JSON::Any)? # Figure out type
   getter plan_code : String?
-  getter send_invoices : Bool | Int32 | Nil
-  getter send_sms : Bool | Int32 | Nil
   getter subscriptions : Array(Subscription)?
   getter total_subscriptions : Int64?
   getter total_subscriptions_revenue : Int64?
   getter updatedAt : String?
+
+  def integration : Integration?
+    Integration.from_any(@integration)
+  end
+
+  def hosted_page
+    hosted_page?
+  end
+
+  def is_deleted
+    is_deleted?
+  end
+
+  def is_archived
+    is_archived?
+  end
+
+  def migrate
+    migrate?
+  end
+
+  def send_invoices
+    send_invoices?
+  end
+
+  def send_sms
+    send_sms?
+  end
+
+  def hosted_page?
+    Bool.from_any(@hosted_page)
+  end
+
+  def is_deleted?
+    Bool.from_any(@is_deleted)
+  end
+
+  def is_archived?
+    Bool.from_any(@is_archived)
+  end
+
+  def migrate?
+    Bool.from_any(@migrate)
+  end
+
+  def send_invoices?
+    Bool.from_any(@send_invoices)
+  end
+
+  def send_sms?
+    Bool.from_any(@send_sms)
+  end
+
+  def self.from_any(plan) : self?
+    return from_json(%({"plan_code": "#{plan}"})) if plan.is_a?(String)
+    previous_def
+  end
 end

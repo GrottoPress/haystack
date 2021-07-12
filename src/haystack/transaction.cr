@@ -1,5 +1,10 @@
 struct Haystack::Transaction
   include JSON::Serializable
+  include FromAny
+
+  @customer : Customer | Int64 | Nil
+  @metadata : Metadata | JSON::Any | Nil
+  @plan : Plan | String | Int64 | Nil
 
   getter amount : Int64?
   getter authorization : Card::Authorization?
@@ -7,7 +12,6 @@ struct Haystack::Transaction
   getter created_at : Time?
   getter createdAt : Time?
   getter currency : Currency?
-  getter customer : Customer | Int64 | Nil
   getter domain : Domain?
   getter fees : Int64?
   getter fees_split : Int64?
@@ -16,11 +20,9 @@ struct Haystack::Transaction
   getter ip_address : String?
   getter log : Log?
   getter message : String?
-  getter metadata : Metadata | JSON::Any | Nil
   getter order_id : Int64?
   getter paid_at : Time?
   getter paidAt : Time?
-  getter plan : Plan | String | Int64 | Nil
   getter plan_object : Plan?
   getter pos_transaction_data : JSON::Any? # Figure out type
   getter reference : String?
@@ -30,4 +32,16 @@ struct Haystack::Transaction
   getter status : Status?
   getter subaccount : Subaccount?
   getter transaction_date : Time?
+
+  def customer : Customer?
+    Customer.from_any(@customer)
+  end
+
+  def metadata : Metadata?
+    Metadata.from_any(@metadata)
+  end
+
+  def plan : Plan?
+    Plan.from_any(@plan)
+  end
 end

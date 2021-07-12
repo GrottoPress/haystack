@@ -1,28 +1,29 @@
 struct Haystack::Invoice
   include JSON::Serializable
 
+  @archived : ::Bool | Int32 | Nil
+  @customer : Customer | Int64 | Nil
+  @has_invoice : ::Bool | Int32 | Nil
+  @integration : Integration | Int64 | Nil
+  @metadata : Metadata | JSON::Any | Nil
+  @paid : ::Bool | Int32 | Nil
+
   getter amount : Int64?
   getter amount_paid : Int64?
-  getter archived : Bool | Int32 | Nil
   getter createdAt : Time?
   getter created_at : Time?
   getter currency : Currency?
-  getter customer : Customer | Int64 | Nil
   getter description : String?
   getter discount : Discount?
   getter domain : Domain?
   getter due_date : Time?
-  getter has_invoice : Bool | Int32 | Nil
   getter id : Int64?
-  getter integration : Integration | Int64 | Nil
   getter invoice_number : Int64?
   getter line_items : Array(LineItem)?
-  getter metadata : Metadata | JSON::Any | Nil
   getter note : String?
   getter notifications : Array(Notification)?
   getter offline_reference : String?
   getter pending_amount : Int64?
-  getter paid : Bool | Int32 | Nil
   getter paid_at : Time?
   getter payment_method : String?
   getter pdf_url : String?
@@ -33,4 +34,40 @@ struct Haystack::Invoice
   getter transactions : Array(Transaction)?
   getter updatedAt : Time?
   getter updated_at : Time?
+
+  def customer : Customer?
+    Customer.from_any(@customer)
+  end
+
+  def integration : Integration?
+    Integration.from_any(@integration)
+  end
+
+  def metadata : Metadata?
+    Metadata.from_any(@metadata)
+  end
+
+  def archived
+    archived?
+  end
+
+  def has_invoice
+    has_invoice?
+  end
+
+  def paid
+    paid?
+  end
+
+  def archived?
+    Bool.from_any(@archived)
+  end
+
+  def has_invoice?
+    Bool.from_any(@has_invoice)
+  end
+
+  def paid?
+    Bool.from_any(@paid)
+  end
 end

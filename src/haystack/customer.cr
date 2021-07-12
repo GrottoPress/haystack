@@ -1,5 +1,12 @@
+require "./from_any"
+
 class Haystack::Customer
   include JSON::Serializable
+  include FromAny
+
+  @identified : ::Bool | Int32 | Nil
+  @integration : Integration | Int64 | Nil
+  @metadata : Metadata | JSON::Any | Nil
 
   getter authorizations : Array(Card::Authorization)?
   getter createdAt : Time?
@@ -9,15 +16,28 @@ class Haystack::Customer
   getter email : String?
   getter first_name : String?
   getter id : Int64?
-  getter identified : Bool | Int32 | Nil
   getter identifications : Array(Identification)?
-  getter integration : Integration | Int64 | Nil
   getter international_format_phone : String?
   getter last_name : String?
-  getter metadata : Metadata | JSON::Any | Nil
   getter phone : String?
   getter risk_action : RiskAction?
   getter subscriptions : Array(Subscription)?
   getter transactions : Array(Transaction)?
   getter updatedAt : Time?
+
+  def integration : Integration?
+    Integration.from_any(@integration)
+  end
+
+  def metadata : Metadata?
+    Metadata.from_any(@metadata)
+  end
+
+  def identified
+    identified?
+  end
+
+  def identified?
+    Bool.from_any(@identified)
+  end
 end

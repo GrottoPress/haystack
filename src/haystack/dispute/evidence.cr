@@ -1,5 +1,8 @@
 class Haystack::Dispute::Evidence
   include JSON::Serializable
+  include FromAny
+
+  @dispute : Dispute | Int64 | Nil
 
   getter createdAt : Time?
   getter customer_email : String?
@@ -7,10 +10,13 @@ class Haystack::Dispute::Evidence
   getter customer_phone : String?
   getter delivery_address : String?
   getter delivery_date : Time?
-  getter dispute : Dispute | Int64 | Nil
   getter id : Int64?
   getter service_details : String?
   getter updatedAt : Time?
+
+  def dispute : Dispute?
+    Dispute.from_any(@dispute)
+  end
 
   struct Item
     include Response
