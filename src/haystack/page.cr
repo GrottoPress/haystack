@@ -1,5 +1,5 @@
 struct Haystack::Page
-  include JSON::Serializable
+  include Hapi::Resource
 
   @active : ::Bool | Int32 | Nil
   @collect_phone : ::Bool | Int32 | Nil

@@ -1,13 +1,12 @@
 struct Haystack::BulkCharge::Endpoint
-  def initialize(@haystack : Haystack)
-  end
+  include Hapi::Endpoint
 
   def init(charges : Array(NamedTuple))
     yield init(charges)
   end
 
   def init(charges : Array(NamedTuple)) : Item
-    @haystack.post(self.class.path, body: charges.to_json) do |response|
+    @client.post(self.class.uri.path, body: charges.to_json) do |response|
       Item.from_json(response.body_io)
     end
   end
@@ -17,8 +16,8 @@ struct Haystack::BulkCharge::Endpoint
   end
 
   def list(**params) : List
-    @haystack.get(
-      "#{self.class.path}?#{URI::Params.encode(params)}"
+    @client.get(
+      "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     ) do |response|
       List.from_json(response.body_io)
     end
@@ -29,7 +28,7 @@ struct Haystack::BulkCharge::Endpoint
   end
 
   def fetch(id : String | Int) : Item
-    @haystack.get("#{self.class.path}/#{id}") do |response|
+    @client.get("#{self.class.uri.path}/#{id}") do |response|
       Item.from_json(response.body_io)
     end
   end
@@ -39,7 +38,7 @@ struct Haystack::BulkCharge::Endpoint
   end
 
   def charges(id : String | Int) : Charge::List
-    @haystack.get("#{self.class.path}/#{id}/charges") do |response|
+    @client.get("#{self.class.uri.path}/#{id}/charges") do |response|
       Charge::List.from_json(response.body_io)
     end
   end
@@ -49,7 +48,7 @@ struct Haystack::BulkCharge::Endpoint
   end
 
   def pause(batch_code : String) : Item
-    @haystack.get("#{self.class.path}/pause/#{batch_code}") do |response|
+    @client.get("#{self.class.uri.path}/pause/#{batch_code}") do |response|
       Item.from_json(response.body_io)
     end
   end
@@ -59,18 +58,14 @@ struct Haystack::BulkCharge::Endpoint
   end
 
   def resume(batch_code : String) : Item
-    @haystack.get("#{self.class.path}/resume/#{batch_code}") do |response|
+    @client.get("#{self.class.uri.path}/resume/#{batch_code}") do |response|
       Item.from_json(response.body_io)
     end
   end
 
-  def self.path : String
-    "#{Haystack.path}bulkcharge"
-  end
-
   def self.uri : URI
-    uri = Haystack.base_uri
-    uri.path = path
+    uri = Haystack.uri
+    uri.path += "bulkcharge"
     uri
   end
 end

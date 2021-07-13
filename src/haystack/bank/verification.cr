@@ -1,5 +1,5 @@
 struct Haystack::Bank::Verification
-  include JSON::Serializable
+  include Hapi::Resource
 
   getter account_name : String
   getter account_number : String

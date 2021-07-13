@@ -1,5 +1,5 @@
 struct Haystack::Log::History
-  include JSON::Serializable
+  include Hapi::Resource
 
   enum Type
     Input

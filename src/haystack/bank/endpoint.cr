@@ -1,14 +1,13 @@
 struct Haystack::Bank::Endpoint
-  def initialize(@haystack : Haystack)
-  end
+  include Hapi::Endpoint
 
   def list(**params)
     yield list(**params)
   end
 
   def list(**params) : List
-    @haystack.get(
-      "#{self.class.path}?#{URI::Params.encode(params)}"
+    @client.get(
+      "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     ) do |response|
       List.from_json(response.body_io)
     end
@@ -19,20 +18,16 @@ struct Haystack::Bank::Endpoint
   end
 
   def verify_account(**params) : Verification::Item
-    @haystack.get(
-      "#{self.class.path}/resolve?#{URI::Params.encode(params)}"
+    @client.get(
+      "#{self.class.uri.path}/resolve?#{URI::Params.encode(params)}"
     ) do |response|
       Verification::Item.from_json(response.body_io)
     end
   end
 
-  def self.path : String
-    "#{Haystack.path}bank"
-  end
-
   def self.uri : URI
-    uri = Haystack.base_uri
-    uri.path = path
+    uri = Haystack.uri
+    uri.path += "bank"
     uri
   end
 end

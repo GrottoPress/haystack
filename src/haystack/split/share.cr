@@ -1,5 +1,5 @@
 struct Haystack::Split::Share
-  include JSON::Serializable
+  include Hapi::Resource
 
   getter subaccount : Subaccount
   getter share : Int64

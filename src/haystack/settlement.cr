@@ -1,5 +1,5 @@
 struct Haystack::Settlement
-  include JSON::Serializable
+  include Hapi::Resource
   include FromAny
 
   @integration : Integration | Int64 | Nil

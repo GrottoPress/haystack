@@ -1,7 +1,7 @@
 require "./from_any"
 
 class Haystack::Customer
-  include JSON::Serializable
+  include Hapi::Resource
   include FromAny
 
   @identified : ::Bool | Int32 | Nil

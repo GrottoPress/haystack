@@ -4,7 +4,7 @@
 
 ### Architecture
 
-See [Cryflare](https://github.com/GrottoPress/cryflare/blob/master/docs/00-GETTING-STARTED.md#architecture).
+See [*Hapi*](https://github.com/GrottoPress/hapi).
 
 ### Requirements
 

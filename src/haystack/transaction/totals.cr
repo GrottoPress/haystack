@@ -1,5 +1,5 @@
 struct Haystack::Transaction::Totals
-  include JSON::Serializable
+  include Hapi::Resource
 
   getter pending_transfers : Int64
   getter pending_transfers_by_currency : Array(Amount)

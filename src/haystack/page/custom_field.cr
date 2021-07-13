@@ -1,5 +1,5 @@
 struct Haystack::Page::CustomField
-  include JSON::Serializable
+  include Hapi::Resource
 
   getter display_name : String
   getter variable_name : String

@@ -1,5 +1,5 @@
 struct Haystack::Country
-  include JSON::Serializable
+  include Hapi::Resource
 
   @active_for_dashboard_onboarding : ::Bool | Int32 | Nil
 

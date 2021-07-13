@@ -1,5 +1,5 @@
 struct Haystack::Invoice
-  include JSON::Serializable
+  include Hapi::Resource
 
   @archived : ::Bool | Int32 | Nil
   @customer : Customer | Int64 | Nil

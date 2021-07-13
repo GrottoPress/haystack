@@ -1,5 +1,5 @@
 struct Haystack::Invoice::Totals
-  include JSON::Serializable
+  include Hapi::Resource
 
   getter pending : Array(Amount)
   getter successful : Array(Amount)

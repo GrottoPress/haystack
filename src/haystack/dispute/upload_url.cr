@@ -1,5 +1,5 @@
 struct Haystack::Dispute::UploadUrl
-  include JSON::Serializable
+  include Hapi::Resource
 
   getter fileName : String
   getter signedUrl : String

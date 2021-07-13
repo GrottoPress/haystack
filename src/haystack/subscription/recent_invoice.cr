@@ -1,5 +1,5 @@
 class Haystack::Subscription::RecentInvoice
-  include JSON::Serializable
+  include Hapi::Resource
 
   @customer : Customer | Int64 | Nil
   @integration : Integration | Int64 | Nil

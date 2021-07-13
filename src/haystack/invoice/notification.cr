@@ -1,5 +1,5 @@
 struct Haystack::Invoice::Notification
-  include JSON::Serializable
+  include Hapi::Resource
 
   enum Channel
     Email

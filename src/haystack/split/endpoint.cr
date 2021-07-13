@@ -1,13 +1,12 @@
 struct Haystack::Split::Endpoint
-  def initialize(@haystack : Haystack)
-  end
+  include Hapi::Endpoint
 
   def create(**params)
     yield create(**params)
   end
 
   def create(**params) : Item
-    @haystack.post(self.class.path, body: params.to_json) do |response|
+    @client.post(self.class.uri.path, body: params.to_json) do |response|
       Item.from_json(response.body_io)
     end
   end
@@ -17,8 +16,8 @@ struct Haystack::Split::Endpoint
   end
 
   def list(**params) : List
-    @haystack.get(
-      "#{self.class.path}?#{URI::Params.encode(params)}"
+    @client.get(
+      "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     ) do |response|
       List.from_json(response.body_io)
     end
@@ -29,7 +28,7 @@ struct Haystack::Split::Endpoint
   end
 
   def fetch(id : Int) : Item
-    @haystack.get("#{self.class.path}/#{id}") do |response|
+    @client.get("#{self.class.uri.path}/#{id}") do |response|
       Item.from_json(response.body_io)
     end
   end
@@ -39,8 +38,8 @@ struct Haystack::Split::Endpoint
   end
 
   def update(id : Int, **params) : Item
-    @haystack.put(
-      "#{self.class.path}/#{id}",
+    @client.put(
+      "#{self.class.uri.path}/#{id}",
       body: params.to_json
     ) do |response|
       Item.from_json(response.body_io)
@@ -60,8 +59,8 @@ struct Haystack::Split::Endpoint
   end
 
   def add_account(id : Int, **params) : Item
-    @haystack.post(
-      "#{self.class.path}/#{id}/subaccount/add",
+    @client.post(
+      "#{self.class.uri.path}/#{id}/subaccount/add",
       body: params.to_json
     ) do |response|
       Item.from_json(response.body_io)
@@ -73,21 +72,17 @@ struct Haystack::Split::Endpoint
   end
 
   def remove_account(id : Int, **params) : Item
-    @haystack.post(
-      "#{self.class.path}/#{id}/subaccount/remove",
+    @client.post(
+      "#{self.class.uri.path}/#{id}/subaccount/remove",
       body: params.to_json
     ) do |response|
       Item.from_json(response.body_io)
     end
   end
 
-  def self.path : String
-    "#{Haystack.path}split"
-  end
-
   def self.uri : URI
-    uri = Haystack.base_uri
-    uri.path = path
+    uri = Haystack.uri
+    uri.path += "split"
     uri
   end
 end

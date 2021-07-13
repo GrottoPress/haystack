@@ -1,5 +1,5 @@
 struct Haystack::Transaction::Authorization
-  include JSON::Serializable
+  include Hapi::Resource
 
   getter access_code : String
   getter authorization_url : String

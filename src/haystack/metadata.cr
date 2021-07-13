@@ -1,5 +1,5 @@
 struct Haystack::Metadata
-  include JSON::Serializable
+  include Hapi::Resource
   include JSON::Serializable::Unmapped
   include FromAny
 
@@ -29,7 +29,7 @@ struct Haystack::Metadata
   end
 
   struct CustomField
-    include JSON::Serializable
+    include Hapi::Resource
 
     getter display_name : String
     getter variable_name : String

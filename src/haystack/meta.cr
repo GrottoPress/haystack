@@ -1,5 +1,5 @@
 struct Haystack::Meta
-  include JSON::Serializable
+  include Hapi::Resource
 
   getter next : String?
   getter page : Int32?

@@ -1,5 +1,5 @@
 struct Haystack::Plan
-  include JSON::Serializable
+  include Hapi::Resource
   include FromAny
 
   @hosted_page : ::Bool | Int32 | Nil

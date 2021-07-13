@@ -1,5 +1,5 @@
 struct Haystack::Product::File
-  include JSON::Serializable
+  include Hapi::Resource
 
   getter key : String
   getter original_filename : String

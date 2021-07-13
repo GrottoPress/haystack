@@ -1,5 +1,5 @@
 struct Haystack::Product
-  include JSON::Serializable
+  include Hapi::Resource
 
   @active : ::Bool | Int32 | Nil
   @in_stock : ::Bool | Int32 | Nil

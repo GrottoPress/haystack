@@ -1,13 +1,12 @@
 struct Haystack::Invoice::Endpoint
-  def initialize(@haystack : Haystack)
-  end
+  include Hapi::Endpoint
 
   def create(**params)
     yield create(**params)
   end
 
   def create(**params) : Item
-    @haystack.post(self.class.path, body: params.to_json) do |response|
+    @client.post(self.class.uri.path, body: params.to_json) do |response|
       Item.from_json(response.body_io)
     end
   end
@@ -17,8 +16,8 @@ struct Haystack::Invoice::Endpoint
   end
 
   def list(**params) : List
-    @haystack.get(
-      "#{self.class.path}?#{URI::Params.encode(params)}"
+    @client.get(
+      "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     ) do |response|
       List.from_json(response.body_io)
     end
@@ -29,7 +28,7 @@ struct Haystack::Invoice::Endpoint
   end
 
   def fetch(id : String | Int) : Item
-    @haystack.get("#{self.class.path}/#{id}") do |response|
+    @client.get("#{self.class.uri.path}/#{id}") do |response|
       Item.from_json(response.body_io)
     end
   end
@@ -39,8 +38,8 @@ struct Haystack::Invoice::Endpoint
   end
 
   def update(id : String | Int, **params) : Item
-    @haystack.put(
-      "#{self.class.path}/#{id}",
+    @client.put(
+      "#{self.class.uri.path}/#{id}",
       body: params.to_json
     ) do |response|
       Item.from_json(response.body_io)
@@ -52,7 +51,7 @@ struct Haystack::Invoice::Endpoint
   end
 
   def verify(code : String) : Item
-    @haystack.get("#{self.class.path}/verify/#{code}") do |response|
+    @client.get("#{self.class.uri.path}/verify/#{code}") do |response|
       Item.from_json(response.body_io)
     end
   end
@@ -62,7 +61,7 @@ struct Haystack::Invoice::Endpoint
   end
 
   def notify(id : String | Int) : Notification::Item
-    @haystack.post("#{self.class.path}/notify/#{id}") do |response|
+    @client.post("#{self.class.uri.path}/notify/#{id}") do |response|
       Notification::Item.from_json(response.body_io)
     end
   end
@@ -72,7 +71,7 @@ struct Haystack::Invoice::Endpoint
   end
 
   def totals : Totals::Item
-    @haystack.get("#{self.class.path}/totals") do |response|
+    @client.get("#{self.class.uri.path}/totals") do |response|
       Totals::Item.from_json(response.body_io)
     end
   end
@@ -82,7 +81,7 @@ struct Haystack::Invoice::Endpoint
   end
 
   def finalise(id : String | Int) : Item
-    @haystack.post("#{self.class.path}/finalize/#{id}") do |response|
+    @client.post("#{self.class.uri.path}/finalize/#{id}") do |response|
       Item.from_json(response.body_io)
     end
   end
@@ -92,18 +91,14 @@ struct Haystack::Invoice::Endpoint
   end
 
   def archive(id : String | Int) : Item
-    @haystack.post("#{self.class.path}/archive/#{id}") do |response|
+    @client.post("#{self.class.uri.path}/archive/#{id}") do |response|
       Item.from_json(response.body_io)
     end
   end
 
-  def self.path : String
-    "#{Haystack.path}paymentrequest"
-  end
-
   def self.uri : URI
-    uri = Haystack.base_uri
-    uri.path = path
+    uri = Haystack.uri
+    uri.path += "paymentrequest"
     uri
   end
 end

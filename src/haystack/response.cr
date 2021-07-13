@@ -1,6 +1,6 @@
 module Haystack::Response
   macro included
-    include JSON::Serializable
+    include Hapi::Resource
 
     getter status : ::Bool
     getter message : String

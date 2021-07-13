@@ -1,5 +1,5 @@
 struct Haystack::Log
-  include JSON::Serializable
+  include Hapi::Resource
 
   @mobile : ::Bool | Int32 | Nil
   @success : ::Bool | Int32 | Nil

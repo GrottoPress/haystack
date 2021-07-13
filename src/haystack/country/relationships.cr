@@ -1,5 +1,5 @@
 struct Haystack::Country::Relationships
-  include JSON::Serializable
+  include Hapi::Resource
 
   getter currency : Relationship
   getter integration_feature : Relationship
@@ -7,7 +7,7 @@ struct Haystack::Country::Relationships
   getter payment_method : Relationship
 
   struct Relationship
-    include JSON::Serializable
+    include Hapi::Resource
 
     getter data : Array(String)
     getter type : String

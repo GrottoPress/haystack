@@ -1,5 +1,5 @@
 struct Haystack::Integration
-  include JSON::Serializable
+  include Hapi::Resource
   include FromAny
 
   getter allowed_currencies : Array(Currency)?

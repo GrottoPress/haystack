@@ -1,5 +1,5 @@
 struct Haystack::BulkCharge
-  include JSON::Serializable
+  include Hapi::Resource
 
   @integration : Integration | Int64 | Nil
 

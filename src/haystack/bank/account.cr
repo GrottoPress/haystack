@@ -1,5 +1,5 @@
 class Haystack::Bank::Account
-  include JSON::Serializable
+  include Hapi::Resource
 
   @active : ::Bool | Int32 | Nil
   @assigned : ::Bool | Int32 | Nil
@@ -44,7 +44,7 @@ class Haystack::Bank::Account
   end
 
   struct Assignment
-    include JSON::Serializable
+    include Hapi::Resource
 
     @expired : ::Bool | Int32 | Nil
     @integration : Integration | Int64 | Nil

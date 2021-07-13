@@ -1,5 +1,5 @@
 struct Haystack::Transfer
-  include JSON::Serializable
+  include Hapi::Resource
 
   @integration : Integration | Int64 | Nil
   @recipient : Recipient | Int64 | String | Nil

@@ -1,5 +1,5 @@
 struct Haystack::Split
-  include JSON::Serializable
+  include Hapi::Resource
 
   @active : ::Bool | Int32 | Nil
   @integration : Integration | Int64 | Nil

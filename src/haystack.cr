@@ -1,15 +1,14 @@
-require "json"
-require "http/client"
+require "hapi"
 
 require "./haystack/version"
 require "./haystack/**"
 
 class Haystack
+  include Hapi::Client
+
   def initialize(secret_key)
     set_headers(secret_key)
   end
-
-  forward_missing_to http_client
 
   def banks : Bank::Endpoint
     @banks ||= Bank::Endpoint.new(self)
@@ -87,18 +86,8 @@ class Haystack
     @transfers ||= Transfer::Endpoint.new(self)
   end
 
-  def self.path : String
-    "/"
-  end
-
   def self.uri : URI
-    uri = base_uri
-    uri.path = path
-    uri
-  end
-
-  def self.base_uri : URI
-    URI.parse("https://api.paystack.co")
+    URI.parse("https://api.paystack.co/")
   end
 
   private def set_headers(secret_key)
@@ -107,10 +96,6 @@ class Haystack
       set_user_agent(request.headers)
       set_authorization(request.headers, secret_key)
     end
-  end
-
-  private def http_client : HTTP::Client
-    @http_client ||= HTTP::Client.new(self.class.base_uri)
   end
 
   private def set_content_type(headers)

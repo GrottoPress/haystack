@@ -1,5 +1,5 @@
 struct Haystack::Amount
-  include JSON::Serializable
+  include Hapi::Resource
 
   getter amount : Int64
   getter currency : Currency

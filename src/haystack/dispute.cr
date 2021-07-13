@@ -1,5 +1,5 @@
 class Haystack::Dispute
-  include JSON::Serializable
+  include Hapi::Resource
 
   @customer : Customer | Int64 | Nil
   @evidence : Evidence | Int64 | Nil

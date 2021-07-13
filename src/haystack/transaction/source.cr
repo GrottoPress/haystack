@@ -1,5 +1,5 @@
 struct Haystack::Transaction::Source
-  include JSON::Serializable
+  include Hapi::Resource
 
   getter source : String
   getter type : String

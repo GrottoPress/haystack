@@ -1,5 +1,5 @@
 struct Haystack::BulkCharge::Charge
-  include JSON::Serializable
+  include Hapi::Resource
 
   enum Status
     Success

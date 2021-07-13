@@ -1,5 +1,5 @@
 struct Haystack::Bank
-  include JSON::Serializable
+  include Hapi::Resource
 
   @active : ::Bool | Int32 | Nil
   @is_deleted : ::Bool | Int32 | Nil

@@ -1,5 +1,5 @@
 struct Haystack::Recipient
-  include JSON::Serializable
+  include Hapi::Resource
   include FromAny
 
   @active : ::Bool | Int32 | Nil

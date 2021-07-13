@@ -1,5 +1,5 @@
 struct Haystack::Export
-  include JSON::Serializable
+  include Hapi::Resource
 
   getter path : String
   getter expiresAt : Time?

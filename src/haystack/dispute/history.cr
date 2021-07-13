@@ -1,5 +1,5 @@
 struct Haystack::Dispute::History
-  include JSON::Serializable
+  include Hapi::Resource
 
   @dispute : Dispute | Int64 | Nil
 

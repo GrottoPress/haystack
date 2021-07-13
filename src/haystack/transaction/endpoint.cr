@@ -1,14 +1,13 @@
 struct Haystack::Transaction::Endpoint
-  def initialize(@haystack : Haystack)
-  end
+  include Hapi::Endpoint
 
   def init(**params)
     yield init(**params)
   end
 
   def init(**params) : Authorization::Item
-    @haystack.post(
-      "#{self.class.path}/initialize",
+    @client.post(
+      "#{self.class.uri.path}/initialize",
       body: params.to_json
     ) do |response|
       Authorization::Item.from_json(response.body_io)
@@ -20,7 +19,7 @@ struct Haystack::Transaction::Endpoint
   end
 
   def verify(reference : String) : Item
-    @haystack.get("#{self.class.path}/verify/#{reference}") do |response|
+    @client.get("#{self.class.uri.path}/verify/#{reference}") do |response|
       Item.from_json(response.body_io)
     end
   end
@@ -30,8 +29,8 @@ struct Haystack::Transaction::Endpoint
   end
 
   def list(**params) : List
-    @haystack.get(
-      "#{self.class.path}?#{URI::Params.encode(params)}"
+    @client.get(
+      "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     ) do |response|
       List.from_json(response.body_io)
     end
@@ -42,7 +41,7 @@ struct Haystack::Transaction::Endpoint
   end
 
   def fetch(id : Int) : Item
-    @haystack.get("#{self.class.path}/#{id}") do |response|
+    @client.get("#{self.class.uri.path}/#{id}") do |response|
       Item.from_json(response.body_io)
     end
   end
@@ -52,8 +51,8 @@ struct Haystack::Transaction::Endpoint
   end
 
   def charge_auth(**params) : Item
-    @haystack.post(
-      "#{self.class.path}/charge_authorization",
+    @client.post(
+      "#{self.class.uri.path}/charge_authorization",
       body: params.to_json
     ) do |response|
       Item.from_json(response.body_io)
@@ -65,8 +64,8 @@ struct Haystack::Transaction::Endpoint
   end
 
   def check_auth(**params) : Amount::Item
-    @haystack.post(
-      "#{self.class.path}/check_authorization",
+    @client.post(
+      "#{self.class.uri.path}/check_authorization",
       body: params.to_json
     ) do |response|
       Amount::Item.from_json(response.body_io)
@@ -78,7 +77,7 @@ struct Haystack::Transaction::Endpoint
   end
 
   def timeline(id : String | Int) : Timeline::Item
-    @haystack.get("#{self.class.path}/timeline/#{id}") do |response|
+    @client.get("#{self.class.uri.path}/timeline/#{id}") do |response|
       Timeline::Item.from_json(response.body_io)
     end
   end
@@ -88,8 +87,8 @@ struct Haystack::Transaction::Endpoint
   end
 
   def totals(**params) : Totals::Item
-    @haystack.get(
-      "#{self.class.path}/totals?#{URI::Params.encode(params)}"
+    @client.get(
+      "#{self.class.uri.path}/totals?#{URI::Params.encode(params)}"
     ) do |response|
       Totals::Item.from_json(response.body_io)
     end
@@ -100,8 +99,8 @@ struct Haystack::Transaction::Endpoint
   end
 
   def export(**params) : Export::Item
-    @haystack.get(
-      "#{self.class.path}/export?#{URI::Params.encode(params)}"
+    @client.get(
+      "#{self.class.uri.path}/export?#{URI::Params.encode(params)}"
     ) do |response|
       Export::Item.from_json(response.body_io)
     end
@@ -112,21 +111,17 @@ struct Haystack::Transaction::Endpoint
   end
 
   def debit(**params) : Item
-    @haystack.post(
-      "#{self.class.path}/partial_debit",
+    @client.post(
+      "#{self.class.uri.path}/partial_debit",
       body: params.to_json
     ) do |response|
       Item.from_json(response.body_io)
     end
   end
 
-  def self.path : String
-    "#{Haystack.path}transaction"
-  end
-
   def self.uri : URI
-    uri = Haystack.base_uri
-    uri.path = path
+    uri = Haystack.uri
+    uri.path += "transaction"
     uri
   end
 end

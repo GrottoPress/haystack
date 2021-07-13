@@ -1,5 +1,5 @@
 struct Haystack::Discount
-  include JSON::Serializable
+  include Hapi::Resource
 
   getter amount : Int64
   getter type : Type

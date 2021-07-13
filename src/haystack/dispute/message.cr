@@ -1,5 +1,5 @@
 struct Haystack::Dispute::Message
-  include JSON::Serializable
+  include Hapi::Resource
 
   @dispute : Dispute | Int64 | Nil
   @is_deleted : ::Bool | Int32 | Nil

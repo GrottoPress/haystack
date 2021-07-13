@@ -1,5 +1,5 @@
 struct Haystack::Recipient::Bulk
-  include JSON::Serializable
+  include Hapi::Resource
 
   getter success : Array(Recipient)
   getter errors : Array(JSON::Any) # Figure out type
