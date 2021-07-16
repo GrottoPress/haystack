@@ -33,7 +33,7 @@ See <https://paystack.com/docs/api/#bulk-charge> for the raw JSON schema.
      response.data.try &.each do |bulk_charge|
        puts bulk_charge.status
        puts bulk_charge.total_charges
-       puts bulk_charge.createdAt.try &.hour
+       puts bulk_charge.created_at.try &.hour
        # ...
      end
    end
@@ -46,7 +46,7 @@ See <https://paystack.com/docs/api/#bulk-charge> for the raw JSON schema.
      return puts response.message unless response.success?
 
      response.data.try do |bulk_charge|
-       puts bulk_charge.updatedAt.try &.minute
+       puts bulk_charge.updated_at.try &.minute
        puts bulk_charge.integration
        puts bulk_charge.pending_charges
        # ...

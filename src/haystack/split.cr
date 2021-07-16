@@ -6,7 +6,6 @@ struct Haystack::Split
 
   getter bearer_subaccount : Int64?
   getter bearer_type : String?
-  getter created_at : Time?
   getter currency : Currency?
   getter domain : Domain?
   getter id : Int64?
@@ -15,7 +14,8 @@ struct Haystack::Split
   getter subaccounts : Array(Share)?
   getter total_subaccounts : Int32?
   getter type : Type?
-  getter updated_at : Time?
+
+  Haystack.time_field :created, :updated
 
   def integration : Integration?
     Integration.from_any(@integration)

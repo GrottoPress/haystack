@@ -8,10 +8,8 @@ class Haystack::Dispute
   getter attachments : String?
   getter bin : String?
   getter category : String?
-  getter createdAt : Time?
   getter currency : Currency?
   getter domain : Domain?
-  getter dueAt : Time?
   getter history : Array(History)?
   getter id : Int64?
   getter last4 : String?
@@ -22,11 +20,11 @@ class Haystack::Dispute
   getter organization : Int64?
   getter refund_amount : Int64?
   getter resolution : String?
-  getter resolvedAt : Time?
   getter source : Source?
   getter status : Status?
   getter transaction_reference : String?
-  getter updatedAt : Time?
+
+  Haystack.time_field :created, :due, :resolved, :updated
 
   def customer : Customer?
     Customer.from_any(@customer)

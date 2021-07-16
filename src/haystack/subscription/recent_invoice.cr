@@ -8,7 +8,6 @@ class Haystack::Subscription::RecentInvoice
 
   getter amount : Int64?
   getter authorization : Int64?
-  getter created_at : Time?
   getter description : String?
   getter domain : Domain?
   getter id : Int64?
@@ -16,12 +15,12 @@ class Haystack::Subscription::RecentInvoice
   getter next_notification : Time?
   getter notification_flag : JSON::Any? # "null" - Figure out type
   getter paid : Int32?
-  getter paid_at : Time?
   getter period_end : Time?
   getter period_start : Time?
   getter retries : Int32?
   getter status : Invoice::Status?
-  getter updated_at : Time?
+
+  Haystack.time_field :created, :paid, :updated
 
   def customer : Customer?
     Customer.from_any(@customer)

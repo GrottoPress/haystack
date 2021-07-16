@@ -14,12 +14,12 @@ struct Haystack::BulkCharge::Charge
   getter amount : Int64?
   getter authorization : Card::Authorization?
   getter bulkcharge : Int64?
-  getter createdAt : Time?
   getter currency : Currency?
   getter domain : Domain?
   getter id : Int64?
   getter status : Status?
-  getter updatedAt : Time?
+
+  Haystack.time_field :created, :updated
 
   def customer : Customer?
     Customer.from_any(@customer)

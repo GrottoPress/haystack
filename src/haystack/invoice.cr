@@ -10,8 +10,6 @@ struct Haystack::Invoice
 
   getter amount : Int64?
   getter amount_paid : Int64?
-  getter createdAt : Time?
-  getter created_at : Time?
   getter currency : Currency?
   getter description : String?
   getter discount : Discount?
@@ -24,7 +22,6 @@ struct Haystack::Invoice
   getter notifications : Array(Notification)?
   getter offline_reference : String?
   getter pending_amount : Int64?
-  getter paid_at : Time?
   getter payment_method : String?
   getter pdf_url : String?
   getter request_code : String?
@@ -32,8 +29,8 @@ struct Haystack::Invoice
   getter status : Status?
   getter tax : Array(Tax)?
   getter transactions : Array(Transaction)?
-  getter updatedAt : Time?
-  getter updated_at : Time?
+
+  Haystack.time_field :created, :paid, :updated
 
   def customer : Customer?
     Customer.from_any(@customer)

@@ -4,10 +4,10 @@ struct Haystack::Dispute::History
   @dispute : Dispute | Int64 | Nil
 
   getter by : String?
-  getter createdAt : Time?
   getter id : Int64?
   getter status : Status?
-  getter updatedAt : Time?
+
+  Haystack.time_field :created, :updated
 
   def dispute : Dispute?
     Dispute.from_any(@dispute)

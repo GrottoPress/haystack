@@ -80,8 +80,8 @@ See <https://paystack.com/docs/api/#transfer-recipient> for the raw JSON schema.
      return puts response.message unless response.success?
 
      response.data.try do |recipient|
-       puts recipient.createdAt.try &.day
-       puts recipient.updatedAt.try &.month
+       puts recipient.created_at.try &.day
+       puts recipient.updated_at.try &.month
        puts recipient.isDeleted
        # ...
      end

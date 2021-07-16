@@ -12,7 +12,6 @@ struct Haystack::Plan
 
   getter active_subscriptions : Int64?
   getter amount : Int64?
-  getter createdAt : Time?
   getter currency : Currency?
   getter description : String?
   getter domain : Domain?
@@ -27,7 +26,8 @@ struct Haystack::Plan
   getter subscriptions : Array(Subscription)?
   getter total_subscriptions : Int64?
   getter total_subscriptions_revenue : Int64?
-  getter updatedAt : String?
+
+  Haystack.time_field :created, :updated
 
   def integration : Integration?
     Integration.from_any(@integration)

@@ -8,7 +8,6 @@ struct Haystack::Recipient
   @isDeleted : ::Bool | Int32 | Nil
   @metadata : Metadata | JSON::Any | Nil
 
-  getter createdAt : Time?
   getter currency : Currency?
   getter description : String?
   getter details : Details?
@@ -18,7 +17,8 @@ struct Haystack::Recipient
   getter name : String?
   getter recipient_code : String?
   getter type : Bank::Type?
-  getter updatedAt : Time?
+
+  Haystack.time_field :created, :updated
 
   def integration : Integration?
     Integration.from_any(@integration)

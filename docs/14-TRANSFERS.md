@@ -112,8 +112,8 @@ See <https://paystack.com/docs/api/#transfer> for the raw JSON schema.
 
      response.data.try do |transfer|
        puts transfer.transferred_at
-       puts transfer.createdAt.try &.year
-       puts transfer.updatedAt.try &.day_of_year
+       puts transfer.created_at.try &.year
+       puts transfer.updated_at.try &.day_of_year
        # ...
      end
    end

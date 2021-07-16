@@ -5,7 +5,6 @@ struct Haystack::Transfer
   @recipient : Recipient | Int64 | String | Nil
 
   getter amount : Int64?
-  getter createdAt : Time?
   getter currency : Currency?
   getter domain : Domain?
   getter failures : JSON::Any? # Figure out type
@@ -17,8 +16,8 @@ struct Haystack::Transfer
   getter status : Status?
   getter titan_code : String?
   getter transfer_code : String?
-  getter transferred_at : Time?
-  getter updatedAt : Time?
+
+  Haystack.time_field :created, :transferred, :updated
 
   def integration : Integration?
     Integration.from_any(@integration)

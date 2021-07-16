@@ -29,7 +29,7 @@ See <https://paystack.com/docs/api/#dispute> for the raw JSON schema.
 
      response.data.try do |dispute|
        puts dispute.currency
-       puts dispute.dueAt.try &.day
+       puts dispute.due_at.try &.day
        puts dispute.last4
        # ...
      end
@@ -118,7 +118,7 @@ See <https://paystack.com/docs/api/#dispute> for the raw JSON schema.
      return puts response.message unless response.success?
 
      response.data.try do |dispute|
-       puts dispute.resolvedAt.try &.month
+       puts dispute.resolved_at.try &.month
        puts dispute.source
        puts dispute.status
        # ...
@@ -134,7 +134,7 @@ See <https://paystack.com/docs/api/#dispute> for the raw JSON schema.
 
      response.data.try do |export|
        puts export.path
-       puts export.expiresAt.try &.year
+       puts export.expires_at.try &.year
        # ...
      end
    end

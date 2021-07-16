@@ -9,7 +9,6 @@ class Haystack::Customer
   @metadata : Metadata | JSON::Any | Nil
 
   getter authorizations : Array(Card::Authorization)?
-  getter createdAt : Time?
   getter customer_code : String?
   getter dedicated_account : Bank::Account?
   getter domain : Domain?
@@ -23,7 +22,8 @@ class Haystack::Customer
   getter risk_action : RiskAction?
   getter subscriptions : Array(Subscription)?
   getter transactions : Array(Transaction)?
-  getter updatedAt : Time?
+
+  Haystack.time_field :created, :updated
 
   def integration : Integration?
     Integration.from_any(@integration)

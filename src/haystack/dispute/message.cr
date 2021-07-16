@@ -5,10 +5,10 @@ struct Haystack::Dispute::Message
   @is_deleted : ::Bool | Int32 | Nil
 
   getter body : String?
-  getter createdAt : Time?
   getter id : Int64?
   getter sender : String?
-  getter updatedAt : Time?
+
+  Haystack.time_field :created, :updated
 
   def dispute : Dispute?
     Dispute.from_any(@dispute)

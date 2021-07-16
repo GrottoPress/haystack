@@ -9,7 +9,6 @@ struct Haystack::Subaccount
 
   getter account_number : String?
   getter business_name : String?
-  getter createdAt : Time?
   getter description : String?
   getter domain : Domain?
   getter id : Int64?
@@ -20,7 +19,8 @@ struct Haystack::Subaccount
   getter settlement_bank : String?
   getter settlement_schedule : Settlement::Schedule?
   getter subaccount_code : String?
-  getter updatedAt : Time?
+
+  Haystack.time_field :created, :updated
 
   def integration : Integration?
     Integration.from_any(@integration)

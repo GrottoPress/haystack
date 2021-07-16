@@ -10,7 +10,6 @@ struct Haystack::Page
   @published : ::Bool | Int32 | Nil
 
   getter amount : Int64?
-  getter createdAt : Time?
   getter currency : Currency?
   getter custom_fields : Array(CustomField)?
   getter description : String?
@@ -24,7 +23,8 @@ struct Haystack::Page
   getter split_code : String?
   getter success_message : String?
   getter type : Type?
-  getter updatedAt : Time?
+
+  Haystack.time_field :created, :updated
 
   def integration : Integration?
     Integration.from_any(@integration)

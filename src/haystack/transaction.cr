@@ -9,8 +9,6 @@ struct Haystack::Transaction
   getter amount : Int64?
   getter authorization : Card::Authorization?
   getter channel : Channel?
-  getter created_at : Time?
-  getter createdAt : Time?
   getter currency : Currency?
   getter domain : Domain?
   getter fees : Int64?
@@ -21,8 +19,6 @@ struct Haystack::Transaction
   getter log : Log?
   getter message : String?
   getter order_id : Int64?
-  getter paid_at : Time?
-  getter paidAt : Time?
   getter plan_object : Plan?
   getter pos_transaction_data : JSON::Any? # Figure out type
   getter reference : String?
@@ -32,6 +28,8 @@ struct Haystack::Transaction
   getter status : Status?
   getter subaccount : Subaccount?
   getter transaction_date : Time?
+
+  Haystack.time_field :created, :paid
 
   def customer : Customer?
     Customer.from_any(@customer)

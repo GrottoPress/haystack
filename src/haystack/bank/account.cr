@@ -10,14 +10,12 @@ class Haystack::Bank::Account
   getter account_number : String?
   getter assignment : Assignment?
   getter bank : Bank?
-  getter created_at : Time?
-  getter createdAt : Time?
   getter currency : Currency?
   getter id : Int64?
   getter provider : Provider?
   getter split_config : Split?
-  getter updated_at : Time?
-  getter updatedAt : Time?
+
+  Haystack.time_field :created, :updated
 
   def customer : Customer?
     Customer.from_any(@customer)
@@ -50,9 +48,10 @@ class Haystack::Bank::Account
     @integration : Integration | Int64 | Nil
 
     getter account_type : String?
-    getter assigned_at : Time?
     getter assignee_id : Int64?
     getter assignee_type : String?
+
+    Haystack.time_field :assigned
 
     def integration : Integration?
       Integration.from_any(@integration)

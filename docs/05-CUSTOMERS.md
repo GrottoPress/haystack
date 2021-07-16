@@ -28,7 +28,7 @@ See <https://paystack.com/docs/api/#customer> for the raw JSON schema.
      return puts response.message unless response.success?
 
      response.data.try &.each do |customer|
-       puts customer.createdAt
+       puts customer.created_at
        puts customer.customer_code
        puts customer.dedicated_account.try &.account_name
        # ...

@@ -9,18 +9,16 @@ struct Haystack::Refund
 
   getter amount : Int64?
   getter channel : Channel?
-  getter createdAt : Time?
   getter currency : Currency?
   getter customer_note : String?
   getter deducted_amount : Int64?
   getter domain : Domain?
-  getter expected_at : Time?
   getter id : Int64?
   getter merchant_note : String?
-  getter refunded_at : Time?
   getter refunded_by : String?
   getter status : Status?
-  getter updatedAt : Time?
+
+  Haystack.time_field :created, :expected, :refunded, :updated
 
   def dispute : Dispute?
     Dispute.from_any(@dispute)

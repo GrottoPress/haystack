@@ -8,7 +8,6 @@ struct Haystack::Product
   @metadata : Metadata | JSON::Any | Nil
   @unlimited : ::Bool | Int32 | Nil
 
-  getter createdAt : Time?
   getter currency : Currency?
   getter description : String?
   getter domain : Domain?
@@ -30,8 +29,9 @@ struct Haystack::Product
   getter split_code : String?
   getter success_message : String?
   getter type : Type?
-  getter updatedAt : Time?
   getter variant_options : Array(JSON::Any)? # Figure out type
+
+  Haystack.time_field :created, :updated
 
   def integration : Integration?
     Integration.from_any(@integration)

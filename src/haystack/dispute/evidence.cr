@@ -4,7 +4,6 @@ class Haystack::Dispute::Evidence
 
   @dispute : Dispute | Int64 | Nil
 
-  getter createdAt : Time?
   getter customer_email : String?
   getter customer_name : String?
   getter customer_phone : String?
@@ -12,7 +11,8 @@ class Haystack::Dispute::Evidence
   getter delivery_date : Time?
   getter id : Int64?
   getter service_details : String?
-  getter updatedAt : Time?
+
+  Haystack.time_field :created, :updated
 
   def dispute : Dispute?
     Dispute.from_any(@dispute)

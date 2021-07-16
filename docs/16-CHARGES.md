@@ -51,7 +51,7 @@ See <https://paystack.com/docs/api/#charge>
 
      response.data.try do |transaction|
        puts transaction.pos_transaction_data
-       puts transaction.paidAt.try &.sunday?
+       puts transaction.paid_at.try &.sunday?
        puts transaction.order_id
        # ...
      end
@@ -120,7 +120,7 @@ See <https://paystack.com/docs/api/#charge>
 
      response.data.try do |transaction|
        puts transaction.currency
-       puts transaction.createdAt.try &.monday?
+       puts transaction.created_at.try &.monday?
        puts transaction.channel
        # ...
      end

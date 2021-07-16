@@ -1,6 +1,7 @@
 require "hapi"
 
 require "./haystack/version"
+require "./haystack/macros"
 require "./haystack/**"
 
 class Haystack

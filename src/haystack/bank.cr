@@ -8,14 +8,14 @@ struct Haystack::Bank
   getter code : String?
   getter country : String?
   getter currency : Currency?
-  getter createdAt : Time?
   getter gateway : Gateway?
   getter id : Int64?
   getter longcode : String?
   getter name : String?
   getter slug : String?
   getter type : Type?
-  getter updatedAt : Time?
+
+  Haystack.time_field :created, :updated
 
   def active
     active?

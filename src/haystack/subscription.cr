@@ -8,8 +8,6 @@ class Haystack::Subscription
 
   getter amount : Int64?
   getter authorization : Card::Authorization?
-  getter cancelledAt : Time?
-  getter createdAt : Time?
   getter cron_expression : String?
   getter domain : Domain?
   getter easy_cron_id : String?
@@ -26,7 +24,8 @@ class Haystack::Subscription
   getter start : Int64?
   getter status : Status?
   getter subscription_code : String?
-  getter updatedAt : Time?
+
+  Haystack.time_field :cancelled, :created, :updated
 
   def customer : Customer?
     Customer.from_any(@customer)

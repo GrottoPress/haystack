@@ -4,7 +4,6 @@ struct Haystack::Settlement
 
   @integration : Integration | Int64 | Nil
 
-  getter createdAt : Time?
   getter domain : Domain?
   getter id : Int64?
   getter settled_by : JSON::Any? # Figure out type
@@ -12,7 +11,8 @@ struct Haystack::Settlement
   getter status : Status?
   getter subaccount : Subaccount?
   getter total_amount : Int64?
-  getter updatedAt : Time?
+
+  Haystack.time_field :created, :updated
 
   def integration : Integration?
     Integration.from_any(@integration)
