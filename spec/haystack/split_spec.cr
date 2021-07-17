@@ -316,7 +316,7 @@ describe Haystack::Split::Endpoint do
             "domain": "test",
             "split_code": "SPL_UO2vBzEqHW",
             "active": true,
-            "bearer_type": "subaccount",
+            "bearer_type": "all-proportional",
             "bearer_subaccount": 40809,
             "createdAt": "2020-06-30T11:52:24.000Z",
             "updatedAt": "2020-06-30T11:52:24.000Z",
@@ -372,6 +372,7 @@ describe Haystack::Split::Endpoint do
       ) do |response|
         response.success?.should be_true
         response.data.should be_a(Haystack::Split)
+        response.data.try &.bearer_type.try(&.all_proportional?).should be_true
       end
     end
   end

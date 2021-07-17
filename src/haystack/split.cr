@@ -1,11 +1,18 @@
 struct Haystack::Split
   include Hapi::Resource
 
+  enum BearerType
+    Subaccount
+    Account
+    AllProportional
+    All
+  end
+
   @active : ::Bool | Int32 | Nil
+  @bearer_type : String?
   @integration : Integration | Int64 | Nil
 
   getter bearer_subaccount : Int64?
-  getter bearer_type : String?
   getter currency : Currency?
   getter domain : Domain?
   getter id : Int64?
@@ -16,6 +23,10 @@ struct Haystack::Split
   getter type : Type?
 
   Haystack.time_field :created, :updated
+
+  def bearer_type : BearerType?
+    @bearer_type.try { |type| BearerType.parse(type.gsub '-', '_') }
+  end
 
   def integration : Integration?
     Integration.from_any(@integration)
