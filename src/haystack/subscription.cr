@@ -15,7 +15,7 @@ class Haystack::Subscription
   getter id : Int64?
   getter invoice_limit : Int32?
   getter invoices : Array(Invoice)?
-  getter most_recent_invoice : RecentInvoice?
+  getter most_recent_invoice : Invoice?
   getter next_payment_date : Time?
   getter open_invoice : String?
   getter payments_count : Int32?

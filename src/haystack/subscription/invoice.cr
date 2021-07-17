@@ -1,4 +1,4 @@
-class Haystack::Subscription::RecentInvoice
+class Haystack::Subscription::Invoice
   include Hapi::Resource
 
   @customer : Customer | Int64 | Nil
@@ -18,7 +18,7 @@ class Haystack::Subscription::RecentInvoice
   getter period_end : Time?
   getter period_start : Time?
   getter retries : Int32?
-  getter status : Invoice::Status?
+  getter status : Haystack::Invoice::Status?
 
   Haystack.time_field :created, :paid, :updated
 
