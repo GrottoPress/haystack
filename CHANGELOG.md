@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased] - 
 
+### Added
+- Add `#is_live` and `#business_name` attributes to `Haystack::Integration`
+
 ### Changed
 - Replace camelcased attributes with underscored methods in public API
 - Return enum (instead of string) for `Haystack::Split#bearer_type`
