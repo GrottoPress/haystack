@@ -13,7 +13,7 @@ class Haystack::Subscription::RecentInvoice
   getter id : Int64?
   getter invoice_code : String?
   getter next_notification : Time?
-  getter notification_flag : JSON::Any? # "null" - Figure out type
+  getter notification_flag : JSON::Any? # Figure out type
   getter paid : Int32?
   getter period_end : Time?
   getter period_start : Time?
