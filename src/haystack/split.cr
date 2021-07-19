@@ -1,13 +1,6 @@
 struct Haystack::Split
   include Hapi::Resource
 
-  enum BearerType
-    Subaccount
-    Account
-    AllProportional
-    All
-  end
-
   @active : ::Bool | Int32 | Nil
   @bearer_type : String?
   @integration : Integration | Int64 | Nil
