@@ -3,6 +3,7 @@ class Haystack::Dispute
 
   @customer : Customer | Int64 | Nil
   @evidence : Evidence | Int64 | Nil
+  @status : String?
   @transaction : Transaction | Int64 | Nil
 
   getter attachments : String?
@@ -21,10 +22,13 @@ class Haystack::Dispute
   getter refund_amount : Int64?
   getter resolution : String?
   getter source : Source?
-  getter status : Status?
   getter transaction_reference : String?
 
   Haystack.time_field :created, :due, :resolved, :updated
+
+  def status : Status?
+    @status.try { |type| Status.parse(type.gsub '-', '_') }
+  end
 
   def customer : Customer?
     Customer.from_any(@customer)
