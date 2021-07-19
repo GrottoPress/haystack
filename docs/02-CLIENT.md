@@ -8,4 +8,6 @@ You may instantiate a client using a pre-generated secret_key:
 paystack = Haystack.new(secret_key: "secret-key")
 ```
 
+If no `secret_key` is provided, *Haystack* falls back to a `PAYSTACK_SECRET_KEY` environment variable.
+
 From here on, you are ready to query *endpoint*s using the `paystack` client you just created.
