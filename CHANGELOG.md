@@ -17,6 +17,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Return enum (instead of string) for `Haystack::Split#bearer_type`
 - Rename `Haystack::Subscription::RecentInvoice` to `Invoice`
 
+### Fixed
+- Fix wrong attribute types in `Haystack::Subscription::Invoice`
+
 ## [0.1.0] - 2021-07-13
 
 ### Added

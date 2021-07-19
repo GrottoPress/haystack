@@ -3,18 +3,18 @@ class Haystack::Subscription::Invoice
 
   @customer : Customer | Int64 | Nil
   @integration : Integration | Int64 | Nil
+  @paid : ::Bool | Int32 | Nil
   @subscription : Subscription | Int64 | Nil
   @transaction : Transaction | Int64 | Nil
 
   getter amount : Int64?
-  getter authorization : Int64?
+  getter authorization : Card::Authorization?
   getter description : String?
   getter domain : Domain?
   getter id : Int64?
   getter invoice_code : String?
   getter next_notification : Time?
   getter notification_flag : JSON::Any? # Figure out type
-  getter paid : Int32?
   getter period_end : Time?
   getter period_start : Time?
   getter retries : Int32?
@@ -36,5 +36,13 @@ class Haystack::Subscription::Invoice
 
   def subscription : Subscription?
     Subscription.from_any(@subscription)
+  end
+
+  def paid
+    paid?
+  end
+
+  def paid?
+    Bool.from_any(@paid)
   end
 end

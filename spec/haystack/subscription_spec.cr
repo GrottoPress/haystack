@@ -157,7 +157,7 @@ describe Haystack::Subscription::Endpoint do
                 "status": "failed",
                 "paid": 0,
                 "retries": 1,
-                "authorization": 192414339,
+                "authorization": {},
                 "paid_at": null,
                 "next_notification": "2021-07-05T19:59:59.000Z",
                 "notification_flag": null,
