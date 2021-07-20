@@ -2,6 +2,8 @@
 
 *Haystack* is a low-level API client for [*Paystack*](https://paystack.com). It features an intuitive interface that maps perfectly to the *Paystack* API.
 
+*Haystack* comes with a webhook handler that intercepts events received from *Paystack*, and allows you to perform actions based on the event type.
+
 ### Usage Examples
 
 1. Create client:

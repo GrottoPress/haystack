@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased] - 
 
 ### Added
+- Add support for Paystack webhooks
 - Add `#is_live` and `#business_name` attributes to `Haystack::Integration`
 - Add environment variable for *Paystack* secret key
 - Add missing `Haystack::Dispute::Status` members

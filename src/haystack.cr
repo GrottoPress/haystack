@@ -1,3 +1,6 @@
+require "crypto/subtle"
+require "digest/sha512"
+
 require "hapi"
 
 require "./haystack/version"
