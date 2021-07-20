@@ -2,10 +2,7 @@ module Haystack::Webhook::Handler
   macro included
     include HTTP::Handler
 
-    def initialize(
-      @secret_key = ENV["PAYSTACK_SECRET_KEY"],
-      @path = "/webhooks/paystack"
-    )
+    def initialize(@secret_key : String, @path : String)
     end
 
     def call(context)

@@ -159,8 +159,8 @@ See <https://paystack.com/docs/payments/webhooks>
 
    ```crystal
    paystack_webhook = PaystackWebhookHandler.new(
-     secret_key: "secret-key", # Default: `ENV["PAYSTACK_SECRET_KEY"]`
-     path: "/some/path" # Default: "/webhooks/paystack"
+     secret_key: "secret-key",
+     path: "/webhooks/paystack"
    )
 
    server = HTTP::Server.new([
@@ -173,6 +173,6 @@ See <https://paystack.com/docs/payments/webhooks>
    server.listen
    ```
 
-   *Haystack* would intercept webhook events sent to `http://127.0.0.1:8080/some/path`, and call the handler method you defined that corresponds to the event received.
+   *Haystack* would intercept webhook events sent to `http://127.0.0.1:8080/webhooks/paystack`, and call the handler method you defined that corresponds to the event received.
 
    Be sure to add the handler **before** others that do some sort of authentication, such as CSRF handlers, or even route handlers.

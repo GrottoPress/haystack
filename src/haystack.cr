@@ -10,7 +10,7 @@ require "./haystack/**"
 class Haystack
   include Hapi::Client
 
-  def initialize(secret_key = ENV["PAYSTACK_SECRET_KEY"])
+  def initialize(secret_key)
     set_headers(secret_key)
   end
 
