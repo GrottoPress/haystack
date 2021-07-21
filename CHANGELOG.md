@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - Fix wrong attribute types in `Haystack::Subscription::Invoice`
+- Fix some attributes not captured from pending charge response
 
 ## [0.1.0] - 2021-07-13
 

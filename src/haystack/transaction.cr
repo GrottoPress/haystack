@@ -31,6 +31,10 @@ struct Haystack::Transaction
 
   Haystack.time_field :created, :paid
 
+  # These are for when checking pending charges
+  getter display_text : String?
+  getter url : String?
+
   def customer : Customer?
     Customer.from_any(@customer)
   end
