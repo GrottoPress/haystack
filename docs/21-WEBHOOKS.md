@@ -176,3 +176,5 @@ See <https://paystack.com/docs/payments/webhooks>
    *Haystack* would intercept webhook events sent to `http://127.0.0.1:8080/webhooks/paystack`, and call the handler method you defined that corresponds to the event received.
 
    Be sure to add the handler **before** others that do some sort of authentication, such as CSRF handlers, or even route handlers.
+
+   Preferrably, operations performed in any webhook handler method should be delegated to a background job. This should avoid potential timeouts, and allow a response to be returned immediately to *Paystack*.
