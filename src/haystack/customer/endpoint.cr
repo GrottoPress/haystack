@@ -72,11 +72,11 @@ struct Haystack::Customer::Endpoint
     end
   end
 
-  def deactivate_auth(**params)
-    yield deactivate_auth(**params)
+  def deactivate_authorization(**params)
+    yield deactivate_authorization(**params)
   end
 
-  def deactivate_auth(**params) : Card::Authorization::Item
+  def deactivate_authorization(**params) : Card::Authorization::Item
     @client.post(
       "#{self.class.uri.path}/deactivate_authorization",
       body: params.to_json

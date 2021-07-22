@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Replace camelcased attributes with underscored methods in public API
 - Return enum (instead of string) for `Haystack::Split#bearer_type`
 - Rename `Haystack::Subscription::RecentInvoice` to `Invoice`
+- Rename methods with abbreviated names to full names
 
 ### Fixed
 - Fix wrong attribute types in `Haystack::Subscription::Invoice`

@@ -1,11 +1,11 @@
 struct Haystack::BulkCharge::Endpoint
   include Hapi::Endpoint
 
-  def init(charges : Array(NamedTuple))
-    yield init(charges)
+  def initiate(charges : Array(NamedTuple))
+    yield initiate(charges)
   end
 
-  def init(charges : Array(NamedTuple)) : Item
+  def initiate(charges : Array(NamedTuple)) : Item
     @client.post(self.class.uri.path, body: charges.to_json) do |response|
       Item.from_json(response.body_io)
     end

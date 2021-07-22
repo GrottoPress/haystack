@@ -109,7 +109,7 @@ See <https://paystack.com/docs/api/#customer> for the raw JSON schema.
 1. Deactivate authorization:
 
    ```crystal
-   paystack.customers.deactivate_auth(
+   paystack.customers.deactivate_authorization(
      authorization_code: "AUTH_72btv547"
    ) do |response|
      if response.success?

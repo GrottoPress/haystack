@@ -362,7 +362,7 @@ describe Haystack::Customer::Endpoint do
     end
   end
 
-  describe "#deactivate_auth" do
+  describe "#deactivate_authorization" do
     it "deactivates authorization" do
       response_json = IO::Memory.new <<-JSON
         {
@@ -380,7 +380,7 @@ describe Haystack::Customer::Endpoint do
 
       paystack = Haystack.new(secret_key: "abcdef")
 
-      paystack.customers.deactivate_auth(
+      paystack.customers.deactivate_authorization(
         authorization_code: "AUTH_72btv547"
       ) do |response|
         response.success?.should be_true

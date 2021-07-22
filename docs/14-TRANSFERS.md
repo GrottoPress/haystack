@@ -9,7 +9,7 @@ See <https://paystack.com/docs/api/#transfer> for the raw JSON schema.
 1. Initiate transfer:
 
    ```crystal
-   paystack.transfers.init(
+   paystack.transfers.initiate(
      source: "balance",
      reason: "Calm down",
      amount: 3794800,
@@ -29,7 +29,7 @@ See <https://paystack.com/docs/api/#transfer> for the raw JSON schema.
 1. Initiate bulk transfer:
 
    ```crystal
-   paystack.transfers.init(
+   paystack.transfers.initiate(
      currency: "NGN",
      source: "balance",
      transfers: [

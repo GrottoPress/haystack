@@ -7,7 +7,7 @@ describe Haystack do
 
       paystack = Haystack.new(secret_key)
 
-      paystack.transactions.init(
+      paystack.transactions.initiate(
         email: "customer@email.com",
         amount: "20000"
       ) do |response|

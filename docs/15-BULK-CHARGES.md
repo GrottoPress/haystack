@@ -9,7 +9,7 @@ See <https://paystack.com/docs/api/#bulk-charge> for the raw JSON schema.
 1. Initiate bulk charge:
 
    ```crystal
-   paystack.bulk_charges.init([
+   paystack.bulk_charges.initiate([
      {authorization: "AUTH_n95vpedf", amount: 2500},
      {authorization: "AUTH_ljdt4e4j", amount: 1500}
    ]) do |response|

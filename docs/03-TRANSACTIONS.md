@@ -9,7 +9,7 @@ See <https://paystack.com/docs/api/#transaction> for the raw JSON schema.
 1. Initialize a transaction:
 
    ```crystal
-   paystack.transactions.init(
+   paystack.transactions.initiate(
      email: "customer@email.com",
      amount: "20000",
      currency: "GHS"
@@ -73,7 +73,7 @@ See <https://paystack.com/docs/api/#transaction> for the raw JSON schema.
 1. Charge authorization:
 
    ```crystal
-   paystack.transactions.charge_auth(
+   paystack.transactions.charge_authorization(
      email: "customer@email.com",
      amount: "20000",
      authorization_code: "AUTH_72btv547"
@@ -92,7 +92,7 @@ See <https://paystack.com/docs/api/#transaction> for the raw JSON schema.
 1. Check authorization:
 
    ```crystal
-   paystack.transactions.check_auth(
+   paystack.transactions.check_authorization(
      email: "customer@email.com",
      amount: "20000",
      authorization_code: "AUTH_72btv547"

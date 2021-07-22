@@ -1,21 +1,21 @@
 struct Haystack::Transfer::Endpoint
   include Hapi::Endpoint
 
-  def init(**params)
-    yield init(**params)
+  def initiate(**params)
+    yield initiate(**params)
   end
 
-  def init(**params) : Item
+  def initiate(**params) : Item
     @client.post(self.class.uri.path, body: params.to_json) do |response|
       Item.from_json(response.body_io)
     end
   end
 
-  def init(transfers : Array(NamedTuple), **params)
-    yield init(transfers, **params)
+  def initiate(transfers : Array(NamedTuple), **params)
+    yield initiate(transfers, **params)
   end
 
-  def init(transfers : Array(NamedTuple), **params) : List
+  def initiate(transfers : Array(NamedTuple), **params) : List
     @client.post(
       "#{self.class.uri.path}/bulk",
       body: params.merge({transfers: transfers}).to_json

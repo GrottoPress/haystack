@@ -33,7 +33,7 @@
 1. Initialize transaction:
 
    ```crystal
-   paystack.transactions.init(
+   paystack.transactions.initiate(
      email: "customer@email.com",
      amount: "20000",
      currency: "GHS"

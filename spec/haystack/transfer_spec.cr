@@ -35,7 +35,7 @@ describe Haystack::Transfer::Endpoint do
 
       paystack = Haystack.new(secret_key: "abcdef")
 
-      paystack.transfers.init(
+      paystack.transfers.initiate(
         source: "balance",
         reason: "Calm down",
         amount: 3794800,
@@ -89,7 +89,7 @@ describe Haystack::Transfer::Endpoint do
 
       paystack = Haystack.new(secret_key: "abcdef")
 
-      paystack.transfers.init(
+      paystack.transfers.initiate(
         currency: "NGN",
         source: "balance",
         transfers: [

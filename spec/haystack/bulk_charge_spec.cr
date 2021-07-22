@@ -28,7 +28,7 @@ describe Haystack::BulkCharge::Endpoint do
 
       paystack = Haystack.new(secret_key: "abcdef")
 
-      paystack.bulk_charges.init([
+      paystack.bulk_charges.initiate([
         {authorization: "AUTH_n95vpedf", amount: 2500},
         {authorization: "AUTH_ljdt4e4j", amount: 1500}
       ]) do |response|

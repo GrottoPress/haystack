@@ -46,7 +46,7 @@ describe Haystack::Transaction::Endpoint do
 
       paystack = Haystack.new(secret_key: "abcdef")
 
-      paystack.transactions.init(
+      paystack.transactions.initiate(
         email: "customer@email.com",
         amount: "20000"
       ) do |response|
@@ -400,7 +400,7 @@ describe Haystack::Transaction::Endpoint do
     end
   end
 
-  describe "#charge_auth" do
+  describe "#charge_authorization" do
     it "charges authorization" do
       response_json = IO::Memory.new <<-JSON
         {
@@ -464,7 +464,7 @@ describe Haystack::Transaction::Endpoint do
 
       paystack = Haystack.new(secret_key: "abcdef")
 
-      paystack.transactions.charge_auth(
+      paystack.transactions.charge_authorization(
         email: "customer@email.com",
         amount: "20000",
         authorization_code: "AUTH_72btv547"
@@ -475,7 +475,7 @@ describe Haystack::Transaction::Endpoint do
     end
   end
 
-  describe "#check_auth" do
+  describe "#check_authorization" do
     it "checks authorization" do
       response_json = IO::Memory.new <<-JSON
         {
@@ -501,7 +501,7 @@ describe Haystack::Transaction::Endpoint do
 
       paystack = Haystack.new(secret_key: "abcdef")
 
-      paystack.transactions.check_auth(
+      paystack.transactions.check_authorization(
         email: "customer@email.com",
         amount: "20000",
         authorization_code: "AUTH_72btv547"

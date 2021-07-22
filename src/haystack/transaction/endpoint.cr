@@ -1,11 +1,11 @@
 struct Haystack::Transaction::Endpoint
   include Hapi::Endpoint
 
-  def init(**params)
-    yield init(**params)
+  def initiate(**params)
+    yield initiate(**params)
   end
 
-  def init(**params) : Authorization::Item
+  def initiate(**params) : Authorization::Item
     @client.post(
       "#{self.class.uri.path}/initialize",
       body: params.to_json
@@ -46,11 +46,11 @@ struct Haystack::Transaction::Endpoint
     end
   end
 
-  def charge_auth(**params)
-    yield charge_auth(**params)
+  def charge_authorization(**params)
+    yield charge_authorization(**params)
   end
 
-  def charge_auth(**params) : Item
+  def charge_authorization(**params) : Item
     @client.post(
       "#{self.class.uri.path}/charge_authorization",
       body: params.to_json
@@ -59,11 +59,11 @@ struct Haystack::Transaction::Endpoint
     end
   end
 
-  def check_auth(**params)
-    yield check_auth(**params)
+  def check_authorization(**params)
+    yield check_authorization(**params)
   end
 
-  def check_auth(**params) : Amount::Item
+  def check_authorization(**params) : Amount::Item
     @client.post(
       "#{self.class.uri.path}/check_authorization",
       body: params.to_json
