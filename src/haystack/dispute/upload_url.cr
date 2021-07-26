@@ -1,8 +1,16 @@
 struct Haystack::Dispute::UploadUrl
   include Hapi::Resource
 
-  getter fileName : String
-  getter signedUrl : String
+  @fileName : String
+  @signedUrl : String
+
+  def file_name
+    @fileName
+  end
+
+  def signed_url
+    @signedUrl
+  end
 
   struct Item
     include Response

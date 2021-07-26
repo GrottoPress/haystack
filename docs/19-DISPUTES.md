@@ -98,8 +98,8 @@ See <https://paystack.com/docs/api/#dispute> for the raw JSON schema.
      return puts response.message unless response.success?
 
      response.data.try do |url|
-       puts url.fileName
-       puts url.signedUrl
+       puts url.file_name
+       puts url.signed_url
        # ...
      end
    end
