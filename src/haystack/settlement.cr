@@ -10,7 +10,7 @@ struct Haystack::Settlement
   getter settlement_date : Time?
   getter status : Status?
   getter subaccount : Subaccount?
-  getter total_amount : Int64?
+  getter total_amount : Int32?
 
   Haystack.time_field :created, :updated
 

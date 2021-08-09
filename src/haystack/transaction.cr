@@ -6,13 +6,13 @@ struct Haystack::Transaction
   @metadata : Metadata | JSON::Any | Nil
   @plan : Plan | String | Int64 | Nil
 
-  getter amount : Int64?
+  getter amount : Int32?
   getter authorization : Card::Authorization?
   getter channel : Channel?
   getter currency : Currency?
   getter domain : Domain?
-  getter fees : Int64?
-  getter fees_split : Int64?
+  getter fees : Int32?
+  getter fees_split : Int32?
   getter gateway_response : String?
   getter id : Int64?
   getter ip_address : String?
@@ -22,7 +22,7 @@ struct Haystack::Transaction
   getter plan_object : Plan?
   getter pos_transaction_data : JSON::Any? # Figure out type
   getter reference : String?
-  getter requested_amount : Int64?
+  getter requested_amount : Int32?
   getter source : Source?
   getter split : Split?
   getter status : Status?

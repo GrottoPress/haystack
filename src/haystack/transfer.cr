@@ -4,7 +4,7 @@ struct Haystack::Transfer
   @integration : Integration | Int64 | Nil
   @recipient : Recipient | Int64 | String | Nil
 
-  getter amount : Int64?
+  getter amount : Int32?
   getter currency : Currency?
   getter domain : Domain?
   getter failures : JSON::Any? # Figure out type

@@ -7,7 +7,7 @@ class Haystack::Subscription::Invoice
   @subscription : Subscription | Int64 | Nil
   @transaction : Transaction | Int64 | Nil
 
-  getter amount : Int64?
+  getter amount : Int32?
   getter authorization : Card::Authorization?
   getter description : String?
   getter domain : Domain?

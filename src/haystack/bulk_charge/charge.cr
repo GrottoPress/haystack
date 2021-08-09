@@ -11,7 +11,7 @@ struct Haystack::BulkCharge::Charge
   @integration : Integration | Int64 | Nil
   @transaction : Transaction | Int64 | Nil
 
-  getter amount : Int64?
+  getter amount : Int32?
   getter authorization : Card::Authorization?
   getter bulkcharge : Int64?
   getter currency : Currency?

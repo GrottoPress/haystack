@@ -9,7 +9,7 @@ struct Haystack::Page
   @plan : Plan | String | Int64 | Nil
   @published : ::Bool | Int32 | Nil
 
-  getter amount : Int64?
+  getter amount : Int32?
   getter currency : Currency?
   getter custom_fields : Array(CustomField)?
   getter description : String?

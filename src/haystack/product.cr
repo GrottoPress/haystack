@@ -20,7 +20,7 @@ struct Haystack::Product
   getter minimum_orderable : Int32?
   getter name : String?
   getter notification_emails : JSON::Any? # Figure out type
-  getter price : Int64?
+  getter price : Int32?
   getter product_code : String?
   getter quantity : Int32?
   getter quantity_sold : Int32?

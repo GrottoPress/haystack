@@ -11,7 +11,7 @@ struct Haystack::Plan
   @send_sms : ::Bool | Int32 | Nil
 
   getter active_subscriptions : Int64?
-  getter amount : Int64?
+  getter amount : Int32?
   getter currency : Currency?
   getter description : String?
   getter domain : Domain?

@@ -6,7 +6,7 @@ class Haystack::Subscription
   @integration : Integration | Int64 | Nil
   @plan : Plan | String | Int64 | Nil
 
-  getter amount : Int64?
+  getter amount : Int32?
   getter authorization : Card::Authorization?
   getter cron_expression : String?
   getter domain : Domain?

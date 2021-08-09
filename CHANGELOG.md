@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add missing `Haystack::Dispute::Status` members
 
 ### Changed
+- Change amount types from `Int64` to `Int32`
+
+### Changed
 - Replace camelcased attributes with underscored methods in public API
 - Return enum (instead of string) for `Haystack::Split#bearer_type`
 - Rename `Haystack::Subscription::RecentInvoice` to `Invoice`

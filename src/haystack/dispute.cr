@@ -19,7 +19,7 @@ class Haystack::Dispute
   getter messages : Array(Message)?
   getter note : String?
   getter organization : Int64?
-  getter refund_amount : Int64?
+  getter refund_amount : Int32?
   getter resolution : String?
   getter source : Source?
   getter transaction_reference : String?

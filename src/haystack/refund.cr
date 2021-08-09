@@ -7,11 +7,11 @@ struct Haystack::Refund
   @settlement : Settlement | Int64 | Nil
   @transaction : Transaction | Int64 | Nil
 
-  getter amount : Int64?
+  getter amount : Int32?
   getter channel : Channel?
   getter currency : Currency?
   getter customer_note : String?
-  getter deducted_amount : Int64?
+  getter deducted_amount : Int32?
   getter domain : Domain?
   getter id : Int64?
   getter merchant_note : String?

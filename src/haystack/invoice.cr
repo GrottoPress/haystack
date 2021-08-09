@@ -8,20 +8,20 @@ struct Haystack::Invoice
   @metadata : Metadata | JSON::Any | Nil
   @paid : ::Bool | Int32 | Nil
 
-  getter amount : Int64?
-  getter amount_paid : Int64?
+  getter amount : Int32?
+  getter amount_paid : Int32?
   getter currency : Currency?
   getter description : String?
   getter discount : Discount?
   getter domain : Domain?
   getter due_date : Time?
   getter id : Int64?
-  getter invoice_number : Int64?
+  getter invoice_number : Int32?
   getter line_items : Array(LineItem)?
   getter note : String?
   getter notifications : Array(Notification)?
   getter offline_reference : String?
-  getter pending_amount : Int64?
+  getter pending_amount : Int32?
   getter payment_method : String?
   getter pdf_url : String?
   getter request_code : String?
