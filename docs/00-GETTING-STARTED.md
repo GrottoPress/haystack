@@ -1,6 +1,6 @@
 ## Getting Started
 
-*Haystack* is a low-level API client for *Paystack* v4. It features an intuitive interface that maps perfectly to the *Paystack* API.
+*Haystack* is a low-level API client for *Paystack* v4. It features an intuitive interface that maps directly to the *Paystack* API.
 
 ### Architecture
 
