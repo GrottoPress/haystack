@@ -27,7 +27,7 @@ class Haystack::Dispute
   Haystack.time_field :created, :due, :resolved, :updated
 
   def status : Status?
-    @status.try { |type| Status.parse(type.gsub '-', '_') }
+    @status.try { |status| Status.parse(status.gsub '-', '_') }
   end
 
   def customer : Customer?
