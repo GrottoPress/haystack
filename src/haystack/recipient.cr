@@ -32,6 +32,10 @@ struct Haystack::Recipient
     active?
   end
 
+  def deleted?
+    is_deleted?
+  end
+
   def is_deleted
     is_deleted?
   end
