@@ -1,8 +1,8 @@
 struct Haystack::Meta
   include Hapi::Resource
 
-  @pageCount : Int32?
-  @perPage : Int32?
+  @pageCount : Int32? # ameba:disable Style/VariableNames
+  @perPage : Int32? # ameba:disable Style/VariableNames
 
   getter next : String?
   getter page : Int32?
@@ -12,10 +12,10 @@ struct Haystack::Meta
   getter total_volume : Int64?
 
   def page_count
-    @pageCount
+    @pageCount # ameba:disable Style/VariableNames
   end
 
   def per_page
-    @perPage
+    @perPage # ameba:disable Style/VariableNames
   end
 end

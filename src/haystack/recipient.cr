@@ -5,7 +5,7 @@ struct Haystack::Recipient
   @active : ::Bool | Int32 | Nil
   @integration : Integration | Int64 | Nil
   @is_deleted : ::Bool | Int32 | Nil
-  @isDeleted : ::Bool | Int32 | Nil
+  @isDeleted : ::Bool | Int32 | Nil # ameba:disable Style/VariableNames
   @metadata : Metadata | JSON::Any | Nil
 
   getter currency : Currency?
@@ -36,20 +36,14 @@ struct Haystack::Recipient
     is_deleted?
   end
 
-  def isDeleted
-    isDeleted?
-  end
-
   def active?
     Bool.from_any(@active)
   end
 
   def is_deleted?
-    Bool.from_any(@is_deleted)
-  end
-
-  def isDeleted?
-    Bool.from_any(@isDeleted)
+    # ameba:disable Style/VariableNames
+    is_deleted = @is_deleted.nil? ? @isDeleted : @is_deleted
+    Bool.from_any(is_deleted)
   end
 
   def self.from_any(recipient) : self?
