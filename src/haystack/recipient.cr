@@ -32,16 +32,16 @@ struct Haystack::Recipient
     active?
   end
 
+  def active?
+    Bool.from_any(@active)
+  end
+
   def deleted?
     is_deleted?
   end
 
   def is_deleted
     is_deleted?
-  end
-
-  def active?
-    Bool.from_any(@active)
   end
 
   def is_deleted?
