@@ -1,7 +1,5 @@
 struct Haystack::Subscription::Item
   include Response
 
-  struct Resource
-    getter data : Subscription?
-  end
+  getter data : Subscription?
 end

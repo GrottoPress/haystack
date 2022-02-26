@@ -7,7 +7,7 @@ struct Haystack::Invoice::Endpoint
 
   def create(**params) : Item
     response = @client.post(self.class.uri.path, body: params.to_json)
-    Item.new(response)
+    Item.from_json(response.body)
   end
 
   def list(**params)
@@ -19,7 +19,7 @@ struct Haystack::Invoice::Endpoint
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     )
 
-    List.new(response)
+    List.from_json(response.body)
   end
 
   def fetch(id : String | Int)
@@ -28,7 +28,7 @@ struct Haystack::Invoice::Endpoint
 
   def fetch(id : String | Int) : Item
     response = @client.get("#{self.class.uri.path}/#{id}")
-    Item.new(response)
+    Item.from_json(response.body)
   end
 
   def update(id : String | Int, **params)
@@ -41,7 +41,7 @@ struct Haystack::Invoice::Endpoint
       body: params.to_json
     )
 
-    Item.new(response)
+    Item.from_json(response.body)
   end
 
   def verify(code : String)
@@ -50,7 +50,7 @@ struct Haystack::Invoice::Endpoint
 
   def verify(code : String) : Item
     response = @client.get("#{self.class.uri.path}/verify/#{code}")
-    Item.new(response)
+    Item.from_json(response.body)
   end
 
   def notify(id : String | Int)
@@ -59,7 +59,7 @@ struct Haystack::Invoice::Endpoint
 
   def notify(id : String | Int) : Notification::Item
     response = @client.post("#{self.class.uri.path}/notify/#{id}")
-    Notification::Item.new(response)
+    Notification::Item.from_json(response.body)
   end
 
   def totals
@@ -68,7 +68,7 @@ struct Haystack::Invoice::Endpoint
 
   def totals : Totals::Item
     response = @client.get("#{self.class.uri.path}/totals")
-    Totals::Item.new(response)
+    Totals::Item.from_json(response.body)
   end
 
   def finalise(id : String | Int)
@@ -77,7 +77,7 @@ struct Haystack::Invoice::Endpoint
 
   def finalise(id : String | Int) : Item
     response = @client.post("#{self.class.uri.path}/finalize/#{id}")
-    Item.new(response)
+    Item.from_json(response.body)
   end
 
   def archive(id : String | Int)
@@ -86,7 +86,7 @@ struct Haystack::Invoice::Endpoint
 
   def archive(id : String | Int) : Item
     response = @client.post("#{self.class.uri.path}/archive/#{id}")
-    Item.new(response)
+    Item.from_json(response.body)
   end
 
   def self.uri : URI

@@ -7,7 +7,7 @@ struct Haystack::Charge::Endpoint
 
   def create(**params) : Transaction::Item
     response = @client.post(self.class.uri.path, body: params.to_json)
-    Transaction::Item.new(response)
+    Transaction::Item.from_json(response.body)
   end
 
   def submit_pin(**params)
@@ -20,7 +20,7 @@ struct Haystack::Charge::Endpoint
       body: params.to_json
     )
 
-    Transaction::Item.new(response)
+    Transaction::Item.from_json(response.body)
   end
 
   def submit_otp(**params)
@@ -33,7 +33,7 @@ struct Haystack::Charge::Endpoint
       body: params.to_json
     )
 
-    Transaction::Item.new(response)
+    Transaction::Item.from_json(response.body)
   end
 
   def submit_phone(**params)
@@ -46,7 +46,7 @@ struct Haystack::Charge::Endpoint
       body: params.to_json
     )
 
-    Transaction::Item.new(response)
+    Transaction::Item.from_json(response.body)
   end
 
   def submit_birthday(**params)
@@ -59,7 +59,7 @@ struct Haystack::Charge::Endpoint
       body: params.to_json
     )
 
-    Transaction::Item.new(response)
+    Transaction::Item.from_json(response.body)
   end
 
   def submit_address(**params)
@@ -72,7 +72,7 @@ struct Haystack::Charge::Endpoint
       body: params.to_json
     )
 
-    Transaction::Item.new(response)
+    Transaction::Item.from_json(response.body)
   end
 
   def check_status(reference : String)
@@ -81,7 +81,7 @@ struct Haystack::Charge::Endpoint
 
   def check_status(reference : String) : Transaction::Item
     response = @client.get("#{self.class.uri.path}/#{reference}")
-    Transaction::Item.new(response)
+    Transaction::Item.from_json(response.body)
   end
 
   def self.uri : URI

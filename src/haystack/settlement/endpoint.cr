@@ -10,7 +10,7 @@ struct Haystack::Settlement::Endpoint
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     )
 
-    List.new(response)
+    List.from_json(response.body)
   end
 
   def transactions(id : Int, **params)
@@ -22,7 +22,7 @@ struct Haystack::Settlement::Endpoint
       "#{self.class.uri.path}/#{id}/transactions?#{URI::Params.encode(params)}"
     )
 
-    Transaction::List.new(response)
+    Transaction::List.from_json(response.body)
   end
 
   def self.uri : URI

@@ -7,7 +7,7 @@ struct Haystack::Page::Endpoint
 
   def create(**params) : Item
     response = @client.post(self.class.uri.path, body: params.to_json)
-    Item.new(response)
+    Item.from_json(response.body)
   end
 
   def list(**params)
@@ -19,7 +19,7 @@ struct Haystack::Page::Endpoint
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     )
 
-    List.new(response)
+    List.from_json(response.body)
   end
 
   def fetch(id : String | Int)
@@ -28,7 +28,7 @@ struct Haystack::Page::Endpoint
 
   def fetch(id : String | Int) : Item
     response = @client.get("#{self.class.uri.path}/#{id}")
-    Item.new(response)
+    Item.from_json(response.body)
   end
 
   def update(id : String | Int, **params)
@@ -37,7 +37,7 @@ struct Haystack::Page::Endpoint
 
   def update(id : String | Int, **params) : Item
     response = @client.put("#{self.class.uri.path}/#{id}", body: params.to_json)
-    Item.new(response)
+    Item.from_json(response.body)
   end
 
   def self.uri : URI

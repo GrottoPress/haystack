@@ -1,7 +1,5 @@
 struct Haystack::Subaccount::List
   include Response
 
-  struct Resource
-    getter data : Array(Subaccount)?
-  end
+  getter data : Array(Subaccount)?
 end

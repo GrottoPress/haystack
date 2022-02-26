@@ -10,7 +10,7 @@ struct Haystack::Dispute::Endpoint
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     )
 
-    List.new(response)
+    List.from_json(response.body)
   end
 
   def fetch(id : Int)
@@ -19,7 +19,7 @@ struct Haystack::Dispute::Endpoint
 
   def fetch(id : Int) : Item
     response = @client.get("#{self.class.uri.path}/#{id}")
-    Item.new(response)
+    Item.from_json(response.body)
   end
 
   def for_transaction(transaction_id : Int, **params)
@@ -32,7 +32,7 @@ struct Haystack::Dispute::Endpoint
         URI::Params.encode(params)}"
     )
 
-    List.new(response)
+    List.from_json(response.body)
   end
 
   def update(id : Int, **params)
@@ -41,7 +41,7 @@ struct Haystack::Dispute::Endpoint
 
   def update(id : Int, **params) : Item
     response = @client.put("#{self.class.uri.path}/#{id}", body: params.to_json)
-    Item.new(response)
+    Item.from_json(response.body)
   end
 
   def add_evidence(id : Int, **params)
@@ -54,7 +54,7 @@ struct Haystack::Dispute::Endpoint
       body: params.to_json
     )
 
-    Evidence::Item.new(response)
+    Evidence::Item.from_json(response.body)
   end
 
   def upload_url(id : Int, **params)
@@ -66,7 +66,7 @@ struct Haystack::Dispute::Endpoint
       "#{self.class.uri.path}/#{id}/upload_url?#{URI::Params.encode(params)}"
     )
 
-    UploadUrl::Item.new(response)
+    UploadUrl::Item.from_json(response.body)
   end
 
   def resolve(id : Int, **params)
@@ -79,7 +79,7 @@ struct Haystack::Dispute::Endpoint
       body: params.to_json
     )
 
-    Item.new(response)
+    Item.from_json(response.body)
   end
 
   def export(**params)
@@ -91,7 +91,7 @@ struct Haystack::Dispute::Endpoint
       "#{self.class.uri.path}/export?#{URI::Params.encode(params)}"
     )
 
-    Export::Item.new(response)
+    Export::Item.from_json(response.body)
   end
 
   def self.uri : URI

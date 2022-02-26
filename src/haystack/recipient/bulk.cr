@@ -7,8 +7,6 @@ struct Haystack::Recipient::Bulk
   struct Item
     include Response
 
-    struct Resource
-      getter data : Bulk?
-    end
+    getter data : Bulk?
   end
 end

@@ -1,7 +1,5 @@
 struct Haystack::Split::List
   include Response
 
-  struct Resource
-    getter data : Array(Split)?
-  end
+  getter data : Array(Split)?
 end

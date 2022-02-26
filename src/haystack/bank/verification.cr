@@ -8,8 +8,6 @@ struct Haystack::Bank::Verification
   struct Item
     include Response
 
-    struct Resource
-      getter data : Verification?
-    end
+    getter data : Verification?
   end
 end

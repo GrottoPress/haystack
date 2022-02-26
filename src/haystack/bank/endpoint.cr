@@ -10,7 +10,7 @@ struct Haystack::Bank::Endpoint
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     )
 
-    List.new(response)
+    List.from_json(response.body)
   end
 
   def verify_account(**params)
@@ -22,7 +22,7 @@ struct Haystack::Bank::Endpoint
       "#{self.class.uri.path}/resolve?#{URI::Params.encode(params)}"
     )
 
-    Verification::Item.new(response)
+    Verification::Item.from_json(response.body)
   end
 
   def self.uri : URI

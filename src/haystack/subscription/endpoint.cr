@@ -7,7 +7,7 @@ struct Haystack::Subscription::Endpoint
 
   def create(**params) : Item
     response = @client.post(self.class.uri.path, body: params.to_json)
-    Item.new(response)
+    Item.from_json(response.body)
   end
 
   def list(**params)
@@ -19,7 +19,7 @@ struct Haystack::Subscription::Endpoint
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     )
 
-    List.new(response)
+    List.from_json(response.body)
   end
 
   def fetch(id : String | Int)
@@ -28,7 +28,7 @@ struct Haystack::Subscription::Endpoint
 
   def fetch(id : String | Int) : Item
     response = @client.get("#{self.class.uri.path}/#{id}")
-    Item.new(response)
+    Item.from_json(response.body)
   end
 
   def enable(**params)
@@ -41,7 +41,7 @@ struct Haystack::Subscription::Endpoint
       body: params.to_json
     )
 
-    Item.new(response)
+    Item.from_json(response.body)
   end
 
   def disable(**params)
@@ -54,7 +54,7 @@ struct Haystack::Subscription::Endpoint
       body: params.to_json
     )
 
-    Item.new(response)
+    Item.from_json(response.body)
   end
 
   def self.uri : URI

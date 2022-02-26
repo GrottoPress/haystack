@@ -11,8 +11,6 @@ struct Haystack::Invoice::Notification
   struct Item
     include Response
 
-    struct Resource
-      getter data : Notification?
-    end
+    getter data : Notification?
   end
 end

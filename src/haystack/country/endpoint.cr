@@ -10,7 +10,7 @@ struct Haystack::Country::Endpoint
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     )
 
-    List.new(response)
+    List.from_json(response.body)
   end
 
   def self.uri : URI

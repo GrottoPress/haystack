@@ -1,7 +1,5 @@
 struct Haystack::BulkCharge::List
   include Response
 
-  struct Resource
-    getter data : Array(BulkCharge)?
-  end
+  getter data : Array(BulkCharge)?
 end

@@ -7,7 +7,7 @@ struct Haystack::Nuban::Endpoint
 
   def create(**params) : Bank::Account::Item
     response = @client.post(self.class.uri.path, body: params.to_json)
-    Bank::Account::Item.new(response)
+    Bank::Account::Item.from_json(response.body)
   end
 
   def list(**params)
@@ -19,7 +19,7 @@ struct Haystack::Nuban::Endpoint
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     )
 
-    Bank::Account::List.new(response)
+    Bank::Account::List.from_json(response.body)
   end
 
   def fetch(id : Int)
@@ -28,7 +28,7 @@ struct Haystack::Nuban::Endpoint
 
   def fetch(id : Int) : Customer::Item
     response = @client.get("#{self.class.uri.path}/#{id}")
-    Customer::Item.new(response)
+    Customer::Item.from_json(response.body)
   end
 
   def deactivate(id : Int)
@@ -37,7 +37,7 @@ struct Haystack::Nuban::Endpoint
 
   def deactivate(id : Int) : Bank::Account::Item
     response = @client.delete("#{self.class.uri.path}/#{id}")
-    Bank::Account::Item.new(response)
+    Bank::Account::Item.from_json(response.body)
   end
 
   def split(**params)
@@ -50,7 +50,7 @@ struct Haystack::Nuban::Endpoint
       body: params.to_json
     )
 
-    Bank::Account::Item.new(response)
+    Bank::Account::Item.from_json(response.body)
   end
 
   def unsplit(**params)
@@ -63,7 +63,7 @@ struct Haystack::Nuban::Endpoint
       body: params.to_json
     )
 
-    Bank::Account::Item.new(response)
+    Bank::Account::Item.from_json(response.body)
   end
 
   def providers(**params)
@@ -75,7 +75,7 @@ struct Haystack::Nuban::Endpoint
       "#{self.class.uri.path}/available_providers?#{URI::Params.encode(params)}"
     )
 
-    Bank::Provider::List.new(response)
+    Bank::Provider::List.from_json(response.body)
   end
 
   def self.uri : URI

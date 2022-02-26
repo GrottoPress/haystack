@@ -21,8 +21,6 @@ class Haystack::Dispute::Evidence
   struct Item
     include Response
 
-    struct Resource
-      getter data : Evidence?
-    end
+    getter data : Evidence?
   end
 end

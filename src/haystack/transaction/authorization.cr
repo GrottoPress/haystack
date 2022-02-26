@@ -8,8 +8,6 @@ struct Haystack::Transaction::Authorization
   struct Item
     include Response
 
-    struct Resource
-      getter data : Authorization?
-    end
+    getter data : Authorization?
   end
 end
