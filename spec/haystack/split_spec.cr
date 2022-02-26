@@ -3,7 +3,7 @@ require "../spec_helper"
 describe Haystack::Split::Endpoint do
   describe "#create" do
     it "creates split" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Split created",
@@ -71,7 +71,7 @@ describe Haystack::Split::Endpoint do
           "bearer_type":"subaccount",\
           "bearer_subaccount":"ACCT_hdl8abxl8drhrl3"\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -94,7 +94,7 @@ describe Haystack::Split::Endpoint do
 
   describe "#list" do
     it "lists splits" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Split retrieved",
@@ -161,7 +161,7 @@ describe Haystack::Split::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/split")
         .with(query: {"perPage" => "20", "page" => "2"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -174,7 +174,7 @@ describe Haystack::Split::Endpoint do
 
   describe "#fetch" do
     it "fetches split" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Split retrieved",
@@ -231,7 +231,7 @@ describe Haystack::Split::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/split/123456")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -244,7 +244,7 @@ describe Haystack::Split::Endpoint do
 
   describe "#update" do
     it "updates split" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Split group updated",
@@ -286,7 +286,7 @@ describe Haystack::Split::Endpoint do
 
       WebMock.stub(:put, "https://api.paystack.co/split/123456")
         .with(body: %({"name":"Updated Name","active":true}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -303,7 +303,7 @@ describe Haystack::Split::Endpoint do
 
   describe "#add_account" do
     it "adds subaccount" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Subaccount added",
@@ -361,7 +361,7 @@ describe Haystack::Split::Endpoint do
 
       WebMock.stub(:post, "https://api.paystack.co/split/123456/subaccount/add")
         .with(body: %({"subaccount":"ACCT_hdl8abxl8drhrl3","share":40000}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -379,7 +379,7 @@ describe Haystack::Split::Endpoint do
 
   describe "#remove_account" do
     it "removes subaccount" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Subaccount removed"
@@ -388,7 +388,7 @@ describe Haystack::Split::Endpoint do
 
       WebMock.stub(:post, "https://api.paystack.co/split/123/subaccount/remove")
         .with(body: %({"subaccount":"ACCT_hdl8abxl8drhrl3"}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 

@@ -28,7 +28,7 @@ end
 describe Haystack::Subscription::Endpoint do
   describe "#create" do
     it "creates subscription" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Subscription successfully created",
@@ -70,7 +70,7 @@ describe Haystack::Subscription::Endpoint do
           "customer":"CUS_xnxdt6s1zg1f4nx",\
           "plan":"PLN_gx2wn530m0i3w3m"\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -86,7 +86,7 @@ describe Haystack::Subscription::Endpoint do
 
   describe "#list" do
     it "lists subscriptions" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Subscriptions retrieved",
@@ -180,7 +180,7 @@ describe Haystack::Subscription::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/subscription")
         .with(query: {"perPage" => "20", "page" => "2"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -193,7 +193,7 @@ describe Haystack::Subscription::Endpoint do
 
   describe "#fetch" do
     it "fetches subscription" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Subscription retrieved successfully",
@@ -275,7 +275,7 @@ describe Haystack::Subscription::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/subscription/123456")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -288,7 +288,7 @@ describe Haystack::Subscription::Endpoint do
 
   describe "#enable" do
     it "enables subscription" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Subscription enabled successfully"
@@ -297,7 +297,7 @@ describe Haystack::Subscription::Endpoint do
 
       WebMock.stub(:post, "https://api.paystack.co/subscription/enable")
         .with(body: %({"code":"SUB_vsyqdmlzble3uii","token":"d7gofp6yppn3qz7"}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -312,7 +312,7 @@ describe Haystack::Subscription::Endpoint do
 
   describe "#disable" do
     it "disables subscription" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Subscription disabled successfully"
@@ -321,7 +321,7 @@ describe Haystack::Subscription::Endpoint do
 
       WebMock.stub(:post, "https://api.paystack.co/subscription/disable")
         .with(body: %({"code":"SUB_vsyqdmlzble3uii","token":"d7gofp6yppn3qz7"}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 

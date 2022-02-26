@@ -3,7 +3,7 @@ require "../spec_helper"
 describe Haystack::Country::Endpoint do
   describe "#list" do
     it "lists countries" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Countries retrieved",
@@ -83,7 +83,7 @@ describe Haystack::Country::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/country")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 

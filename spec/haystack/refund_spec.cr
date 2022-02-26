@@ -3,7 +3,7 @@ require "../spec_helper"
 describe Haystack::Refund::Endpoint do
   describe "#create" do
     it "creates refund" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Refund created",
@@ -72,7 +72,7 @@ describe Haystack::Refund::Endpoint do
 
       WebMock.stub(:post, "https://api.paystack.co/refund")
         .with(body: %({"transaction":1641}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -85,7 +85,7 @@ describe Haystack::Refund::Endpoint do
 
   describe "#list" do
     it "lists refunds" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Refunds retrieved",
@@ -138,7 +138,7 @@ describe Haystack::Refund::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/refund")
         .with(query: {"perPage" => "20", "page" => "2"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -151,7 +151,7 @@ describe Haystack::Refund::Endpoint do
 
   describe "#fetch" do
     it "fetches refund" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Refund retrieved",
@@ -180,7 +180,7 @@ describe Haystack::Refund::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/refund/123456")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 

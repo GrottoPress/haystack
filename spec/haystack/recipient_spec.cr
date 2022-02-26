@@ -36,7 +36,7 @@ end
 describe Haystack::Recipient::Endpoint do
   describe "#create" do
     it "creates transfer recipient" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Recipient created",
@@ -73,7 +73,7 @@ describe Haystack::Recipient::Endpoint do
           "bank_code":"044",\
           "currency":"NGN"\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -91,7 +91,7 @@ describe Haystack::Recipient::Endpoint do
     end
 
     it "creates many transfer recipients" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Recipients added successfully",
@@ -164,7 +164,7 @@ describe Haystack::Recipient::Endpoint do
             }\
           ]\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -192,7 +192,7 @@ describe Haystack::Recipient::Endpoint do
 
   describe "#list" do
     it "lists transfer recipients" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Recipients retrieved",
@@ -249,7 +249,7 @@ describe Haystack::Recipient::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/transferrecipient")
         .with(query: {"perPage" => "20", "page" => "2"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -262,7 +262,7 @@ describe Haystack::Recipient::Endpoint do
 
   describe "#fetch" do
     it "fetches transfer recipient" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Recipient retrieved",
@@ -290,7 +290,7 @@ describe Haystack::Recipient::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/transferrecipient/123456")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -303,7 +303,7 @@ describe Haystack::Recipient::Endpoint do
 
   describe "#update" do
     it "updates transfer recipient" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Recipient updated",
@@ -333,7 +333,7 @@ describe Haystack::Recipient::Endpoint do
 
       WebMock.stub(:put, "https://api.paystack.co/transferrecipient/123456")
         .with(body: %({"name":"Rick Sanchez"}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -346,7 +346,7 @@ describe Haystack::Recipient::Endpoint do
 
   describe "#delete" do
     it "deletes transfer recipient" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Transfer recipient set as inactive"
@@ -354,7 +354,7 @@ describe Haystack::Recipient::Endpoint do
         JSON
 
       WebMock.stub(:delete, "https://api.paystack.co/transferrecipient/123456")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 

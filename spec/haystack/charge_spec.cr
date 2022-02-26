@@ -3,7 +3,7 @@ require "../spec_helper"
 describe Haystack::Charge::Endpoint do
   describe "#create" do
     it "creates charge" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Charge attempted",
@@ -66,7 +66,7 @@ describe Haystack::Charge::Endpoint do
 
       WebMock.stub(:post, "https://api.paystack.co/charge")
         .with(body: %({"email":"customer@email.com","amount":"20000"}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -82,7 +82,7 @@ describe Haystack::Charge::Endpoint do
 
   describe "#submit_pin" do
     it "submits pin" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Charge attempted",
@@ -145,7 +145,7 @@ describe Haystack::Charge::Endpoint do
 
       WebMock.stub(:post, "https://api.paystack.co/charge/submit_pin")
         .with(body: %({"pin":"1234","reference":"5bwib5v6anhe9xa"}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -161,7 +161,7 @@ describe Haystack::Charge::Endpoint do
 
   describe "#submit_otp" do
     it "submits otp" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Charge attempted",
@@ -224,7 +224,7 @@ describe Haystack::Charge::Endpoint do
 
       WebMock.stub(:post, "https://api.paystack.co/charge/submit_otp")
         .with(body: %({"otp":"123456","reference":"5bwib5v6anhe9xa"}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -240,7 +240,7 @@ describe Haystack::Charge::Endpoint do
 
   describe "#submit_phone" do
     it "submits phone" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Charge attempted",
@@ -303,7 +303,7 @@ describe Haystack::Charge::Endpoint do
 
       WebMock.stub(:post, "https://api.paystack.co/charge/submit_phone")
         .with(body: %({"phone":"08012345678","reference":"5bwib5v6anhe9xa"}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -319,7 +319,7 @@ describe Haystack::Charge::Endpoint do
 
   describe "#submit_birthday" do
     it "submits birthday" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Charge attempted",
@@ -382,7 +382,7 @@ describe Haystack::Charge::Endpoint do
 
       WebMock.stub(:post, "https://api.paystack.co/charge/submit_birthday")
         .with(body: %({"birthday":"1961-09-21","reference":"5bwib5v6anhe9xa"}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -398,7 +398,7 @@ describe Haystack::Charge::Endpoint do
 
   describe "#submit_address" do
     it "submits address" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "message": "Charge attempted",
           "status": true,
@@ -459,7 +459,7 @@ describe Haystack::Charge::Endpoint do
 
       WebMock.stub(:post, "https://api.paystack.co/charge/submit_address")
         .with(body: %({"address":"140 N 2ND ST","reference":"5bwib5v6anhe9xa"}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -475,7 +475,7 @@ describe Haystack::Charge::Endpoint do
 
   describe "#check_status" do
     it "checks status" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Charge attempted",
@@ -537,7 +537,7 @@ describe Haystack::Charge::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/charge/zuvbpizfcf2fs7y")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 

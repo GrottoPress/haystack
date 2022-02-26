@@ -3,7 +3,7 @@ require "../spec_helper"
 describe Haystack::Nuban::Endpoint do
   describe "#create" do
     it "creates dedicated NUBAN account" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "NUBAN successfully created",
@@ -45,7 +45,7 @@ describe Haystack::Nuban::Endpoint do
 
       WebMock.stub(:post, "https://api.paystack.co/dedicated_account")
         .with(body: %({"customer":481193,"preferred_bank":"wema-bank"}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -61,7 +61,7 @@ describe Haystack::Nuban::Endpoint do
 
   describe "#list" do
     it "lists dedicated NUBAN accounts" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Managed accounts successfully retrieved",
@@ -105,7 +105,7 @@ describe Haystack::Nuban::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/dedicated_account")
         .with(query: {"active" => "true", "currency" => "USD"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -118,7 +118,7 @@ describe Haystack::Nuban::Endpoint do
 
   describe "#fetch" do
     it "fetches dedicated NUBAN account" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Customer retrieved",
@@ -169,7 +169,7 @@ describe Haystack::Nuban::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/dedicated_account/123456")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -182,7 +182,7 @@ describe Haystack::Nuban::Endpoint do
 
   describe "#deactivate" do
     it "deactivates dedicated NUBAN account" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Managed Account Successfully Unassigned",
@@ -213,7 +213,7 @@ describe Haystack::Nuban::Endpoint do
         JSON
 
       WebMock.stub(:delete, "https://api.paystack.co/dedicated_account/123456")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -226,7 +226,7 @@ describe Haystack::Nuban::Endpoint do
 
   describe "#split" do
     it "splits dedicated NUBAN account" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Assigned Managed Account Successfully Created",
@@ -275,7 +275,7 @@ describe Haystack::Nuban::Endpoint do
           "preferred_bank":"wema-bank",\
           "split_code":"SPL_e7jnRLtzla"\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -292,7 +292,7 @@ describe Haystack::Nuban::Endpoint do
 
   describe "#unsplit" do
     it "unsplits dedicated NUBAN account" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Subaccount unassigned",
@@ -312,7 +312,7 @@ describe Haystack::Nuban::Endpoint do
 
       WebMock.stub(:delete, "https://api.paystack.co/dedicated_account/split")
         .with(body: %({"account_number":"0033322211"}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -325,7 +325,7 @@ describe Haystack::Nuban::Endpoint do
 
   describe "#providers" do
     it "lists providers for dedicated NUBAN account" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Dedicated account providers retrieved",
@@ -349,7 +349,7 @@ describe Haystack::Nuban::Endpoint do
       WebMock.stub(
         :get,
         "https://api.paystack.co/dedicated_account/available_providers"
-      ).to_return(body_io: response_json)
+      ).to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 

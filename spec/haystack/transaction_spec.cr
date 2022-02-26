@@ -28,7 +28,7 @@ end
 describe Haystack::Transaction::Endpoint do
   describe "#init" do
     it "initializes transaction" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Authorization URL created",
@@ -42,7 +42,7 @@ describe Haystack::Transaction::Endpoint do
 
       WebMock.stub(:post, "https://api.paystack.co/transaction/initialize")
         .with(body: %({"email":"customer@email.com","amount":"20000"}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -58,7 +58,7 @@ describe Haystack::Transaction::Endpoint do
 
   describe "#verify" do
     it "verifies transaction" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Verification successful",
@@ -107,7 +107,7 @@ describe Haystack::Transaction::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/transaction/verify/def456")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -120,7 +120,7 @@ describe Haystack::Transaction::Endpoint do
 
   describe "#list" do
     it "lists transactions" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Transactions retrieved",
@@ -278,7 +278,7 @@ describe Haystack::Transaction::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/transaction")
         .with(query: {"perPage" => "20", "page" => "2"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -291,7 +291,7 @@ describe Haystack::Transaction::Endpoint do
 
   describe "#fetch" do
     it "fetches transaction" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Transaction retrieved",
@@ -389,7 +389,7 @@ describe Haystack::Transaction::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/transaction/292584114")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -402,7 +402,7 @@ describe Haystack::Transaction::Endpoint do
 
   describe "#charge_authorization" do
     it "charges authorization" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Charge attempted",
@@ -460,7 +460,7 @@ describe Haystack::Transaction::Endpoint do
           "amount":"20000",\
           "authorization_code":"AUTH_72btv547"\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -477,7 +477,7 @@ describe Haystack::Transaction::Endpoint do
 
   describe "#check_authorization" do
     it "checks authorization" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Authorization is valid for this amount",
@@ -497,7 +497,7 @@ describe Haystack::Transaction::Endpoint do
           "amount":"20000",\
           "authorization_code":"AUTH_72btv547"\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -514,7 +514,7 @@ describe Haystack::Transaction::Endpoint do
 
   describe "#timeline" do
     it "shows transaction timeline" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Timeline retrieved",
@@ -546,7 +546,7 @@ describe Haystack::Transaction::Endpoint do
       WebMock.stub(
         :get,
         "https://api.paystack.co/transaction/timeline/292584114"
-      ).to_return(body_io: response_json)
+      ).to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -559,7 +559,7 @@ describe Haystack::Transaction::Endpoint do
 
   describe "#totals" do
     it "shows transaction totals" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Transaction totals",
@@ -586,7 +586,7 @@ describe Haystack::Transaction::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/transaction/totals")
         .with(query: {"page" => "2"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -599,7 +599,7 @@ describe Haystack::Transaction::Endpoint do
 
   describe "#export" do
     it "exports transactions" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Export successful",
@@ -611,7 +611,7 @@ describe Haystack::Transaction::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/transaction/export")
         .with(query: {"page" => "2"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -624,7 +624,7 @@ describe Haystack::Transaction::Endpoint do
 
   describe "#debit" do
     it "retrieves part payment" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Charge attempted",
@@ -680,7 +680,7 @@ describe Haystack::Transaction::Endpoint do
           "amount":"20000",\
           "email":"customer@email.com"\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 

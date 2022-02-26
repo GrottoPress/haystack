@@ -3,7 +3,7 @@ require "../spec_helper"
 describe Haystack::Invoice::Endpoint do
   describe "#create" do
     it "creates invoice" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Payment request created",
@@ -55,7 +55,7 @@ describe Haystack::Invoice::Endpoint do
           "customer":"CUS_xwaj0txjryg393b",\
           "due_date":"2020-07-08"\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -77,7 +77,7 @@ describe Haystack::Invoice::Endpoint do
 
   describe "#list" do
     it "lists invoices" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Payment requests retrieved",
@@ -143,7 +143,7 @@ describe Haystack::Invoice::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/paymentrequest")
         .with(query: {"perPage" => "20"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -156,7 +156,7 @@ describe Haystack::Invoice::Endpoint do
 
   describe "#fetch" do
     it "fetches invoice" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Payment request retrieved",
@@ -228,7 +228,7 @@ describe Haystack::Invoice::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/paymentrequest/3136406")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -241,7 +241,7 @@ describe Haystack::Invoice::Endpoint do
 
   describe "#update" do
     it "updates invoice" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Payment request updated",
@@ -298,7 +298,7 @@ describe Haystack::Invoice::Endpoint do
           "description":"Update test invoice",\
           "due_date":"2017-05-10"\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -315,7 +315,7 @@ describe Haystack::Invoice::Endpoint do
 
   describe "#verify" do
     it "verifies invoice" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Payment request retrieved",
@@ -381,7 +381,7 @@ describe Haystack::Invoice::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/paymentrequest/verify/abc123")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -394,7 +394,7 @@ describe Haystack::Invoice::Endpoint do
 
   describe "#notify" do
     it "sends notification" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Notification sent"
@@ -404,7 +404,7 @@ describe Haystack::Invoice::Endpoint do
       WebMock.stub(
         :post,
         "https://api.paystack.co/paymentrequest/notify/123456"
-      ).to_return(body_io: response_json)
+      ).to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -416,7 +416,7 @@ describe Haystack::Invoice::Endpoint do
 
   describe "#totals" do
     it "retrieves invoice totals" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Payment request totals",
@@ -456,7 +456,7 @@ describe Haystack::Invoice::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/paymentrequest/totals")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -469,7 +469,7 @@ describe Haystack::Invoice::Endpoint do
 
   describe "#finalise" do
     it "finalises invoice" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Payment request finalized",
@@ -523,7 +523,7 @@ describe Haystack::Invoice::Endpoint do
         JSON
 
       WebMock.stub(:post, "https://api.paystack.co/paymentrequest/finalize/123")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -536,7 +536,7 @@ describe Haystack::Invoice::Endpoint do
 
   describe "#archive" do
     it "archives invoice" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Payment request has been archived"
@@ -544,7 +544,7 @@ describe Haystack::Invoice::Endpoint do
         JSON
 
       WebMock.stub(:post, "https://api.paystack.co/paymentrequest/archive/123")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 

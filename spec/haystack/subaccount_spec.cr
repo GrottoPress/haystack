@@ -3,7 +3,7 @@ require "../spec_helper"
 describe Haystack::Subaccount::Endpoint do
   describe "#create" do
     it "creates subaccount" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Subaccount created",
@@ -38,7 +38,7 @@ describe Haystack::Subaccount::Endpoint do
           "account_number":"0193274682",\
           "percentage_charge":18.2\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -56,7 +56,7 @@ describe Haystack::Subaccount::Endpoint do
 
   describe "#list" do
     it "lists subaccounts" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Subaccounts retrieved",
@@ -114,7 +114,7 @@ describe Haystack::Subaccount::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/subaccount")
         .with(query: {"perPage" => "20", "page" => "2"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -127,7 +127,7 @@ describe Haystack::Subaccount::Endpoint do
 
   describe "#fetch" do
     it "fetches subaccount" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Subaccount retrieved",
@@ -156,7 +156,7 @@ describe Haystack::Subaccount::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/subaccount/123456")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -169,7 +169,7 @@ describe Haystack::Subaccount::Endpoint do
 
   describe "#update" do
     it "updates subaccount" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Subaccount updated",
@@ -202,7 +202,7 @@ describe Haystack::Subaccount::Endpoint do
           "primary_contact_email":"dafe@aba.com",\
           "percentage_charge":18.9\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 

@@ -28,7 +28,7 @@ end
 describe Haystack::Customer::Endpoint do
   describe "#create" do
     it "creates customer" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Customer created",
@@ -48,7 +48,7 @@ describe Haystack::Customer::Endpoint do
 
       WebMock.stub(:post, "https://api.paystack.co/customer")
         .with(body: %({"email":"customer@email.com"}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -61,7 +61,7 @@ describe Haystack::Customer::Endpoint do
 
   describe "#list" do
     it "lists customers" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Customers retrieved",
@@ -107,7 +107,7 @@ describe Haystack::Customer::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/customer")
         .with(query: {"perPage" => "20"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -120,7 +120,7 @@ describe Haystack::Customer::Endpoint do
 
   describe "#fetch" do
     it "fetches customer" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Customer retrieved",
@@ -217,7 +217,7 @@ describe Haystack::Customer::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/customer/customer@email.com")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -230,7 +230,7 @@ describe Haystack::Customer::Endpoint do
 
   describe "#update" do
     it "updates customer" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Customer updated",
@@ -267,7 +267,7 @@ describe Haystack::Customer::Endpoint do
 
       WebMock.stub(:put, "https://api.paystack.co/customer/abc123")
         .with(body: %({"first_name":"BoJack"}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -280,7 +280,7 @@ describe Haystack::Customer::Endpoint do
 
   describe "#verify" do
     it "validates customer" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Customer identified",
@@ -303,7 +303,7 @@ describe Haystack::Customer::Endpoint do
           "first_name":"Asta",\
           "last_name":"Lavista"\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -323,7 +323,7 @@ describe Haystack::Customer::Endpoint do
 
   describe "#set_risk_action" do
     it "sets risk action" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Customer updated",
@@ -348,7 +348,7 @@ describe Haystack::Customer::Endpoint do
 
       WebMock.stub(:post, "https://api.paystack.co/customer/set_risk_action")
         .with(body: %({"customer":"CUS_xr58yrr2ujlft9k","risk_action":"allow"}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -364,7 +364,7 @@ describe Haystack::Customer::Endpoint do
 
   describe "#deactivate_authorization" do
     it "deactivates authorization" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Authorization has been deactivated"
@@ -376,7 +376,7 @@ describe Haystack::Customer::Endpoint do
         "https://api.paystack.co/customer/deactivate_authorization"
       )
         .with(body: %({"authorization_code":"AUTH_72btv547"}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 

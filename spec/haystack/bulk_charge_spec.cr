@@ -3,7 +3,7 @@ require "../spec_helper"
 describe Haystack::BulkCharge::Endpoint do
   describe "#init" do
     it "initiates bulk charge" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Charges have been queued",
@@ -24,7 +24,7 @@ describe Haystack::BulkCharge::Endpoint do
           {"authorization":"AUTH_n95vpedf","amount":2500},\
           {"authorization":"AUTH_ljdt4e4j","amount":1500}\
         ]))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -40,7 +40,7 @@ describe Haystack::BulkCharge::Endpoint do
 
   describe "#list" do
     it "lists bulk charges" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Bulk charges retrieved",
@@ -66,7 +66,7 @@ describe Haystack::BulkCharge::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/bulkcharge")
         .with(query: {"perBulkCharge" => "20", "page" => "2"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -79,7 +79,7 @@ describe Haystack::BulkCharge::Endpoint do
 
   describe "#fetch" do
     it "fetches bulk charge" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Bulk charge retrieved",
@@ -97,7 +97,7 @@ describe Haystack::BulkCharge::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/bulkcharge/123456")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -110,7 +110,7 @@ describe Haystack::BulkCharge::Endpoint do
 
   describe "#charges" do
     it "fetches charges in a batch" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Bulk charge items retrieved",
@@ -245,7 +245,7 @@ describe Haystack::BulkCharge::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/bulkcharge/123456/charges")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -258,7 +258,7 @@ describe Haystack::BulkCharge::Endpoint do
 
   describe "#pause" do
     it "pauses bulk charge processing" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Bulk charge batch has been paused"
@@ -266,7 +266,7 @@ describe Haystack::BulkCharge::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/bulkcharge/pause/a1b2c3")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -278,7 +278,7 @@ describe Haystack::BulkCharge::Endpoint do
 
   describe "#resume" do
     it "resumes bulk charge processing" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Bulk charge batch has been resumed"
@@ -286,7 +286,7 @@ describe Haystack::BulkCharge::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/bulkcharge/resume/a1b2c3")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 

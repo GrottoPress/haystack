@@ -28,7 +28,7 @@ end
 describe Haystack::Dispute::Endpoint do
   describe "#list" do
     it "lists disputes" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Disputes retrieved",
@@ -117,7 +117,7 @@ describe Haystack::Dispute::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/dispute")
         .with(query: {"perPage" => "20", "page" => "2"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -130,7 +130,7 @@ describe Haystack::Dispute::Endpoint do
 
   describe "#fetch" do
     it "fetches dispute" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Dispute retrieved",
@@ -211,7 +211,7 @@ describe Haystack::Dispute::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/dispute/123456")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -224,7 +224,7 @@ describe Haystack::Dispute::Endpoint do
 
   describe "#for_transaction" do
     it "lists disputes for a given transaction" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Dispute retrieved successfully",
@@ -305,7 +305,7 @@ describe Haystack::Dispute::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/dispute/transaction/123456")
         .with(query: {"perPage" => "20"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -318,7 +318,7 @@ describe Haystack::Dispute::Endpoint do
 
   describe "#update" do
     it "updates dispute" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Dispute updated successfully",
@@ -390,7 +390,7 @@ describe Haystack::Dispute::Endpoint do
 
       WebMock.stub(:put, "https://api.paystack.co/dispute/123456")
         .with(body: %({"refund_amount":1002}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -403,7 +403,7 @@ describe Haystack::Dispute::Endpoint do
 
   describe "#add_evidence" do
     it "adds evidence" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Evidence created",
@@ -429,7 +429,7 @@ describe Haystack::Dispute::Endpoint do
           "service_details":"claim for buying product",\
           "delivery_address":"3a ladoke street ogbomoso"\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -449,7 +449,7 @@ describe Haystack::Dispute::Endpoint do
 
   describe "#upload_url" do
     it "returns upload URL" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Upload url generated",
@@ -462,7 +462,7 @@ describe Haystack::Dispute::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/dispute/123456/upload_url")
         .with(query: {"upload_filename" => "filename.ext"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -478,7 +478,7 @@ describe Haystack::Dispute::Endpoint do
 
   describe "#resolve" do
     it "resolves dispute" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Dispute successfully resolved",
@@ -550,7 +550,7 @@ describe Haystack::Dispute::Endpoint do
           "uploaded_filename":"qesp8a4df1xejihd9x5q",\
           "refund_amount":1002\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -569,7 +569,7 @@ describe Haystack::Dispute::Endpoint do
 
   describe "#export" do
     it "exports dispute" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Export successful",
@@ -582,7 +582,7 @@ describe Haystack::Dispute::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/dispute/export")
         .with(query: {"perPage" => "20", "page" => "2"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 

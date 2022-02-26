@@ -3,7 +3,7 @@ require "../spec_helper"
 describe Haystack::Page::Endpoint do
   describe "#create" do
     it "creates page" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Page created",
@@ -28,7 +28,7 @@ describe Haystack::Page::Endpoint do
           "amount":500000,\
           "description":"Gather your friends for the ritual that is brunch"\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -45,7 +45,7 @@ describe Haystack::Page::Endpoint do
 
   describe "#list" do
     it "lists pages" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Pages retrieved",
@@ -106,7 +106,7 @@ describe Haystack::Page::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/page")
         .with(query: {"perPage" => "20", "page" => "2"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -119,7 +119,7 @@ describe Haystack::Page::Endpoint do
 
   describe "#fetch" do
     it "fetches page" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Page retrieved",
@@ -176,7 +176,7 @@ describe Haystack::Page::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/page/123456")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -189,7 +189,7 @@ describe Haystack::Page::Endpoint do
 
   describe "#update" do
     it "updates page" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Page updated",
@@ -215,7 +215,7 @@ describe Haystack::Page::Endpoint do
           "amount":500000,\
           "description":"Gather your friends for the ritual that is brunch"\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 

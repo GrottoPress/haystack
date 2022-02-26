@@ -3,7 +3,7 @@ require "../spec_helper"
 describe Haystack::Product::Endpoint do
   describe "#create" do
     it "creates product" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Product successfully created",
@@ -37,7 +37,7 @@ describe Haystack::Product::Endpoint do
           "limited":false,\
           "quantity":100\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -57,7 +57,7 @@ describe Haystack::Product::Endpoint do
 
   describe "#list" do
     it "lists products" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Products retrieved",
@@ -121,7 +121,7 @@ describe Haystack::Product::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/product")
         .with(query: {"perPage" => "20", "page" => "2"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -134,7 +134,7 @@ describe Haystack::Product::Endpoint do
 
   describe "#fetch" do
     it "fetches product" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Product retrieved",
@@ -165,7 +165,7 @@ describe Haystack::Product::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/product/123456")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -178,7 +178,7 @@ describe Haystack::Product::Endpoint do
 
   describe "#update" do
     it "updates product" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Product successfully updated",
@@ -217,7 +217,7 @@ describe Haystack::Product::Endpoint do
           "limited":false,\
           "quantity":100\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 

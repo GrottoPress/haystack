@@ -28,7 +28,7 @@ end
 describe Haystack::Settlement::Endpoint do
   describe "#list" do
     it "lists settlements" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Settlements retrieved",
@@ -89,7 +89,7 @@ describe Haystack::Settlement::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/settlement")
         .with(query: {"perPage" => "20", "page" => "2"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -102,7 +102,7 @@ describe Haystack::Settlement::Endpoint do
 
   describe "#transactions" do
     it "lists settlement transactions" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Transactions retrieved",
@@ -147,7 +147,7 @@ describe Haystack::Settlement::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/settlement/123/transactions")
         .with(query: {"perPage" => "20"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 

@@ -3,7 +3,7 @@ require "../spec_helper"
 describe Haystack::Bank::Endpoint do
   describe "#verify_account" do
     it "verifies account" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Account number resolved",
@@ -17,7 +17,7 @@ describe Haystack::Bank::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/bank/resolve")
         .with(query: {"account_number" => "0022728151", "bank_code" => "063"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -33,7 +33,7 @@ describe Haystack::Bank::Endpoint do
 
   describe "#list" do
     it "lists banks" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Banks retrieved",
@@ -81,7 +81,7 @@ describe Haystack::Bank::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/bank")
         .with(query: {"country" => "ghana"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -92,7 +92,7 @@ describe Haystack::Bank::Endpoint do
     end
 
     it "lists providers" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "NUBAN Providers successfully retrieved",
@@ -119,7 +119,7 @@ describe Haystack::Bank::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/bank")
         .with(query: {"pay_with_bank_transfer" => "true"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 

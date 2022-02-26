@@ -36,7 +36,7 @@ end
 describe Haystack::Plan::Endpoint do
   describe "#create" do
     it "creates plan" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Plan created",
@@ -64,7 +64,7 @@ describe Haystack::Plan::Endpoint do
           "interval":"monthly",\
           "amount":"500000"\
         }))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -81,7 +81,7 @@ describe Haystack::Plan::Endpoint do
 
   describe "#list" do
     it "lists plans" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Plans retrieved",
@@ -172,7 +172,7 @@ describe Haystack::Plan::Endpoint do
 
       WebMock.stub(:get, "https://api.paystack.co/plan")
         .with(query: {"perPage" => "20", "page" => "2"})
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -185,7 +185,7 @@ describe Haystack::Plan::Endpoint do
 
   describe "#fetch" do
     it "fetches plan" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Plan retrieved",
@@ -212,7 +212,7 @@ describe Haystack::Plan::Endpoint do
         JSON
 
       WebMock.stub(:get, "https://api.paystack.co/plan/123456")
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
@@ -225,7 +225,7 @@ describe Haystack::Plan::Endpoint do
 
   describe "#update" do
     it "updates plan" do
-      response_json = IO::Memory.new <<-JSON
+      body = <<-JSON
         {
           "status": true,
           "message": "Plan updated. 1 subscription(s) affected"
@@ -234,7 +234,7 @@ describe Haystack::Plan::Endpoint do
 
       WebMock.stub(:put, "https://api.paystack.co/plan/123456")
         .with(body: %({"name":"Weekly retainer"}))
-        .to_return(body_io: response_json)
+        .to_return(body: body)
 
       paystack = Haystack.new(secret_key: "abcdef")
 
