@@ -1,5 +1,7 @@
 struct Haystack::Recipient::Item
   include Response
 
-  getter data : Recipient?
+  struct Resource
+    getter data : Recipient?
+  end
 end

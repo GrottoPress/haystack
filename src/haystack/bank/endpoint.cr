@@ -9,7 +9,7 @@ struct Haystack::Bank::Endpoint
     @client.get(
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     ) do |response|
-      List.from_json(response.body_io)
+      List.new(response)
     end
   end
 
@@ -21,7 +21,7 @@ struct Haystack::Bank::Endpoint
     @client.get(
       "#{self.class.uri.path}/resolve?#{URI::Params.encode(params)}"
     ) do |response|
-      Verification::Item.from_json(response.body_io)
+      Verification::Item.new(response)
     end
   end
 

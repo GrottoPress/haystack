@@ -7,7 +7,7 @@ struct Haystack::Split::Endpoint
 
   def create(**params) : Item
     @client.post(self.class.uri.path, body: params.to_json) do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -19,7 +19,7 @@ struct Haystack::Split::Endpoint
     @client.get(
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     ) do |response|
-      List.from_json(response.body_io)
+      List.new(response)
     end
   end
 
@@ -29,7 +29,7 @@ struct Haystack::Split::Endpoint
 
   def fetch(id : Int) : Item
     @client.get("#{self.class.uri.path}/#{id}") do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -42,7 +42,7 @@ struct Haystack::Split::Endpoint
       "#{self.class.uri.path}/#{id}",
       body: params.to_json
     ) do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -63,7 +63,7 @@ struct Haystack::Split::Endpoint
       "#{self.class.uri.path}/#{id}/subaccount/add",
       body: params.to_json
     ) do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -76,7 +76,7 @@ struct Haystack::Split::Endpoint
       "#{self.class.uri.path}/#{id}/subaccount/remove",
       body: params.to_json
     ) do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 

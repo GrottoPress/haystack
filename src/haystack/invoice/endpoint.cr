@@ -7,7 +7,7 @@ struct Haystack::Invoice::Endpoint
 
   def create(**params) : Item
     @client.post(self.class.uri.path, body: params.to_json) do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -19,7 +19,7 @@ struct Haystack::Invoice::Endpoint
     @client.get(
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     ) do |response|
-      List.from_json(response.body_io)
+      List.new(response)
     end
   end
 
@@ -29,7 +29,7 @@ struct Haystack::Invoice::Endpoint
 
   def fetch(id : String | Int) : Item
     @client.get("#{self.class.uri.path}/#{id}") do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -42,7 +42,7 @@ struct Haystack::Invoice::Endpoint
       "#{self.class.uri.path}/#{id}",
       body: params.to_json
     ) do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -52,7 +52,7 @@ struct Haystack::Invoice::Endpoint
 
   def verify(code : String) : Item
     @client.get("#{self.class.uri.path}/verify/#{code}") do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -62,7 +62,7 @@ struct Haystack::Invoice::Endpoint
 
   def notify(id : String | Int) : Notification::Item
     @client.post("#{self.class.uri.path}/notify/#{id}") do |response|
-      Notification::Item.from_json(response.body_io)
+      Notification::Item.new(response)
     end
   end
 
@@ -72,7 +72,7 @@ struct Haystack::Invoice::Endpoint
 
   def totals : Totals::Item
     @client.get("#{self.class.uri.path}/totals") do |response|
-      Totals::Item.from_json(response.body_io)
+      Totals::Item.new(response)
     end
   end
 
@@ -82,7 +82,7 @@ struct Haystack::Invoice::Endpoint
 
   def finalise(id : String | Int) : Item
     @client.post("#{self.class.uri.path}/finalize/#{id}") do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -92,7 +92,7 @@ struct Haystack::Invoice::Endpoint
 
   def archive(id : String | Int) : Item
     @client.post("#{self.class.uri.path}/archive/#{id}") do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 

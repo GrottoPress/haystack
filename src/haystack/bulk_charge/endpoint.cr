@@ -7,7 +7,7 @@ struct Haystack::BulkCharge::Endpoint
 
   def initiate(charges : Array(NamedTuple)) : Item
     @client.post(self.class.uri.path, body: charges.to_json) do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -19,7 +19,7 @@ struct Haystack::BulkCharge::Endpoint
     @client.get(
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     ) do |response|
-      List.from_json(response.body_io)
+      List.new(response)
     end
   end
 
@@ -29,7 +29,7 @@ struct Haystack::BulkCharge::Endpoint
 
   def fetch(id : String | Int) : Item
     @client.get("#{self.class.uri.path}/#{id}") do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -39,7 +39,7 @@ struct Haystack::BulkCharge::Endpoint
 
   def charges(id : String | Int) : Charge::List
     @client.get("#{self.class.uri.path}/#{id}/charges") do |response|
-      Charge::List.from_json(response.body_io)
+      Charge::List.new(response)
     end
   end
 
@@ -49,7 +49,7 @@ struct Haystack::BulkCharge::Endpoint
 
   def pause(batch_code : String) : Item
     @client.get("#{self.class.uri.path}/pause/#{batch_code}") do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -59,7 +59,7 @@ struct Haystack::BulkCharge::Endpoint
 
   def resume(batch_code : String) : Item
     @client.get("#{self.class.uri.path}/resume/#{batch_code}") do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 

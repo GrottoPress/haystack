@@ -7,7 +7,7 @@ struct Haystack::Transfer::Endpoint
 
   def initiate(**params) : Item
     @client.post(self.class.uri.path, body: params.to_json) do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -20,7 +20,7 @@ struct Haystack::Transfer::Endpoint
       "#{self.class.uri.path}/bulk",
       body: params.merge({transfers: transfers}).to_json
     ) do |response|
-      List.from_json(response.body_io)
+      List.new(response)
     end
   end
 
@@ -33,7 +33,7 @@ struct Haystack::Transfer::Endpoint
       "#{self.class.uri.path}/finalize_transfer",
       body: params.to_json
     ) do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -45,7 +45,7 @@ struct Haystack::Transfer::Endpoint
     @client.get(
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     ) do |response|
-      List.from_json(response.body_io)
+      List.new(response)
     end
   end
 
@@ -55,7 +55,7 @@ struct Haystack::Transfer::Endpoint
 
   def fetch(id : String | Int) : Item
     @client.get("#{self.class.uri.path}/#{id}") do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -65,7 +65,7 @@ struct Haystack::Transfer::Endpoint
 
   def verify(reference : String) : Item
     @client.get("#{self.class.uri.path}/verify/#{reference}") do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 

@@ -9,6 +9,8 @@ struct Haystack::Bank::Provider
   struct List
     include Response
 
-    getter data : Array(Provider)?
+    struct Resource
+      getter data : Array(Provider)?
+    end
   end
 end

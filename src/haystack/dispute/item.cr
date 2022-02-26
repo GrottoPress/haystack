@@ -1,5 +1,7 @@
 struct Haystack::Dispute::Item
   include Response
 
-  getter data : Dispute?
+  struct Resource
+    getter data : Dispute?
+  end
 end

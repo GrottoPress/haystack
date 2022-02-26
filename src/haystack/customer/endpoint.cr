@@ -7,7 +7,7 @@ struct Haystack::Customer::Endpoint
 
   def create(**params) : Item
     @client.post(self.class.uri.path, body: params.to_json) do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -19,7 +19,7 @@ struct Haystack::Customer::Endpoint
     @client.get(
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     ) do |response|
-      List.from_json(response.body_io)
+      List.new(response)
     end
   end
 
@@ -29,7 +29,7 @@ struct Haystack::Customer::Endpoint
 
   def fetch(code : String) : Item
     @client.get("#{self.class.uri.path}/#{code}") do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -42,7 +42,7 @@ struct Haystack::Customer::Endpoint
       "#{self.class.uri.path}/#{code}",
       body: params.to_json
     ) do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -55,7 +55,7 @@ struct Haystack::Customer::Endpoint
       "#{self.class.uri.path}/#{code}/identification",
       body: params.to_json
     ) do |response|
-      Identification::Item.from_json(response.body_io)
+      Identification::Item.new(response)
     end
   end
 
@@ -68,7 +68,7 @@ struct Haystack::Customer::Endpoint
       "#{self.class.uri.path}/set_risk_action",
       body: params.to_json
     ) do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -81,7 +81,7 @@ struct Haystack::Customer::Endpoint
       "#{self.class.uri.path}/deactivate_authorization",
       body: params.to_json
     ) do |response|
-      Card::Authorization::Item.from_json(response.body_io)
+      Card::Authorization::Item.new(response)
     end
   end
 

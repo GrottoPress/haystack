@@ -1,5 +1,7 @@
 struct Haystack::Product::Item
   include Response
 
-  getter data : Product?
+  struct Resource
+    getter data : Product?
+  end
 end

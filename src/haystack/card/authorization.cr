@@ -29,7 +29,9 @@ struct Haystack::Card::Authorization
   struct Item
     include Response
 
-    getter data : Authorization?
+    struct Resource
+      getter data : Authorization?
+    end
   end
 
 end

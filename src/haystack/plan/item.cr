@@ -1,5 +1,7 @@
 struct Haystack::Plan::Item
   include Response
 
-  getter data : Plan?
+  struct Resource
+    getter data : Plan?
+  end
 end

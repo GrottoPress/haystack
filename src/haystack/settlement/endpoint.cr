@@ -9,7 +9,7 @@ struct Haystack::Settlement::Endpoint
     @client.get(
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     ) do |response|
-      List.from_json(response.body_io)
+      List.new(response)
     end
   end
 
@@ -21,7 +21,7 @@ struct Haystack::Settlement::Endpoint
     @client.get(
       "#{self.class.uri.path}/#{id}/transactions?#{URI::Params.encode(params)}"
     ) do |response|
-      Transaction::List.from_json(response.body_io)
+      Transaction::List.new(response)
     end
   end
 

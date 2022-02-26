@@ -1,5 +1,7 @@
 struct Haystack::Transaction::Item
   include Response
 
-  getter data : Transaction?
+  struct Resource
+    getter data : Transaction?
+  end
 end

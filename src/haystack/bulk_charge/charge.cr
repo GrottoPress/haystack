@@ -36,6 +36,8 @@ struct Haystack::BulkCharge::Charge
   struct List
     include Response
 
-    getter data : Array(Charge)?
+    struct Resource
+      getter data : Array(Charge)?
+    end
   end
 end

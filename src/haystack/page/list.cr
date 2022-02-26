@@ -1,5 +1,7 @@
 struct Haystack::Page::List
   include Response
 
-  getter data : Array(Page)?
+  struct Resource
+    getter data : Array(Page)?
+  end
 end

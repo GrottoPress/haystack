@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 - Add `Haystack::Recipient#deleted?` as an alias for `#is_deleted?`
+- Add `Haystack::Response#raw` for access to the raw HTTP response
 - Ensure support for *Crystal* v1.3
 
 ### Removed

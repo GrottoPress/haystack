@@ -15,6 +15,8 @@ struct Haystack::Dispute::UploadUrl
   struct Item
     include Response
 
-    getter data : UploadUrl?
+    struct Resource
+      getter data : UploadUrl?
+    end
   end
 end

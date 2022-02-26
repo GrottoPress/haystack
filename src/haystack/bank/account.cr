@@ -69,12 +69,16 @@ class Haystack::Bank::Account
   struct Item
     include Response
 
-    getter data : Account?
+    struct Resource
+      getter data : Account?
+    end
   end
 
   struct List
     include Response
 
-    getter data : Array(Account)?
+    struct Resource
+      getter data : Array(Account)?
+    end
   end
 end

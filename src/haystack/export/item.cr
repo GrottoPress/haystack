@@ -1,5 +1,7 @@
 struct Haystack::Export::Item
   include Response
 
-  getter data : Export?
+  struct Resource
+    getter data : Export?
+  end
 end

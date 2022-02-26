@@ -1,5 +1,7 @@
 struct Haystack::Invoice::List
   include Response
 
-  getter data : Array(Invoice)?
+  struct Resource
+    getter data : Array(Invoice)?
+  end
 end

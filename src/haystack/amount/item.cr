@@ -1,5 +1,7 @@
 struct Haystack::Amount::Item
   include Response
 
-  getter data : Amount?
+  struct Resource
+    getter data : Amount?
+  end
 end

@@ -1,5 +1,7 @@
 struct Haystack::Settlement::List
   include Response
 
-  getter data : Array(Settlement)?
+  struct Resource
+    getter data : Array(Settlement)?
+  end
 end

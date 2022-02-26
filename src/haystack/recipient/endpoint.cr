@@ -7,7 +7,7 @@ struct Haystack::Recipient::Endpoint
 
   def create(**params) : Item
     @client.post(self.class.uri.path, body: params.to_json) do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -20,7 +20,7 @@ struct Haystack::Recipient::Endpoint
       "#{self.class.uri.path}/bulk",
       body: {batch: batch}.to_json
     ) do |response|
-      Bulk::Item.from_json(response.body_io)
+      Bulk::Item.new(response)
     end
   end
 
@@ -32,7 +32,7 @@ struct Haystack::Recipient::Endpoint
     @client.get(
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
     ) do |response|
-      List.from_json(response.body_io)
+      List.new(response)
     end
   end
 
@@ -42,7 +42,7 @@ struct Haystack::Recipient::Endpoint
 
   def fetch(id : String | Int) : Item
     @client.get("#{self.class.uri.path}/#{id}") do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -55,7 +55,7 @@ struct Haystack::Recipient::Endpoint
       "#{self.class.uri.path}/#{id}",
       body: params.to_json
     ) do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 
@@ -65,7 +65,7 @@ struct Haystack::Recipient::Endpoint
 
   def delete(id : String | Int) : Item
     @client.delete("#{self.class.uri.path}/#{id}") do |response|
-      Item.from_json(response.body_io)
+      Item.new(response)
     end
   end
 

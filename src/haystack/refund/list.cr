@@ -1,5 +1,7 @@
 struct Haystack::Refund::List
   include Response
 
-  getter data : Array(Refund)?
+  struct Resource
+    getter data : Array(Refund)?
+  end
 end

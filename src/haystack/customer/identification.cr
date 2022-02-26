@@ -12,6 +12,8 @@ struct Haystack::Customer::Identification
   struct Item
     include Response
 
-    getter data : Identification?
+    struct Resource
+      getter data : Identification?
+    end
   end
 end

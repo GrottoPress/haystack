@@ -1,5 +1,7 @@
 struct Haystack::Subscription::List
   include Response
 
-  getter data : Array(Subscription)?
+  struct Resource
+    getter data : Array(Subscription)?
+  end
 end

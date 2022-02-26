@@ -1,5 +1,7 @@
 struct Haystack::Transfer::Item
   include Response
 
-  getter data : Transfer?
+  struct Resource
+    getter data : Transfer?
+  end
 end

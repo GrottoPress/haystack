@@ -8,6 +8,8 @@ struct Haystack::Invoice::Totals
   struct Item
     include Response
 
-    getter data : Totals?
+    struct Resource
+      getter data : Totals?
+    end
   end
 end

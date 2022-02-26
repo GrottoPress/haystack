@@ -1,5 +1,7 @@
 struct Haystack::Subaccount::Item
   include Response
 
-  getter data : Subaccount?
+  struct Resource
+    getter data : Subaccount?
+  end
 end
