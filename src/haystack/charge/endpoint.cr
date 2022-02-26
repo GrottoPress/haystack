@@ -6,9 +6,8 @@ struct Haystack::Charge::Endpoint
   end
 
   def create(**params) : Transaction::Item
-    @client.post(self.class.uri.path, body: params.to_json) do |response|
-      Transaction::Item.new(response)
-    end
+    response = @client.post(self.class.uri.path, body: params.to_json)
+    Transaction::Item.new(response)
   end
 
   def submit_pin(**params)
@@ -16,12 +15,12 @@ struct Haystack::Charge::Endpoint
   end
 
   def submit_pin(**params) : Transaction::Item
-    @client.post(
+    response = @client.post(
       "#{self.class.uri.path}/submit_pin",
       body: params.to_json
-    ) do |response|
-      Transaction::Item.new(response)
-    end
+    )
+
+    Transaction::Item.new(response)
   end
 
   def submit_otp(**params)
@@ -29,12 +28,12 @@ struct Haystack::Charge::Endpoint
   end
 
   def submit_otp(**params) : Transaction::Item
-    @client.post(
+    response = @client.post(
       "#{self.class.uri.path}/submit_otp",
       body: params.to_json
-    ) do |response|
-      Transaction::Item.new(response)
-    end
+    )
+
+    Transaction::Item.new(response)
   end
 
   def submit_phone(**params)
@@ -42,12 +41,12 @@ struct Haystack::Charge::Endpoint
   end
 
   def submit_phone(**params) : Transaction::Item
-    @client.post(
+    response = @client.post(
       "#{self.class.uri.path}/submit_phone",
       body: params.to_json
-    ) do |response|
-      Transaction::Item.new(response)
-    end
+    )
+
+    Transaction::Item.new(response)
   end
 
   def submit_birthday(**params)
@@ -55,12 +54,12 @@ struct Haystack::Charge::Endpoint
   end
 
   def submit_birthday(**params) : Transaction::Item
-    @client.post(
+    response = @client.post(
       "#{self.class.uri.path}/submit_birthday",
       body: params.to_json
-    ) do |response|
-      Transaction::Item.new(response)
-    end
+    )
+
+    Transaction::Item.new(response)
   end
 
   def submit_address(**params)
@@ -68,12 +67,12 @@ struct Haystack::Charge::Endpoint
   end
 
   def submit_address(**params) : Transaction::Item
-    @client.post(
+    response = @client.post(
       "#{self.class.uri.path}/submit_address",
       body: params.to_json
-    ) do |response|
-      Transaction::Item.new(response)
-    end
+    )
+
+    Transaction::Item.new(response)
   end
 
   def check_status(reference : String)
@@ -81,9 +80,8 @@ struct Haystack::Charge::Endpoint
   end
 
   def check_status(reference : String) : Transaction::Item
-    @client.get("#{self.class.uri.path}/#{reference}") do |response|
-      Transaction::Item.new(response)
-    end
+    response = @client.get("#{self.class.uri.path}/#{reference}")
+    Transaction::Item.new(response)
   end
 
   def self.uri : URI

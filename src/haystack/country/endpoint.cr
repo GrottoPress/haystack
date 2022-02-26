@@ -6,11 +6,11 @@ struct Haystack::Country::Endpoint
   end
 
   def list(**params) : List
-    @client.get(
+    response = @client.get(
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
-    ) do |response|
-      List.new(response)
-    end
+    )
+
+    List.new(response)
   end
 
   def self.uri : URI

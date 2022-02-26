@@ -6,9 +6,8 @@ struct Haystack::BulkCharge::Endpoint
   end
 
   def initiate(charges : Array(NamedTuple)) : Item
-    @client.post(self.class.uri.path, body: charges.to_json) do |response|
-      Item.new(response)
-    end
+    response = @client.post(self.class.uri.path, body: charges.to_json)
+    Item.new(response)
   end
 
   def list(**params)
@@ -16,11 +15,11 @@ struct Haystack::BulkCharge::Endpoint
   end
 
   def list(**params) : List
-    @client.get(
+    response = @client.get(
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
-    ) do |response|
-      List.new(response)
-    end
+    )
+
+    List.new(response)
   end
 
   def fetch(id : String | Int)
@@ -28,9 +27,8 @@ struct Haystack::BulkCharge::Endpoint
   end
 
   def fetch(id : String | Int) : Item
-    @client.get("#{self.class.uri.path}/#{id}") do |response|
-      Item.new(response)
-    end
+    response = @client.get("#{self.class.uri.path}/#{id}")
+    Item.new(response)
   end
 
   def charges(id : String | Int)
@@ -38,9 +36,8 @@ struct Haystack::BulkCharge::Endpoint
   end
 
   def charges(id : String | Int) : Charge::List
-    @client.get("#{self.class.uri.path}/#{id}/charges") do |response|
-      Charge::List.new(response)
-    end
+    response = @client.get("#{self.class.uri.path}/#{id}/charges")
+    Charge::List.new(response)
   end
 
   def pause(batch_code : String)
@@ -48,9 +45,8 @@ struct Haystack::BulkCharge::Endpoint
   end
 
   def pause(batch_code : String) : Item
-    @client.get("#{self.class.uri.path}/pause/#{batch_code}") do |response|
-      Item.new(response)
-    end
+    response = @client.get("#{self.class.uri.path}/pause/#{batch_code}")
+    Item.new(response)
   end
 
   def resume(batch_code : String)
@@ -58,9 +54,8 @@ struct Haystack::BulkCharge::Endpoint
   end
 
   def resume(batch_code : String) : Item
-    @client.get("#{self.class.uri.path}/resume/#{batch_code}") do |response|
-      Item.new(response)
-    end
+    response = @client.get("#{self.class.uri.path}/resume/#{batch_code}")
+    Item.new(response)
   end
 
   def self.uri : URI

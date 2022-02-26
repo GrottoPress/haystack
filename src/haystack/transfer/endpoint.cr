@@ -6,9 +6,8 @@ struct Haystack::Transfer::Endpoint
   end
 
   def initiate(**params) : Item
-    @client.post(self.class.uri.path, body: params.to_json) do |response|
-      Item.new(response)
-    end
+    response = @client.post(self.class.uri.path, body: params.to_json)
+    Item.new(response)
   end
 
   def initiate(transfers : Array(NamedTuple), **params)
@@ -16,12 +15,12 @@ struct Haystack::Transfer::Endpoint
   end
 
   def initiate(transfers : Array(NamedTuple), **params) : List
-    @client.post(
+    response = @client.post(
       "#{self.class.uri.path}/bulk",
       body: params.merge({transfers: transfers}).to_json
-    ) do |response|
-      List.new(response)
-    end
+    )
+
+    List.new(response)
   end
 
   def finalise(**params)
@@ -29,12 +28,12 @@ struct Haystack::Transfer::Endpoint
   end
 
   def finalise(**params) : Item
-    @client.post(
+    response = @client.post(
       "#{self.class.uri.path}/finalize_transfer",
       body: params.to_json
-    ) do |response|
-      Item.new(response)
-    end
+    )
+
+    Item.new(response)
   end
 
   def list(**params)
@@ -42,11 +41,11 @@ struct Haystack::Transfer::Endpoint
   end
 
   def list(**params) : List
-    @client.get(
+    response = @client.get(
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
-    ) do |response|
-      List.new(response)
-    end
+    )
+
+    List.new(response)
   end
 
   def fetch(id : String | Int)
@@ -54,9 +53,8 @@ struct Haystack::Transfer::Endpoint
   end
 
   def fetch(id : String | Int) : Item
-    @client.get("#{self.class.uri.path}/#{id}") do |response|
-      Item.new(response)
-    end
+    response = @client.get("#{self.class.uri.path}/#{id}")
+    Item.new(response)
   end
 
   def verify(reference : String)
@@ -64,9 +62,8 @@ struct Haystack::Transfer::Endpoint
   end
 
   def verify(reference : String) : Item
-    @client.get("#{self.class.uri.path}/verify/#{reference}") do |response|
-      Item.new(response)
-    end
+    response = @client.get("#{self.class.uri.path}/verify/#{reference}")
+    Item.new(response)
   end
 
   def self.uri : URI

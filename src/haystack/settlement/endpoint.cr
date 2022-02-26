@@ -6,11 +6,11 @@ struct Haystack::Settlement::Endpoint
   end
 
   def list(**params) : List
-    @client.get(
+    response = @client.get(
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
-    ) do |response|
-      List.new(response)
-    end
+    )
+
+    List.new(response)
   end
 
   def transactions(id : Int, **params)
@@ -18,11 +18,11 @@ struct Haystack::Settlement::Endpoint
   end
 
   def transactions(id : Int, **params) : Transaction::List
-    @client.get(
+    response = @client.get(
       "#{self.class.uri.path}/#{id}/transactions?#{URI::Params.encode(params)}"
-    ) do |response|
-      Transaction::List.new(response)
-    end
+    )
+
+    Transaction::List.new(response)
   end
 
   def self.uri : URI

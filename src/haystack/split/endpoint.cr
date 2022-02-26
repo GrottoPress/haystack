@@ -6,9 +6,8 @@ struct Haystack::Split::Endpoint
   end
 
   def create(**params) : Item
-    @client.post(self.class.uri.path, body: params.to_json) do |response|
-      Item.new(response)
-    end
+    response = @client.post(self.class.uri.path, body: params.to_json)
+    Item.new(response)
   end
 
   def list(**params)
@@ -16,11 +15,11 @@ struct Haystack::Split::Endpoint
   end
 
   def list(**params) : List
-    @client.get(
+    response = @client.get(
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
-    ) do |response|
-      List.new(response)
-    end
+    )
+
+    List.new(response)
   end
 
   def fetch(id : Int)
@@ -28,9 +27,8 @@ struct Haystack::Split::Endpoint
   end
 
   def fetch(id : Int) : Item
-    @client.get("#{self.class.uri.path}/#{id}") do |response|
-      Item.new(response)
-    end
+    response = @client.get("#{self.class.uri.path}/#{id}")
+    Item.new(response)
   end
 
   def update(id : Int, **params)
@@ -38,12 +36,8 @@ struct Haystack::Split::Endpoint
   end
 
   def update(id : Int, **params) : Item
-    @client.put(
-      "#{self.class.uri.path}/#{id}",
-      body: params.to_json
-    ) do |response|
-      Item.new(response)
-    end
+    response = @client.put("#{self.class.uri.path}/#{id}", body: params.to_json)
+    Item.new(response)
   end
 
   def update_account(id : Int, **params)
@@ -59,12 +53,12 @@ struct Haystack::Split::Endpoint
   end
 
   def add_account(id : Int, **params) : Item
-    @client.post(
+    response = @client.post(
       "#{self.class.uri.path}/#{id}/subaccount/add",
       body: params.to_json
-    ) do |response|
-      Item.new(response)
-    end
+    )
+
+    Item.new(response)
   end
 
   def remove_account(id : Int, **params)
@@ -72,12 +66,12 @@ struct Haystack::Split::Endpoint
   end
 
   def remove_account(id : Int, **params) : Item
-    @client.post(
+    response = @client.post(
       "#{self.class.uri.path}/#{id}/subaccount/remove",
       body: params.to_json
-    ) do |response|
-      Item.new(response)
-    end
+    )
+
+    Item.new(response)
   end
 
   def self.uri : URI

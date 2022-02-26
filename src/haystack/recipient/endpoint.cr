@@ -6,9 +6,8 @@ struct Haystack::Recipient::Endpoint
   end
 
   def create(**params) : Item
-    @client.post(self.class.uri.path, body: params.to_json) do |response|
-      Item.new(response)
-    end
+    response = @client.post(self.class.uri.path, body: params.to_json)
+    Item.new(response)
   end
 
   def create(batch : Array(NamedTuple))
@@ -16,12 +15,12 @@ struct Haystack::Recipient::Endpoint
   end
 
   def create(batch : Array(NamedTuple)) : Bulk::Item
-    @client.post(
+    response = @client.post(
       "#{self.class.uri.path}/bulk",
       body: {batch: batch}.to_json
-    ) do |response|
-      Bulk::Item.new(response)
-    end
+    )
+
+    Bulk::Item.new(response)
   end
 
   def list(**params)
@@ -29,11 +28,11 @@ struct Haystack::Recipient::Endpoint
   end
 
   def list(**params) : List
-    @client.get(
+    response = @client.get(
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
-    ) do |response|
-      List.new(response)
-    end
+    )
+
+    List.new(response)
   end
 
   def fetch(id : String | Int)
@@ -41,9 +40,8 @@ struct Haystack::Recipient::Endpoint
   end
 
   def fetch(id : String | Int) : Item
-    @client.get("#{self.class.uri.path}/#{id}") do |response|
-      Item.new(response)
-    end
+    response = @client.get("#{self.class.uri.path}/#{id}")
+    Item.new(response)
   end
 
   def update(id : String | Int, **params)
@@ -51,12 +49,8 @@ struct Haystack::Recipient::Endpoint
   end
 
   def update(id : String | Int, **params) : Item
-    @client.put(
-      "#{self.class.uri.path}/#{id}",
-      body: params.to_json
-    ) do |response|
-      Item.new(response)
-    end
+    response = @client.put("#{self.class.uri.path}/#{id}", body: params.to_json)
+    Item.new(response)
   end
 
   def delete(id : String | Int)
@@ -64,9 +58,8 @@ struct Haystack::Recipient::Endpoint
   end
 
   def delete(id : String | Int) : Item
-    @client.delete("#{self.class.uri.path}/#{id}") do |response|
-      Item.new(response)
-    end
+    response = @client.delete("#{self.class.uri.path}/#{id}")
+    Item.new(response)
   end
 
   def self.uri : URI

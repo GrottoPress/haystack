@@ -6,11 +6,11 @@ struct Haystack::Bank::Endpoint
   end
 
   def list(**params) : List
-    @client.get(
+    response = @client.get(
       "#{self.class.uri.path}?#{URI::Params.encode(params)}"
-    ) do |response|
-      List.new(response)
-    end
+    )
+
+    List.new(response)
   end
 
   def verify_account(**params)
@@ -18,11 +18,11 @@ struct Haystack::Bank::Endpoint
   end
 
   def verify_account(**params) : Verification::Item
-    @client.get(
+    response = @client.get(
       "#{self.class.uri.path}/resolve?#{URI::Params.encode(params)}"
-    ) do |response|
-      Verification::Item.new(response)
-    end
+    )
+
+    Verification::Item.new(response)
   end
 
   def self.uri : URI
