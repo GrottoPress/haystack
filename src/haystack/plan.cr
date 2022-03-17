@@ -61,6 +61,10 @@ struct Haystack::Plan
     Bool.from_any(@hosted_page)
   end
 
+  def deleted?
+    is_deleted?
+  end
+
   def is_deleted?
     Bool.from_any(@is_deleted)
   end
