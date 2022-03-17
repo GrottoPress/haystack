@@ -33,6 +33,10 @@ struct Haystack::Bank
     Bool.from_any(@active)
   end
 
+  def deleted?
+    is_deleted?
+  end
+
   def is_deleted?
     Bool.from_any(@is_deleted)
   end

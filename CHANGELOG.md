@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased] - 
 
 ### Added
+- Add `Haystack::Bank#deleted?` as an alias for `#is_deleted?`
 - Add `Haystack::Recipient#deleted?` as an alias for `#is_deleted?`
 - Ensure support for *Crystal* v1.3
 
