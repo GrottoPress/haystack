@@ -14,6 +14,10 @@ struct Haystack::Dispute::Message
     Dispute.from_any(@dispute)
   end
 
+  def deleted?
+    is_deleted?
+  end
+
   def is_deleted
     is_deleted?
   end
