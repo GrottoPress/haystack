@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add `Haystack::Recipient#deleted?` as an alias for `#is_deleted?`
 - Ensure support for *Crystal* v1.3
 
+### Changed
+- Read HTTP responses from `body` instead of `body_io` in endpoint methods
+
 ### Removed
 - Remove `Haystack::Recipient#isDeleted`
 - Remove `Haystack::Recipient#isDeleted?`
