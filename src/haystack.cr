@@ -14,80 +14,80 @@ class Haystack
     set_headers(secret_key)
   end
 
-  def banks : Bank::Endpoint
-    @banks ||= Bank::Endpoint.new(self)
+  getter banks : Bank::Endpoint do
+    Bank::Endpoint.new(self)
   end
 
-  def bulk_charges : BulkCharge::Endpoint
-    @bulk_charges ||= BulkCharge::Endpoint.new(self)
+  getter bulk_charges : BulkCharge::Endpoint do
+    BulkCharge::Endpoint.new(self)
   end
 
-  def charges : Charge::Endpoint
-    @charges ||= Charge::Endpoint.new(self)
+  getter charges : Charge::Endpoint do
+    Charge::Endpoint.new(self)
   end
 
-  def countries : Country::Endpoint
-    @countries ||= Country::Endpoint.new(self)
+  getter countries : Country::Endpoint do
+    Country::Endpoint.new(self)
   end
 
-  def customers : Customer::Endpoint
-    @customers ||= Customer::Endpoint.new(self)
+  getter customers : Customer::Endpoint do
+    Customer::Endpoint.new(self)
   end
 
-  def disputes : Dispute::Endpoint
-    @disputes ||= Dispute::Endpoint.new(self)
+  getter disputes : Dispute::Endpoint do
+    Dispute::Endpoint.new(self)
   end
 
-  def invoices : Invoice::Endpoint
-    @invoices ||= Invoice::Endpoint.new(self)
+  getter invoices : Invoice::Endpoint do
+    Invoice::Endpoint.new(self)
   end
 
-  def nubans : Nuban::Endpoint
-    @nubans ||= Nuban::Endpoint.new(self)
+  getter nubans : Nuban::Endpoint do
+    Nuban::Endpoint.new(self)
   end
 
-  def pages : Page::Endpoint
-    @pages ||= Page::Endpoint.new(self)
+  getter pages : Page::Endpoint do
+    Page::Endpoint.new(self)
   end
 
-  def plans : Plan::Endpoint
-    @plans ||= Plan::Endpoint.new(self)
+  getter plans : Plan::Endpoint do
+    Plan::Endpoint.new(self)
   end
 
-  def products : Product::Endpoint
-    @products ||= Product::Endpoint.new(self)
+  getter products : Product::Endpoint do
+    Product::Endpoint.new(self)
   end
 
-  def recipients : Recipient::Endpoint
-    @recipients ||= Recipient::Endpoint.new(self)
+  getter recipients : Recipient::Endpoint do
+    Recipient::Endpoint.new(self)
   end
 
-  def refunds : Refund::Endpoint
-    @refunds ||= Refund::Endpoint.new(self)
+  getter refunds : Refund::Endpoint do
+    Refund::Endpoint.new(self)
   end
 
-  def settlements : Settlement::Endpoint
-    @settlements ||= Settlement::Endpoint.new(self)
+  getter settlements : Settlement::Endpoint do
+    Settlement::Endpoint.new(self)
   end
 
-  def splits : Split::Endpoint
-    @splits ||= Split::Endpoint.new(self)
+  getter splits : Split::Endpoint do
+    Split::Endpoint.new(self)
   end
 
-  def subaccounts : Subaccount::Endpoint
-    @subaccounts ||= Subaccount::Endpoint.new(self)
+  getter subaccounts : Subaccount::Endpoint do
+    Subaccount::Endpoint.new(self)
   end
 
-  def subscriptions : Subscription::Endpoint
-    @subscriptions ||= Subscription::Endpoint.new(self)
+  getter subscriptions : Subscription::Endpoint do
+    Subscription::Endpoint.new(self)
   end
 
-  def transactions : Transaction::Endpoint
-    @transactions ||= Transaction::Endpoint.new(self)
+  getter transactions : Transaction::Endpoint do
+    Transaction::Endpoint.new(self)
   end
 
-  def transfers : Transfer::Endpoint
-    @transfers ||= Transfer::Endpoint.new(self)
+  getter transfers : Transfer::Endpoint do
+    Transfer::Endpoint.new(self)
   end
 
   def self.uri : URI
