@@ -1,5 +1,7 @@
 struct Haystack::Webhook::Event
-  def initialize(@raw : String)
+  getter raw : String
+
+  def initialize(@raw)
   end
 
   def charge
@@ -7,7 +9,7 @@ struct Haystack::Webhook::Event
   end
 
   def charge?
-    @raw.starts_with?("charge.")
+    @raw.starts_with?("#{Charge::NAME}.")
   end
 
   def customeridentification
@@ -15,7 +17,7 @@ struct Haystack::Webhook::Event
   end
 
   def customeridentification?
-    @raw.starts_with?("customeridentification.")
+    @raw.starts_with?("#{CustomerIdentification::NAME}.")
   end
 
   def invoice
@@ -23,7 +25,7 @@ struct Haystack::Webhook::Event
   end
 
   def invoice?
-    @raw.starts_with?("invoice.")
+    @raw.starts_with?("#{Invoice::NAME}.")
   end
 
   def paymentrequest
@@ -31,7 +33,7 @@ struct Haystack::Webhook::Event
   end
 
   def paymentrequest?
-    @raw.starts_with?("paymentrequest.")
+    @raw.starts_with?("#{PaymentRequest::NAME}.")
   end
 
   def subscription
@@ -39,7 +41,7 @@ struct Haystack::Webhook::Event
   end
 
   def subscription?
-    @raw.starts_with?("subscription.")
+    @raw.starts_with?("#{Subscription::NAME}.")
   end
 
   def transfer
@@ -47,117 +49,155 @@ struct Haystack::Webhook::Event
   end
 
   def transfer?
-    @raw.starts_with?("transfer.")
+    @raw.starts_with?("#{Transfer::NAME}.")
   end
 
   struct Charge
-    def initialize(@event : String)
+    NAME = "charge"
+
+    SUCCESS = "#{NAME}.success"
+
+    def initialize(@raw : String)
     end
 
     def dispute
-      Dispute.new(@event)
+      Dispute.new(@raw)
     end
 
     def dispute?
-      @event.starts_with?("charge.dispute.")
+      @raw.starts_with?("#{Dispute::NAME}.")
     end
 
     def success?
-      @event == "charge.success"
+      @raw == SUCCESS
     end
 
     struct Dispute
-      def initialize(@event : String)
+      NAME = "#{Charge::NAME}.dispute"
+
+      CREATE = "#{NAME}.create"
+      REMIND = "#{NAME}.remind"
+      RESOLVE = "#{NAME}.resolve"
+
+      def initialize(@raw : String)
       end
 
       def create?
-        @event == "charge.dispute.create"
+        @raw == CREATE
       end
 
       def remind?
-        @event == "charge.dispute.remind"
+        @raw == REMIND
       end
 
       def resolve?
-        @event == "charge.dispute.resolve"
+        @raw == RESOLVE
       end
     end
   end
 
   struct CustomerIdentification
-    def initialize(@event : String)
+    NAME = "customeridentification"
+
+    FAILED = "#{NAME}.failed"
+    SUCCESS = "#{NAME}.success"
+
+    def initialize(@raw : String)
     end
 
     def failed?
-      @event == "customeridentification.failed"
+      @raw == FAILED
     end
 
     def success?
-      @event == "customeridentification.success"
+      @raw == SUCCESS
     end
   end
 
   struct Invoice
-    def initialize(@event : String)
+    NAME = "invoice"
+
+    CREATE = "#{NAME}.create"
+    PAYMENT_FAILED = "#{NAME}.payment_failed"
+    UPDATE = "#{NAME}.update"
+
+    def initialize(@raw : String)
     end
 
     def create?
-      @event == "invoice.create"
+      @raw == CREATE
     end
 
     def payment_failed?
-      @event == "invoice.payment_failed"
+      @raw == PAYMENT_FAILED
     end
 
     def update?
-      @event == "invoice.update"
+      @raw == UPDATE
     end
   end
 
   struct PaymentRequest
-    def initialize(@event : String)
+    NAME = "paymentrequest"
+
+    PENDING = "#{NAME}.pending"
+    SUCCESS = "#{NAME}.success"
+
+    def initialize(@raw : String)
     end
 
     def pending?
-      @event == "paymentrequest.pending"
+      @raw == PENDING
     end
 
     def success?
-      @event == "paymentrequest.success"
+      @raw == SUCCESS
     end
   end
 
   struct Subscription
-    def initialize(@event : String)
+    NAME = "subscription"
+
+    CREATE = "#{NAME}.create"
+    DISABLE = "#{NAME}.disable"
+    ENABLE = "#{NAME}.enable"
+
+    def initialize(@raw : String)
     end
 
     def create?
-      @event == "subscription.create"
+      @raw == CREATE
     end
 
     def disable?
-      @event == "subscription.disable"
+      @raw == DISABLE
     end
 
     def enable?
-      @event == "subscription.enable"
+      @raw == ENABLE
     end
   end
 
   struct Transfer
-    def initialize(@event : String)
+    NAME = "transfer"
+
+    FAILED = "#{NAME}.failed"
+    REVERSED = "#{NAME}.reversed"
+    SUCCESS = "#{NAME}.success"
+
+    def initialize(@raw : String)
     end
 
     def failed?
-      @event == "transfer.failed"
+      @raw == FAILED
     end
 
     def reversed?
-      @event == "transfer.reversed"
+      @raw == REVERSED
     end
 
     def success?
-      @event == "transfer.success"
+      @raw == SUCCESS
     end
   end
 end
