@@ -1,5 +1,5 @@
 class Haystack::Bank::Account
-  include Hapi::Resource
+  include Haystack::Resource
 
   @active : ::Bool | Int32 | Nil
   @assigned : ::Bool | Int32 | Nil
@@ -42,7 +42,7 @@ class Haystack::Bank::Account
   end
 
   struct Assignment
-    include Hapi::Resource
+    include Haystack::Resource
 
     @expired : ::Bool | Int32 | Nil
     @integration : Integration | Int64 | Nil

@@ -1,5 +1,5 @@
 struct Haystack::Invoice::Notification
-  include Hapi::Resource
+  include Haystack::Resource
 
   enum Channel
     Email

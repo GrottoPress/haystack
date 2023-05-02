@@ -1,5 +1,5 @@
 class Haystack::Dispute
-  include Hapi::Resource
+  include Haystack::Resource
 
   @customer : Customer | Int64 | Nil
   @evidence : Evidence | Int64 | Nil

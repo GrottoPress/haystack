@@ -1,5 +1,5 @@
 struct Haystack::Log::History
-  include Hapi::Resource
+  include Haystack::Resource
 
   enum Type
     Input

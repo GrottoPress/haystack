@@ -1,5 +1,5 @@
 struct Haystack::Plan
-  include Hapi::Resource
+  include Haystack::Resource
   include FromAny
 
   @hosted_page : ::Bool | Int32 | Nil

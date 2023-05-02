@@ -1,5 +1,5 @@
 struct Haystack::Bank::Provider
-  include Hapi::Resource
+  include Haystack::Resource
 
   getter bank_id : Int64
   getter bank_name : String

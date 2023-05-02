@@ -1,5 +1,5 @@
 struct Haystack::Customer::Identification
-  include Hapi::Resource
+  include Haystack::Resource
 
   enum Type
     BVN

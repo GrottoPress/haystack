@@ -1,5 +1,5 @@
 struct Haystack::Recipient
-  include Hapi::Resource
+  include Haystack::Resource
   include FromAny
 
   @active : ::Bool | Int32 | Nil

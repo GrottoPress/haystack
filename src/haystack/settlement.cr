@@ -1,5 +1,5 @@
 struct Haystack::Settlement
-  include Hapi::Resource
+  include Haystack::Resource
   include FromAny
 
   @integration : Integration | Int64 | Nil

@@ -1,5 +1,5 @@
 struct Haystack::Dispute::UploadUrl
-  include Hapi::Resource
+  include Haystack::Resource
 
   @fileName : String # ameba:disable Style/VariableNames
   @signedUrl : String # ameba:disable Style/VariableNames

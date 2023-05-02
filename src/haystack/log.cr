@@ -1,5 +1,5 @@
 struct Haystack::Log
-  include Hapi::Resource
+  include Haystack::Resource
 
   @mobile : ::Bool | Int32 | Nil
   @success : ::Bool | Int32 | Nil

@@ -1,5 +1,5 @@
 struct Haystack::Bank
-  include Hapi::Resource
+  include Haystack::Resource
 
   @active : ::Bool | Int32 | Nil
   @is_deleted : ::Bool | Int32 | Nil

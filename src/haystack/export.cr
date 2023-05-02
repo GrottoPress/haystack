@@ -1,5 +1,5 @@
 struct Haystack::Export
-  include Hapi::Resource
+  include Haystack::Resource
 
   getter path : String
 

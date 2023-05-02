@@ -1,5 +1,5 @@
 struct Haystack::Card::Authorization
-  include Hapi::Resource
+  include Haystack::Resource
 
   @reusable : ::Bool | Int32 | Nil
 

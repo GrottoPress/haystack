@@ -1,5 +1,5 @@
 struct Haystack::Meta
-  include Hapi::Resource
+  include Haystack::Resource
 
   @pageCount : Int32? # ameba:disable Style/VariableNames
   @perPage : Int32? # ameba:disable Style/VariableNames

@@ -1,5 +1,5 @@
 struct Haystack::Country
-  include Hapi::Resource
+  include Haystack::Resource
 
   @active_for_dashboard_onboarding : ::Bool | Int32 | Nil
 

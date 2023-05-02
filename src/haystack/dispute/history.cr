@@ -1,5 +1,5 @@
 struct Haystack::Dispute::History
-  include Hapi::Resource
+  include Haystack::Resource
 
   @dispute : Dispute | Int64 | Nil
 

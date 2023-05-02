@@ -1,5 +1,5 @@
 struct Haystack::Invoice::LineItem
-  include Hapi::Resource
+  include Haystack::Resource
 
   getter amount : Int32
   getter name : String

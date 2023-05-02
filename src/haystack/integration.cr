@@ -1,5 +1,5 @@
 struct Haystack::Integration
-  include Hapi::Resource
+  include Haystack::Resource
   include FromAny
 
   @is_live : ::Bool | Int32 | Nil

@@ -1,5 +1,5 @@
 struct Haystack::Refund
-  include Hapi::Resource
+  include Haystack::Resource
 
   @dispute : Dispute | Int64 | Nil
   @fully_deducted : ::Bool | Int32 | Nil

@@ -1,5 +1,5 @@
 struct Haystack::Split
-  include Hapi::Resource
+  include Haystack::Resource
 
   @active : ::Bool | Int32 | Nil
   @bearer_type : String?

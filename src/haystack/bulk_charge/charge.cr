@@ -1,5 +1,5 @@
 struct Haystack::BulkCharge::Charge
-  include Hapi::Resource
+  include Haystack::Resource
 
   enum Status
     Success

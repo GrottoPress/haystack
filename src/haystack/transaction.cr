@@ -1,5 +1,5 @@
 struct Haystack::Transaction
-  include Hapi::Resource
+  include Haystack::Resource
   include FromAny
 
   @customer : Customer | Int64 | Nil

@@ -1,5 +1,5 @@
 struct Haystack::Webhook
-  include Hapi::Resource
+  include Haystack::Resource
 
   @data : JSON::Any
   @event : String
@@ -28,7 +28,7 @@ struct Haystack::Webhook
   end
 
   struct CustomerIdentification
-    include Hapi::Resource
+    include Haystack::Resource
 
     getter customer_code : String
     getter customer_id : String

@@ -1,5 +1,5 @@
 struct Haystack::Subaccount
-  include Hapi::Resource
+  include Haystack::Resource
 
   @active : ::Bool | Int32 | Nil
   @integration : Integration | Int64 | Nil

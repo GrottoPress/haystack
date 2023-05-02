@@ -1,5 +1,5 @@
 class Haystack::Dispute::Evidence
-  include Hapi::Resource
+  include Haystack::Resource
   include FromAny
 
   @dispute : Dispute | Int64 | Nil

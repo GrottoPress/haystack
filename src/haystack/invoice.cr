@@ -1,5 +1,5 @@
 struct Haystack::Invoice
-  include Hapi::Resource
+  include Haystack::Resource
 
   @archived : ::Bool | Int32 | Nil
   @customer : Customer | Int64 | Nil

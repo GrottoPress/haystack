@@ -1,5 +1,5 @@
 struct Haystack::Product
-  include Hapi::Resource
+  include Haystack::Resource
 
   @active : ::Bool | Int32 | Nil
   @in_stock : ::Bool | Int32 | Nil

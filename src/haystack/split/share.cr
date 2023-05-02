@@ -1,5 +1,5 @@
 struct Haystack::Split::Share
-  include Hapi::Resource
+  include Haystack::Resource
 
   getter subaccount : Subaccount
   getter share : Int32

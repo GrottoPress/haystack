@@ -1,5 +1,5 @@
 class Haystack::Subscription::Invoice
-  include Hapi::Resource
+  include Haystack::Resource
 
   @customer : Customer | Int64 | Nil
   @integration : Integration | Int64 | Nil

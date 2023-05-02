@@ -1,5 +1,5 @@
 struct Haystack::Split::Endpoint
-  include Hapi::Endpoint
+  include Haystack::Endpoint
 
   def create(**params)
     yield create(**params)

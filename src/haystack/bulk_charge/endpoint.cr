@@ -1,5 +1,5 @@
 struct Haystack::BulkCharge::Endpoint
-  include Hapi::Endpoint
+  include Haystack::Endpoint
 
   def initiate(charges : Array(NamedTuple))
     yield initiate(charges)

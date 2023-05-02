@@ -1,5 +1,5 @@
 struct Haystack::Transaction::Endpoint
-  include Hapi::Endpoint
+  include Haystack::Endpoint
 
   def initiate(**params)
     yield initiate(**params)

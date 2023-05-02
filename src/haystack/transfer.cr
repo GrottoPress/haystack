@@ -1,5 +1,5 @@
 struct Haystack::Transfer
-  include Hapi::Resource
+  include Haystack::Resource
 
   @integration : Integration | Int64 | Nil
   @recipient : Recipient | Int64 | String | Nil

@@ -1,5 +1,5 @@
 struct Haystack::Bank::Endpoint
-  include Hapi::Endpoint
+  include Haystack::Endpoint
 
   def list(**params)
     yield list(**params)

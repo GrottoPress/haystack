@@ -1,5 +1,5 @@
 struct Haystack::BulkCharge
-  include Hapi::Resource
+  include Haystack::Resource
 
   @integration : Integration | Int64 | Nil
 

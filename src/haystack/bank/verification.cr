@@ -1,5 +1,5 @@
 struct Haystack::Bank::Verification
-  include Hapi::Resource
+  include Haystack::Resource
 
   getter account_name : String
   getter account_number : String
