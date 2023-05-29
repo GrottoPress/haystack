@@ -52,7 +52,7 @@ struct Haystack::Recipient
 
   def self.from_any(recipient) : self?
     if recipient.is_a?(String)
-      return from_json(%({"recipient_code": "#{recipient}"}))
+      return from_json({recipient_code: recipient}.to_json)
     end
 
     previous_def

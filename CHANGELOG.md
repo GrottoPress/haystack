@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Rename `Haystack::Country::Relationships::Relationship` to `Haystack::Country::Relationship`
 
+### Fixed
+- Fix potential JSON parse errors in `.from_any` methods
+
 ## [0.6.0] - 2023-05-02
 
 ### Removed

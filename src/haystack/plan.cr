@@ -86,7 +86,7 @@ struct Haystack::Plan
   end
 
   def self.from_any(plan) : self?
-    return from_json(%({"plan_code": "#{plan}"})) if plan.is_a?(String)
+    return from_json({plan_code: plan}.to_json) if plan.is_a?(String)
     previous_def
   end
 end

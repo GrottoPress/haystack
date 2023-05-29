@@ -22,7 +22,7 @@ struct Haystack::Metadata
   def self.from_any(metadata) : self?
     case metadata
     when JSON::Any, Bool, Number, String
-      from_json(%({"any": #{metadata}}))
+      from_json({any: metadata}.to_json)
     else
       metadata
     end

@@ -3,7 +3,7 @@ module Haystack::FromAny
     def self.from_any(object) : self?
       case object
       when Int
-        from_json(%({"id": #{object}}))
+        from_json({id: object}.to_json)
       else
         object
       end
