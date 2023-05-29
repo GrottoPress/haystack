@@ -31,5 +31,4 @@ struct Haystack::Card::Authorization
 
     getter data : Authorization?
   end
-
 end
