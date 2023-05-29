@@ -6,7 +6,7 @@ struct Haystack::Settlement
 
   getter domain : Domain?
   getter id : Int64?
-  getter settled_by : JSON::Any? # Figure out type
+  getter settled_by : JSON::Any? # TODO: Figure out type
   getter settlement_date : Time?
   getter status : Status?
   getter subaccount : Subaccount?

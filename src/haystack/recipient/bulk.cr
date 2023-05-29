@@ -2,7 +2,7 @@ struct Haystack::Recipient::Bulk
   include Haystack::Resource
 
   getter success : Array(Recipient)
-  getter errors : Array(JSON::Any) # Figure out type
+  getter errors : Array(JSON::Any) # TODO: Figure out type
 
   struct Item
     include Response

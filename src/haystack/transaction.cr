@@ -20,7 +20,7 @@ struct Haystack::Transaction
   getter message : String?
   getter order_id : Int64?
   getter plan_object : Plan?
-  getter pos_transaction_data : JSON::Any? # Figure out type
+  getter pos_transaction_data : JSON::Any? # TODO: Figure out type
   getter reference : String?
   getter requested_amount : Int32?
   getter source : Source?

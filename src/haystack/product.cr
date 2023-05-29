@@ -11,7 +11,7 @@ struct Haystack::Product
   getter currency : Currency?
   getter description : String?
   getter domain : Domain?
-  getter features : JSON::Any? # Figure out type
+  getter features : JSON::Any? # TODO: Figure out type
   getter file_path : String?
   getter files : Array(File)?
   getter id : Int64?
@@ -19,7 +19,7 @@ struct Haystack::Product
   getter maximum_orderable : Int32?
   getter minimum_orderable : Int32?
   getter name : String?
-  getter notification_emails : JSON::Any? # Figure out type
+  getter notification_emails : JSON::Any? # TODO: Figure out type
   getter price : Int32?
   getter product_code : String?
   getter quantity : Int32?
@@ -29,7 +29,7 @@ struct Haystack::Product
   getter split_code : String?
   getter success_message : String?
   getter type : Type?
-  getter variant_options : Array(JSON::Any)? # Figure out type
+  getter variant_options : Array(JSON::Any)? # TODO: Figure out type
 
   Haystack.time_field :created, :updated
 

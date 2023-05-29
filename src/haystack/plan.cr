@@ -21,7 +21,7 @@ struct Haystack::Plan
   getter interval : Interval?
   getter invoice_limit : Int32?
   getter name : String?
-  getter pages : Array(JSON::Any)? # Figure out type
+  getter pages : Array(JSON::Any)? # TODO: Figure out type
   getter plan_code : String?
   getter subscriptions : Array(Subscription)?
   getter total_subscriptions : Int64?
