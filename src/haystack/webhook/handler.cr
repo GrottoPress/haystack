@@ -12,10 +12,12 @@ module Haystack::Webhook::Handler
         return call_next(context)
       end
 
-      return response.status_code = 403 unless verify?(request)
-
-      response.status_code = 200
-      call(request.body)
+      if verify?(request)
+        response.status_code = 200
+        call(request.body)
+      else
+        response.status_code = 403
+      end
     end
 
     private def verify?(request) : Bool
