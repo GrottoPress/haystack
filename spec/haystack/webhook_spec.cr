@@ -2,6 +2,9 @@ require "../spec_helper"
 
 describe Haystack::Webhook::Handler do
   it "skips if request method is not 'POST'" do
+    path = "/webhooks/paystack"
+    secret_key = "abcdef"
+
     body = <<-JSON
       {
         "event": "customeridentification.success",
@@ -18,19 +21,21 @@ describe Haystack::Webhook::Handler do
       }
       JSON
 
-    signature = Digest::SHA512.hexdigest("abcdef")
+    signature = OpenSSL::HMAC.hexdigest(:sha512, secret_key, body)
     headers = HTTP::Headers{"X-Paystack-Signature" => signature}
 
-    request = HTTP::Request.new("GET", "/webhooks/paystack?a=b", headers, body)
+    request = HTTP::Request.new("GET", "#{path}?a=b", headers, body)
     response = HTTP::Server::Response.new(IO::Memory.new)
     context = HTTP::Server::Context.new(request, response)
 
-    TestWebhookHandler.new("abcdef", "/webhooks/paystack").call(context)
+    TestWebhookHandler.new(secret_key, path).call(context)
 
     context.response.status_code.should eq(404)
   end
 
   it "skips if request path does not match" do
+    secret_key = "abcdef"
+
     body = <<-JSON
       {
         "event": "customeridentification.success",
@@ -47,19 +52,21 @@ describe Haystack::Webhook::Handler do
       }
       JSON
 
-    signature = Digest::SHA512.hexdigest("abcdef")
+    signature = OpenSSL::HMAC.hexdigest(:sha512, secret_key, body)
     headers = HTTP::Headers{"X-Paystack-Signature" => signature}
 
     request = HTTP::Request.new("POST", "/webhooks/paystack/", headers, body)
     response = HTTP::Server::Response.new(IO::Memory.new)
     context = HTTP::Server::Context.new(request, response)
 
-    TestWebhookHandler.new("abcdef", "/webhooks/paystack").call(context)
+    TestWebhookHandler.new(secret_key, "/webhooks/paystack").call(context)
 
     context.response.status_code.should eq(404)
   end
 
   it "rejects unverified requests" do
+    path = "/webhooks/paystack"
+
     body = <<-JSON
       {
         "event": "customeridentification.success",
@@ -76,19 +83,22 @@ describe Haystack::Webhook::Handler do
       }
       JSON
 
-    signature = Digest::SHA512.hexdigest("ghijkl")
+    signature = OpenSSL::HMAC.hexdigest(:sha512, "ghijkl", body)
     headers = HTTP::Headers{"X-Paystack-Signature" => signature}
 
-    request = HTTP::Request.new("POST", "/webhooks/paystack?a=b", headers, body)
+    request = HTTP::Request.new("POST", path, headers, body)
     response = HTTP::Server::Response.new(IO::Memory.new)
     context = HTTP::Server::Context.new(request, response)
 
-    TestWebhookHandler.new("abcdef", "/webhooks/paystack").call(context)
+    TestWebhookHandler.new("abcdef", path).call(context)
 
     context.response.status_code.should eq(403)
   end
 
   it "handles customeridentification events" do
+    path = "/webhooks/paystack"
+    secret_key = "abcdef"
+
     body = <<-JSON
       {
         "event": "customeridentification.failed",
@@ -105,21 +115,21 @@ describe Haystack::Webhook::Handler do
       }
       JSON
 
-    signature = Digest::SHA512.hexdigest("abcdef")
+    signature = OpenSSL::HMAC.hexdigest(:sha512, secret_key, body)
     headers = HTTP::Headers{"X-Paystack-Signature" => signature}
 
-    request = HTTP::Request.new("POST", "/webhooks/paystack?a=b", headers, body)
+    request = HTTP::Request.new("POST", path, headers, body)
     response = HTTP::Server::Response.new(IO::Memory.new)
     context = HTTP::Server::Context.new(request, response)
 
-    TestWebhookHandler.new("abcdef", "/webhooks/paystack")
-      .call(context)
-      .should(eq 1)
-
+    TestWebhookHandler.new(secret_key, path).call(context).should eq(1)
     context.response.status_code.should eq(200)
   end
 
   it "handles dispute events" do
+    path = "/webhooks/paystack"
+    secret_key = "abcdef"
+
     body = <<-JSON
       {
         "event":"charge.dispute.remind",
@@ -199,21 +209,21 @@ describe Haystack::Webhook::Handler do
       }
       JSON
 
-    signature = Digest::SHA512.hexdigest("abcdef")
+    signature = OpenSSL::HMAC.hexdigest(:sha512, secret_key, body)
     headers = HTTP::Headers{"X-Paystack-Signature" => signature}
 
-    request = HTTP::Request.new("POST", "/webhooks/paystack?a=b", headers, body)
+    request = HTTP::Request.new("POST", path, headers, body)
     response = HTTP::Server::Response.new(IO::Memory.new)
     context = HTTP::Server::Context.new(request, response)
 
-    TestWebhookHandler.new("abcdef", "/webhooks/paystack")
-      .call(context)
-      .should(eq 11)
-
+    TestWebhookHandler.new(secret_key, path).call(context).should eq(11)
     context.response.status_code.should eq(200)
   end
 
   it "handles invoice events" do
+    path = "/webhooks/paystack"
+    secret_key = "abcdef"
+
     body = <<-JSON
       {
         "event": "invoice.create",
@@ -272,21 +282,21 @@ describe Haystack::Webhook::Handler do
       }
       JSON
 
-    signature = Digest::SHA512.hexdigest("abcdef")
+    signature = OpenSSL::HMAC.hexdigest(:sha512, secret_key, body)
     headers = HTTP::Headers{"X-Paystack-Signature" => signature}
 
-    request = HTTP::Request.new("POST", "/webhooks/paystack?a=b", headers, body)
+    request = HTTP::Request.new("POST", path, headers, body)
     response = HTTP::Server::Response.new(IO::Memory.new)
     context = HTTP::Server::Context.new(request, response)
 
-    TestWebhookHandler.new("abcdef", "/webhooks/paystack")
-      .call(context)
-      .should(eq 1000)
-
+    TestWebhookHandler.new(secret_key, path).call(context).should eq(1000)
     context.response.status_code.should eq(200)
   end
 
   it "handles paymentrequest events" do
+    path = "/webhooks/paystack"
+    secret_key = "abcdef"
+
     body = <<-JSON
       {
         "event": "paymentrequest.pending",
@@ -315,21 +325,21 @@ describe Haystack::Webhook::Handler do
       }
       JSON
 
-    signature = Digest::SHA512.hexdigest("abcdef")
+    signature = OpenSSL::HMAC.hexdigest(:sha512, secret_key, body)
     headers = HTTP::Headers{"X-Paystack-Signature" => signature}
 
-    request = HTTP::Request.new("POST", "/webhooks/paystack?a=b", headers, body)
+    request = HTTP::Request.new("POST", path, headers, body)
     response = HTTP::Server::Response.new(IO::Memory.new)
     context = HTTP::Server::Context.new(request, response)
 
-    TestWebhookHandler.new("abcdef", "/webhooks/paystack")
-      .call(context)
-      .should(eq 101)
-
+    TestWebhookHandler.new(secret_key, path).call(context).should eq(101)
     context.response.status_code.should eq(200)
   end
 
   it "handles subscription events" do
+    path = "/webhooks/paystack"
+    secret_key = "abcdef"
+
     body = <<-JSON
       {
         "event": "subscription.disable",
@@ -378,21 +388,21 @@ describe Haystack::Webhook::Handler do
       }
       JSON
 
-    signature = Digest::SHA512.hexdigest("abcdef")
+    signature = OpenSSL::HMAC.hexdigest(:sha512, secret_key, body)
     headers = HTTP::Headers{"X-Paystack-Signature" => signature}
 
-    request = HTTP::Request.new("POST", "/webhooks/paystack?a=b", headers, body)
+    request = HTTP::Request.new("POST", path, headers, body)
     response = HTTP::Server::Response.new(IO::Memory.new)
     context = HTTP::Server::Context.new(request, response)
 
-    TestWebhookHandler.new("abcdef", "/webhooks/paystack")
-      .call(context)
-      .should(eq 10_002)
-
+    TestWebhookHandler.new(secret_key, path).call(context).should eq(10_002)
     context.response.status_code.should eq(200)
   end
 
   it "handles charge events" do
+    path = "/webhooks/paystack"
+    secret_key = "abcdef"
+
     body = <<-JSON
       {
         "event":"charge.success",
@@ -465,21 +475,21 @@ describe Haystack::Webhook::Handler do
       }
       JSON
 
-    signature = Digest::SHA512.hexdigest("abcdef")
+    signature = OpenSSL::HMAC.hexdigest(:sha512, secret_key, body)
     headers = HTTP::Headers{"X-Paystack-Signature" => signature}
 
-    request = HTTP::Request.new("POST", "/webhooks/paystack?a=b", headers, body)
+    request = HTTP::Request.new("POST", path, headers, body)
     response = HTTP::Server::Response.new(IO::Memory.new)
     context = HTTP::Server::Context.new(request, response)
 
-    TestWebhookHandler.new("abcdef", "/webhooks/paystack")
-      .call(context)
-      .should(eq 100_000)
-
+    TestWebhookHandler.new(secret_key, path).call(context).should eq(100_000)
     context.response.status_code.should eq(200)
   end
 
   it "handles transfer events" do
+    path = "/webhooks/paystack"
+    secret_key = "abcdef"
+
     body = <<-JSON
       {
         "event": "transfer.success",
@@ -531,17 +541,14 @@ describe Haystack::Webhook::Handler do
       }
       JSON
 
-    signature = Digest::SHA512.hexdigest("abcdef")
+    signature = OpenSSL::HMAC.hexdigest(:sha512, secret_key, body)
     headers = HTTP::Headers{"X-Paystack-Signature" => signature}
 
-    request = HTTP::Request.new("POST", "/webhooks/paystack?a=b", headers, body)
+    request = HTTP::Request.new("POST", path, headers, body)
     response = HTTP::Server::Response.new(IO::Memory.new)
     context = HTTP::Server::Context.new(request, response)
 
-    TestWebhookHandler.new("abcdef", "/webhooks/paystack")
-      .call(context)
-      .should(eq 1_000_000)
-
+    TestWebhookHandler.new(secret_key, path).call(context).should eq(1_000_000)
     context.response.status_code.should eq(200)
   end
 end

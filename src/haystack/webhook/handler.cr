@@ -23,7 +23,7 @@ module Haystack::Webhook::Handler
     private def verify?(request) : Bool
       return false unless signature = request.headers["X-Paystack-Signature"]?
 
-      digest = Digest::SHA512.hexdigest(@secret_key)
+      digest = OpenSSL::HMAC.hexdigest(:sha512, @secret_key, request.body.to_s)
       Crypto::Subtle.constant_time_compare(digest, signature)
     end
 

@@ -1,5 +1,5 @@
 require "crypto/subtle"
-require "digest/sha512"
+require "openssl/hmac"
 require "json"
 
 require "./haystack/version"
