@@ -1,6 +1,7 @@
 require "crypto/subtle"
-require "openssl/hmac"
+require "http/client"
 require "json"
+require "openssl/hmac"
 
 require "./haystack/version"
 require "./haystack/endpoint"
