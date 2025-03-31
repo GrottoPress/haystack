@@ -1,4 +1,4 @@
-class Haystack::Dispute::Evidence
+struct Haystack::Dispute::Evidence
   include Haystack::Resource
   include FromAny
 
