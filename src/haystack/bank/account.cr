@@ -1,4 +1,4 @@
-class Haystack::Bank::Account
+struct Haystack::Bank::Account
   include Haystack::Resource
 
   @active : ::Bool | Int32 | Nil
