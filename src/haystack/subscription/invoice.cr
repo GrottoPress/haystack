@@ -1,4 +1,4 @@
-class Haystack::Subscription::Invoice
+struct Haystack::Subscription::Invoice
   include Haystack::Resource
 
   @customer : Customer | Int64 | Nil
