@@ -9,7 +9,7 @@ require "./haystack/resource"
 require "./haystack/macros"
 require "./haystack/**"
 
-class Haystack
+struct Haystack
   def initialize(secret_key)
     @http_client = HTTP::Client.new(self.class.uri)
     set_headers(secret_key)
@@ -17,79 +17,79 @@ class Haystack
 
   forward_missing_to @http_client
 
-  getter banks : Bank::Endpoint do
+  def banks : Bank::Endpoint
     Bank::Endpoint.new(self)
   end
 
-  getter bulk_charges : BulkCharge::Endpoint do
+  def bulk_charges : BulkCharge::Endpoint
     BulkCharge::Endpoint.new(self)
   end
 
-  getter charges : Charge::Endpoint do
+  def charges : Charge::Endpoint
     Charge::Endpoint.new(self)
   end
 
-  getter countries : Country::Endpoint do
+  def countries : Country::Endpoint
     Country::Endpoint.new(self)
   end
 
-  getter customers : Customer::Endpoint do
+  def customers : Customer::Endpoint
     Customer::Endpoint.new(self)
   end
 
-  getter disputes : Dispute::Endpoint do
+  def disputes : Dispute::Endpoint
     Dispute::Endpoint.new(self)
   end
 
-  getter invoices : Invoice::Endpoint do
+  def invoices : Invoice::Endpoint
     Invoice::Endpoint.new(self)
   end
 
-  getter nubans : Nuban::Endpoint do
+  def nubans : Nuban::Endpoint
     Nuban::Endpoint.new(self)
   end
 
-  getter pages : Page::Endpoint do
+  def pages : Page::Endpoint
     Page::Endpoint.new(self)
   end
 
-  getter plans : Plan::Endpoint do
+  def plans : Plan::Endpoint
     Plan::Endpoint.new(self)
   end
 
-  getter products : Product::Endpoint do
+  def products : Product::Endpoint
     Product::Endpoint.new(self)
   end
 
-  getter recipients : Recipient::Endpoint do
+  def recipients : Recipient::Endpoint
     Recipient::Endpoint.new(self)
   end
 
-  getter refunds : Refund::Endpoint do
+  def refunds : Refund::Endpoint
     Refund::Endpoint.new(self)
   end
 
-  getter settlements : Settlement::Endpoint do
+  def settlements : Settlement::Endpoint
     Settlement::Endpoint.new(self)
   end
 
-  getter splits : Split::Endpoint do
+  def splits : Split::Endpoint
     Split::Endpoint.new(self)
   end
 
-  getter subaccounts : Subaccount::Endpoint do
+  def subaccounts : Subaccount::Endpoint
     Subaccount::Endpoint.new(self)
   end
 
-  getter subscriptions : Subscription::Endpoint do
+  def subscriptions : Subscription::Endpoint
     Subscription::Endpoint.new(self)
   end
 
-  getter transactions : Transaction::Endpoint do
+  def transactions : Transaction::Endpoint
     Transaction::Endpoint.new(self)
   end
 
-  getter transfers : Transfer::Endpoint do
+  def transfers : Transfer::Endpoint
     Transfer::Endpoint.new(self)
   end
 

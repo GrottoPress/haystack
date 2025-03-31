@@ -1,3 +1,3 @@
-class Haystack
+struct Haystack
   VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
 end

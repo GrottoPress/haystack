@@ -1,4 +1,4 @@
-class Haystack
+struct Haystack
   macro time_field(*fields)
     {% for field in fields %}
       @{{ field.id.downcase }}_at : Time?
