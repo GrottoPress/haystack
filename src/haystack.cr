@@ -10,12 +10,13 @@ require "./haystack/macros"
 require "./haystack/**"
 
 struct Haystack
+  @@http_client = HTTP::Client.new(uri)
+
   def initialize(secret_key)
-    @http_client = HTTP::Client.new(self.class.uri)
     set_headers(secret_key)
   end
 
-  forward_missing_to @http_client
+  forward_missing_to @@http_client
 
   def banks : Bank::Endpoint
     Bank::Endpoint.new(self)
@@ -98,7 +99,7 @@ struct Haystack
   end
 
   private def set_headers(secret_key)
-    @http_client.before_request do |request|
+    @@http_client.before_request do |request|
       set_content_type(request.headers)
       set_user_agent(request.headers)
       set_authorization(request.headers, secret_key)

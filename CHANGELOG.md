@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Convert `Haystack::Dispute::Evidence` to a `struct`
 - Convert `Haystack::Subscription::Invoice` to a `struct`
 
+### Fixed
+- Use the same `HTTP::Client` object for all `Haystack` instances
+
 ## [1.0.2] - 2024-08-15
 
 ### Fixed
