@@ -106,7 +106,7 @@ struct Haystack
   end
 
   private def set_content_type(headers)
-    headers["Content-Type"] = "application/json; charset=UTF-8"
+    headers["Content-Type"] = "application/json"
   end
 
   private def set_user_agent(headers)
