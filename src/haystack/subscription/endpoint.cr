@@ -58,8 +58,8 @@ struct Haystack::Subscription::Endpoint
   end
 
   def self.uri : URI
-    uri = Haystack.uri
-    uri.path += "subscription"
-    uri
+    Haystack.uri.tap do |uri|
+      uri.path += "subscription"
+    end
   end
 end

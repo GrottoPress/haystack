@@ -41,8 +41,8 @@ struct Haystack::Plan::Endpoint
   end
 
   def self.uri : URI
-    uri = Haystack.uri
-    uri.path += "plan"
-    uri
+    Haystack.uri.tap do |uri|
+      uri.path += "plan"
+    end
   end
 end

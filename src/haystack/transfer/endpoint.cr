@@ -67,8 +67,8 @@ struct Haystack::Transfer::Endpoint
   end
 
   def self.uri : URI
-    uri = Haystack.uri
-    uri.path += "transfer"
-    uri
+    Haystack.uri.tap do |uri|
+      uri.path += "transfer"
+    end
   end
 end

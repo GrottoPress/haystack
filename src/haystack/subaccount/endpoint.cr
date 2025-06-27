@@ -41,8 +41,8 @@ struct Haystack::Subaccount::Endpoint
   end
 
   def self.uri : URI
-    uri = Haystack.uri
-    uri.path += "subaccount"
-    uri
+    Haystack.uri.tap do |uri|
+      uri.path += "subaccount"
+    end
   end
 end

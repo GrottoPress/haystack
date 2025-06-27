@@ -59,8 +59,8 @@ struct Haystack::BulkCharge::Endpoint
   end
 
   def self.uri : URI
-    uri = Haystack.uri
-    uri.path += "bulkcharge"
-    uri
+    Haystack.uri.tap do |uri|
+      uri.path += "bulkcharge"
+    end
   end
 end

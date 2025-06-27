@@ -26,8 +26,8 @@ struct Haystack::Settlement::Endpoint
   end
 
   def self.uri : URI
-    uri = Haystack.uri
-    uri.path += "settlement"
-    uri
+    Haystack.uri.tap do |uri|
+      uri.path += "settlement"
+    end
   end
 end

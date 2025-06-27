@@ -85,8 +85,8 @@ struct Haystack::Charge::Endpoint
   end
 
   def self.uri : URI
-    uri = Haystack.uri
-    uri.path += "charge"
-    uri
+    Haystack.uri.tap do |uri|
+      uri.path += "charge"
+    end
   end
 end

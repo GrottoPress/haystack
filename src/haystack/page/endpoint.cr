@@ -41,8 +41,8 @@ struct Haystack::Page::Endpoint
   end
 
   def self.uri : URI
-    uri = Haystack.uri
-    uri.path += "page"
-    uri
+    Haystack.uri.tap do |uri|
+      uri.path += "page"
+    end
   end
 end

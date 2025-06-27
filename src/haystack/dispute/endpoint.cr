@@ -95,8 +95,8 @@ struct Haystack::Dispute::Endpoint
   end
 
   def self.uri : URI
-    uri = Haystack.uri
-    uri.path += "dispute"
-    uri
+    Haystack.uri.tap do |uri|
+      uri.path += "dispute"
+    end
   end
 end

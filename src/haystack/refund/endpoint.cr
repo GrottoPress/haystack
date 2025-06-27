@@ -32,8 +32,8 @@ struct Haystack::Refund::Endpoint
   end
 
   def self.uri : URI
-    uri = Haystack.uri
-    uri.path += "refund"
-    uri
+    Haystack.uri.tap do |uri|
+      uri.path += "refund"
+    end
   end
 end

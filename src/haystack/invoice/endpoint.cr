@@ -90,8 +90,8 @@ struct Haystack::Invoice::Endpoint
   end
 
   def self.uri : URI
-    uri = Haystack.uri
-    uri.path += "paymentrequest"
-    uri
+    Haystack.uri.tap do |uri|
+      uri.path += "paymentrequest"
+    end
   end
 end

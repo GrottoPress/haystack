@@ -26,8 +26,8 @@ struct Haystack::Bank::Endpoint
   end
 
   def self.uri : URI
-    uri = Haystack.uri
-    uri.path += "bank"
-    uri
+    Haystack.uri.tap do |uri|
+      uri.path += "bank"
+    end
   end
 end

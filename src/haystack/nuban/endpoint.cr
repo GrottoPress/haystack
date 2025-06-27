@@ -79,8 +79,8 @@ struct Haystack::Nuban::Endpoint
   end
 
   def self.uri : URI
-    uri = Haystack.uri
-    uri.path += "dedicated_account"
-    uri
+    Haystack.uri.tap do |uri|
+      uri.path += "dedicated_account"
+    end
   end
 end

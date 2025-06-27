@@ -14,8 +14,8 @@ struct Haystack::Country::Endpoint
   end
 
   def self.uri : URI
-    uri = Haystack.uri
-    uri.path += "country"
-    uri
+    Haystack.uri.tap do |uri|
+      uri.path += "country"
+    end
   end
 end
